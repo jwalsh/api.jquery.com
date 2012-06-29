@@ -150,7 +150,6 @@
 </script>
 <xsl:if test="count(//entry) &gt; 1">
 <div class="toc">
-  <h4><span>Contents:</span></h4>
   <ul class="toc-list">
     <xsl:for-each select="//entry">
       <xsl:variable name="entry-name" select="@name" />
