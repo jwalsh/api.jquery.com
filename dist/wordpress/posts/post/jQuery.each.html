@@ -1,0 +1,118 @@
+<script>
+	{
+		"title": "jQuery.each()",
+		"excerpt": "A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.0"
+			]
+		}
+	}
+</script><div id="jQuery-each1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.each( collection, callback(indexInArray, valueOfElement) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Object">Object</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.</p>
+<ul class="signatures"><li class="signature" id="jQuery-each-collection-callbackindexInArray--valueOfElement">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.each( collection, callback(indexInArray, valueOfElement) )</h4>
+<p class="argument"><strong>collection: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          The object or array to iterate over.</p>
+<p class="argument"><strong>callback(indexInArray, valueOfElement): </strong>Function()
+                          The function that will be executed on every object.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.each()</code> function is not the same as <a href="/each/">$(selector).each()</a>, which is used to iterate, exclusively, over a jQuery object. The <code>$.each()</code> function can be used to iterate over any collection, whether it is a map (JavaScript object) or an array. In the case of an array, the callback is passed an array index and a corresponding array value each time. (The value can also be accessed through the <code>this</code> keyword, but Javascript will always wrap the <code>this</code> value as an <code>Object</code> even if it is a simple string or number value.) The method returns its first argument, the object that was iterated.</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">each</span><span class="p">([</span>52<span class="p">,</span> 97<span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="s">': '</span> <span class="o">+</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This produces two messages:</p>
+<p>
+      <span class="output">0: 52</span>
+      <br />
+      <span class="output">1: 97</span>
+    </p>
+<p>If a map is used as the collection, the callback is passed a key-value pair each time:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">map</span> <span class="p">=</span> <span class="p">{</span>
+  <span class="s">'flammable'</span><span class="p">:</span> <span class="s">'inflammable'</span><span class="p">,</span>
+  <span class="s">'duh'</span><span class="p">:</span> <span class="s">'no duh'</span>
+<span class="p">};</span>
+$<span class="p">.</span><span class="n">each</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s">': '</span> <span class="o">+</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Once again, this produces two messages:</p>
+<p>
+      <span class="output">flammable: inflammable</span>
+      <br />
+      <span class="output">duh: no duh</span>
+    </p>
+<p>We can break the <code>$.each()</code> loop at a particular iteration by making the callback function return <code>false</code>. Returning <em>non-false</em> is the same as a <code>continue</code> statement in a for loop; it will skip immediately to the next iteration.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Iterates through the array displaying each number as both a word and numeral</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { color:blue; }
+  div#five { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"one"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"two"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"three"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"four"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"five"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    var arr = [ "one", "two", "three", "four", "five" ];
+    var obj = { one:1, two:2, three:3, four:4, five:5 };
+
+    jQuery.each(arr, function() {
+      $("#" + this).text("Mine is " + this + ".");
+       return (this != "three"); // will stop running after "three"
+   });
+
+    jQuery.each(obj, function(i, val) {
+      $("#" + i).append(document.createTextNode(" - " + val));
+    });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Iterates over items in an array, accessing both the current item and its index.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">each</span><span class="p">(</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span> <span class="n">l</span><span class="p">){</span>
+   <span class="n">alert</span><span class="p">(</span> "<span class="n">Index</span> #" <span class="o">+</span> <span class="nb">i</span> <span class="o">+</span> "<span class="p">:</span> " <span class="o">+</span> <span class="n">l</span> <span class="p">);</span>
+ <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Iterates over the properties in an object, accessing both the current item and its key.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">each</span><span class="p">(</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> "<span class="n">John</span>"<span class="p">,</span> <span class="n">lang</span><span class="p">:</span> "<span class="n">JS</span>" <span class="p">},</span> <span class="k">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">){</span>
+   <span class="n">alert</span><span class="p">(</span> "<span class="n">Key</span><span class="p">:</span> " <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> "<span class="p">,</span> <span class="n">Value</span><span class="p">:</span> " <span class="o">+</span> <span class="n">v</span> <span class="p">);</span>
+ <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

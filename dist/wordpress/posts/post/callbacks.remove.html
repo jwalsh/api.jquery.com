@@ -1,0 +1,50 @@
+<script>
+	{
+		"title": "callbacks.remove()",
+		"excerpt": "Remove a callback or a collection of callbacks from a callback list.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-remove1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.remove( callbacks )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove a callback or a collection of callbacks from a callback list.</p>
+<ul class="signatures"><li class="signature" id="callbacks-remove-callbacks">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.remove( callbacks )</h4>
+<p class="argument"><strong>callbacks: </strong>Function()
+                          A function, or array of functions, that are to be removed from the callback list.</p>
+</li></ul>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Using callbacks.remove() to remove callbacks from a callback list:</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="c1">// a sample logging function to be added to a callbacks list</span>
+<span class="k">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="p">'</span><span class="nl">foo:</span><span class="p">'</span> <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="n">callbacks</span> <span class="o">=</span> <span class="err">$</span><span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="c1">// add the function 'foo' to the list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+<span class="c1">// fire the items on the list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="mh">'he</span><span class="n">llo</span><span class="p">'</span> <span class="p">);</span> <span class="c1">// outputs: 'foo: hello'</span>
+
+<span class="c1">// remove 'foo' from the callback list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+<span class="c1">// fire the items on the list again</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="p">'</span><span class="n">world</span><span class="p">'</span> <span class="p">);</span>
+
+<span class="c1">// nothing output as 'foo' is no longer in the list</span>
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>

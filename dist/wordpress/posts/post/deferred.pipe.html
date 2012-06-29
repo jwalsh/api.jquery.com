@@ -1,0 +1,96 @@
+<script>
+	{
+		"title": "deferred.pipe()",
+		"excerpt": " Utility method to filter and/or chain Deferreds.  ",
+		"termSlugs": {
+			"category": [
+				"deferred-object","version/1.6","version/1.7"
+			]
+		}
+	}
+</script><div id="deferred-pipe1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">deferred.pipe(  [doneFilter]  [, failFilter]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Promise">Promise</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> Utility method to filter and/or chain Deferreds.  </p>
+<ul class="signatures">
+<li class="signature" id="deferred-pipe-doneFilter-failFilter">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>deferred.pipe(  [doneFilter] [, failFilter] )</h4>
+<p class="argument"><strong>doneFilter: </strong>Function()
+                          
+        An optional function that is called when the Deferred is resolved.
+      </p>
+<p class="argument"><strong>failFilter: </strong>Function()
+                          
+        An optional function that is called when the Deferred is rejected.
+      </p>
+</li>
+<li class="signature" id="deferred-pipe-doneFilter-failFilter-progressFilter">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>deferred.pipe(  [doneFilter] [, failFilter] [, progressFilter] )</h4>
+<p class="argument"><strong>doneFilter: </strong>Function()
+                          
+        An optional function that is called when the Deferred is resolved.
+      </p>
+<p class="argument"><strong>failFilter: </strong>Function()
+                          
+        An optional function that is called when the Deferred is rejected.
+      </p>
+<p class="argument"><strong>progressFilter: </strong>Function()
+                          
+        An optional function that is called when progress notifications are sent to the Deferred.
+      </p>
+</li>
+</ul>
+<div class="longdesc"><p>The <code>deferred.pipe()</code> method returns a new promise that filters the status and values of a deferred through a function.  The <code>doneFilter</code> and <code>failFilter</code> functions filter the original deferred's resolved / rejected status and values. <strong>As of jQuery 1.7</strong>, the method also accepts a <code>progressFilter</code> function to filter any calls to the original deferred's <code>notify</code> or <code>notifyWith</code> methods. These filter functions can return a new value to be passed along to the piped promise's <code>done()</code> or <code>fail()</code> callbacks, or they can return another observable object (Deferred, Promise, etc) which will pass its resolved / rejected status and values to the piped promise's callbacks. If the filter function used is <code>null</code>, or not specified, the piped promise will be resolved or rejected with the same values as the original.</p></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Filter resolve value:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">defer</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Deferred</span><span class="p">(),</span>
+    <span class="n">filtered</span> <span class="p">=</span> <span class="n">defer</span><span class="p">.</span><span class="n">pipe</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> 2<span class="p">;</span>
+    <span class="p">});</span>
+
+<span class="n">defer</span><span class="p">.</span><span class="n">resolve</span><span class="p">(</span> 5 <span class="p">);</span>
+<span class="n">filtered</span><span class="p">.</span><span class="n">done</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span> "<span class="n">Value</span> <span class="n">is</span> <span class="p">(</span> 2<span class="o">*</span>5 <span class="p">=</span> <span class="p">)</span> 10<span class="p">:</span> " <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Filter reject value:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">defer</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Deferred</span><span class="p">(),</span>
+    <span class="n">filtered</span> <span class="p">=</span> <span class="n">defer</span><span class="p">.</span><span class="n">pipe</span><span class="p">(</span> <span class="n">null</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> 3<span class="p">;</span>
+    <span class="p">});</span>
+
+<span class="n">defer</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span> 6 <span class="p">);</span>
+<span class="n">filtered</span><span class="p">.</span><span class="n">fail</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span> "<span class="n">Value</span> <span class="n">is</span> <span class="p">(</span> 3<span class="o">*</span>6 <span class="p">=</span> <span class="p">)</span> 18<span class="p">:</span> " <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Chain tasks:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">request</span> <span class="p">=</span> $<span class="p">.</span><span class="n">ajax</span><span class="p">(</span> <span class="n">url</span><span class="p">,</span> <span class="p">{</span> <span class="n">dataType</span><span class="p">:</span> "<span class="n">json</span>" <span class="p">}</span> <span class="p">),</span>
+    <span class="n">chained</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">pipe</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">data</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> $<span class="p">.</span><span class="n">ajax</span><span class="p">(</span> <span class="n">url2</span><span class="p">,</span> <span class="p">{</span> <span class="n">data</span><span class="p">:</span> <span class="p">{</span> <span class="n">user</span><span class="p">:</span> <span class="n">data</span><span class="p">.</span><span class="n">userId</span> <span class="p">}</span> <span class="p">}</span> <span class="p">);</span>
+    <span class="p">});</span>
+
+<span class="n">chained</span><span class="p">.</span><span class="n">done</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">data</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">data</span> <span class="n">retrieved</span> <span class="n">from</span> <span class="n">url2</span> <span class="n">as</span> <span class="n">provided</span> <span class="n">by</span> <span class="n">the</span> <span class="n">first</span> <span class="n">request</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

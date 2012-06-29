@@ -1,0 +1,43 @@
+<script>
+	{
+		"title": ":enabled Selector",
+		"excerpt": "Selects all elements that are enabled.",
+		"termSlugs": {
+			"category": [
+				"selectors/form-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="enabled1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">enabled</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery(':enabled')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements that are enabled.</p>
+<div class="longdesc"><p>As with other pseudo-class selectors (those that begin with a ":") it is recommended to precede it with a tag name or some other selector; otherwise, the universal selector ("*") is implied. In other words, the bare <code>$(':enabled')</code> is equivalent to <code>$('*:enabled')</code>, so <code>$('input:enabled')</code> should be used instead. </p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all input elements that are enabled.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">disabled=</span><span class="s">"disabled"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"id"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("input:enabled").val("this is it");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

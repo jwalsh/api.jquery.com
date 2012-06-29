@@ -1,0 +1,154 @@
+<script>
+	{
+		"title": ".trigger()",
+		"excerpt": "Execute all handlers and behaviors attached to the matched elements for the given event type.",
+		"termSlugs": {
+			"category": [
+				"events/event-handler-attachment","version/1.0"
+			]
+		}
+	}
+</script><div id="trigger1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.trigger( eventType [, extraParameters]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Execute all handlers and behaviors attached to the matched elements for the given event type.</p>
+<ul class="signatures">
+<li class="signature" id="trigger-eventType-extraParameters">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.trigger( eventType [, extraParameters] )</h4>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a JavaScript event type, such as <code>click</code> or <code>submit</code>.</p>
+<p class="argument"><strong>extraParameters: </strong><a href="http://api.jquery.com/Types#Array%7CPlainObject">Array|PlainObject</a>
+                          Additional parameters to pass along to the event handler.</p>
+</li>
+<li class="signature" id="trigger-event">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>.trigger( event )</h4>
+<p class="argument"><strong>event: </strong><a href="http://api.jquery.com/Types#Event">Event</a>
+                          A <a href="http://api.jquery.com/category/events/event-object/"><code>jQuery.Event</code></a> object.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Any event handlers attached with <code>.on()</code> or one of its shortcut methods are triggered when the corresponding event occurs. They can be fired manually, however, with the <code>.trigger()</code> method. A call to <code>.trigger()</code> executes the handlers in the same order they would be if the event were triggered naturally by the user:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">on</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">text</span><span class="p">());</span>
+    <span class="p">});</span>
+    $<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">trigger</span><span class="p">(</span><span class="s">'click'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>As of jQuery 1.3, <code>.trigger()</code>ed events bubble up the DOM tree; an event handler can stop the bubbling by returning <code>false</code> from the handler or calling the <a href="http://api.jquery.com/event.stopPropagation/"><code>.stopPropagation()</code></a> method on the event object passed into the event. Although <code>.trigger()</code> simulates an event activation, complete with a synthesized event object, it does not perfectly replicate a naturally-occurring event.</p>
+<p>To trigger handlers bound via jQuery without also triggering the native event, use <a href="http://api.jquery.com/triggerHandler/"><code>.triggerHandler()</code></a> instead. </p>
+<p>When we define a custom event type using the <code>.on()</code> method, the second argument to <code>.trigger()</code> can become useful. For example, suppose we have bound a handler for the <code>custom</code> event to our element instead of the built-in <code>click</code> event as we did above:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">on</span><span class="p">(</span><span class="s">'custom'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">param1</span> <span class="o">+</span> "<span class="o">\</span><span class="n">n</span>" <span class="o">+</span> <span class="n">param2</span><span class="p">);</span>
+<span class="p">});</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">trigger</span><span class="p">(</span><span class="s">'custom'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Custom'</span><span class="p">,</span> <span class="s">'Event'</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>The event object is always passed as the first parameter to an event handler, but if additional parameters are specified during a <code>.trigger()</code> call, these parameters will be passed along to the handler as well. To pass more than one parameter, use an array as shown here. As of jQuery 1.6.2, a single parameter can be passed without using an array.</p>
+<p>Note the difference between the extra parameters we're passing here and the <code>eventData</code> parameter to the <a href="/on/">.on()</a> method. Both are mechanisms for passing information to an event handler, but the <code>extraParameters</code> argument to <code>.trigger()</code> allows information to be determined at the time the event is triggered, while the <code>eventData</code> argument to <code>.on()</code> requires the information to be already computed at the time the handler is bound.</p>
+<p>The <code>.trigger()</code> method can be used on jQuery collections that wrap plain JavaScript objects similar to a pub/sub mechanism; any event handlers bound to the object will be called when the event is triggered. </p>
+<blockquote>
+<strong>Note:</strong> For both plain objects and DOM objects, if a triggered event name matches the name of a property on the object, jQuery will attempt to invoke the property as a method if no event handler calls <code>event.preventDefault()</code>. If this behavior is not desired, use <code>.triggerHandler()</code> instead.</blockquote>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Clicks to button #2 also trigger a click for button #1.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+button { margin:10px; }
+div { color:blue; font-weight:bold; }
+span { color:red; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Button #1<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button&gt;</span>Button #2<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;div&gt;&lt;span&gt;</span>0<span class="nt">&lt;/span&gt;</span> button #1 clicks.<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div&gt;&lt;span&gt;</span>0<span class="nt">&lt;/span&gt;</span> button #2 clicks.<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("button:first").click(function () {
+update($("span:first"));
+});
+$("button:last").click(function () {
+$("button:first").trigger('click');
+
+update($("span:last"));
+});
+
+function update(j) {
+var n = parseInt(j.text(), 10);
+j.text(n + 1);
+}
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To submit the first form without using the submit() function, try:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">form</span><span class="p">:</span><span class="n">first</span>"<span class="p">).</span><span class="n">trigger</span><span class="p">(</span>"<span class="n">submit</span>"<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To submit the first form without using the submit() function, try:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">event</span> <span class="p">=</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">Event</span><span class="p">(</span>"<span class="n">submit</span>"<span class="p">);</span>
+$<span class="p">(</span>"<span class="n">form</span><span class="p">:</span><span class="n">first</span>"<span class="p">).</span><span class="n">trigger</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">event</span><span class="p">.</span><span class="n">isDefaultPrevented</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+<span class="o">//</span> <span class="n">Perform</span> <span class="n">an</span> <span class="n">action</span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To pass arbitrary data to an event:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span> <span class="k">function</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="o">//</span> <span class="n">when</span> <span class="n">a</span> <span class="n">normal</span> <span class="n">click</span> <span class="n">fires</span><span class="p">,</span> <span class="n">a</span> <span class="n">and</span> <span class="n">b</span> <span class="n">are</span> <span class="n">undefined</span>
+<span class="o">//</span> <span class="k">for</span> <span class="n">a</span> <span class="n">trigger</span> <span class="n">like</span> <span class="n">below</span> <span class="n">a</span> <span class="n">refers</span> <span class="n">to</span> "<span class="n">foo</span>" <span class="n">and</span> <span class="n">b</span> <span class="n">refers</span> <span class="n">to</span> "<span class="n">bar</span>"
+
+<span class="p">}</span> <span class="p">).</span><span class="n">trigger</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="p">[</span>"<span class="n">foo</span>"<span class="p">,</span> "<span class="n">bar</span>"<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">To pass arbitrary data through an event object:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">event</span> <span class="p">=</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">Event</span><span class="p">(</span>"<span class="n">logged</span>"<span class="p">);</span>
+<span class="n">event</span><span class="p">.</span><span class="n">user</span> <span class="p">=</span> "<span class="n">foo</span>"<span class="p">;</span>
+<span class="n">event</span><span class="p">.</span><span class="n">pass</span> <span class="p">=</span> "<span class="n">bar</span>"<span class="p">;</span>
+$<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">trigger</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div id="example-5">
+<h4>Example: <span class="desc">Alternative way to pass data through an event object:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">trigger</span><span class="p">({</span>
+<span class="n">type</span><span class="p">:</span>"<span class="n">logged</span>"<span class="p">,</span>
+<span class="n">user</span><span class="p">:</span>"<span class="n">foo</span>"<span class="p">,</span>
+<span class="n">pass</span><span class="p">:</span>"<span class="n">bar</span>"
+
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

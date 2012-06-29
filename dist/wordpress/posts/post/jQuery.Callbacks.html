@@ -1,0 +1,282 @@
+<script>
+	{
+		"title": "jQuery.Callbacks()",
+		"excerpt": "A multi-purpose callbacks list object that provides a powerful way to manage callback lists.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="jQuery-Callbacks1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.Callbacks( flags )</span> <span class="returns"></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>A multi-purpose callbacks list object that provides a powerful way to manage callback lists.</p>
+<ul class="signatures"><li class="signature" id="jQuery-Callbacks-flags">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>jQuery.Callbacks( flags )</h4>
+<p class="argument"><strong>flags: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          An optional list of space-separated flags that change how the callback list behaves.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.Callbacks()</code> function is internally used to provide the base functionality behind the jQuery <code>$.ajax()</code> and <code>$.Deferred()</code> components. It can be used as a similar base to define functionality for new components.</p>
+<p><code>$.Callbacks()</code> support a number of methods including <code><a href="/callbacks.add/">callbacks.add()</a></code>,<code><a href="/callbacks.remove/">callbacks.remove()</a></code>, <code><a href="/callbacks.fire/">callbacks.fire()</a></code> and <code><a href="/callbacks.disable/">callbacks.disable()</a></code>.</p>
+<h3 id="getting-started">Getting started</h3>
+<p>The following are two sample methods named <code>fn1</code> and <code>fn2</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">fn1</span><span class="p">(</span> value <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">fn2</span><span class="p">(</span> value <span class="p">){</span>
+    <span class="n">fn1</span><span class="p">(</span>"<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span>" <span class="o">+</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>These can be added as callbacks to a <code>$.Callbacks</code> list and invoked follows:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>!" <span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">foo</span>!
+
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>!" <span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">bar</span>!<span class="p">,</span> <span class="n">fn2</span> <span class="n">says</span><span class="p">:</span> <span class="n">bar</span>!
+</pre></div>
+</div>
+<p>The result of this is that it becomes simple to construct complex lists of callbacks where input values can be passed through to as many functions as needed with ease.</p>
+<p>Two specific methods were being used above: <code>.add()</code> and <code>.fire()</code> .add() supports adding new callbacks to the callback list, whilst fire() provides a way to pass arguments to be processed by the callbacks in the same list.</p>
+<p>Another method supported by <code>$.Callbacks</code> is remove(), which has the ability to remove a particular callback from the callback list. Here"s a practical example of .remove() being used:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>!" <span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">foo</span>!
+
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>!" <span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">bar</span>!<span class="p">,</span> <span class="n">fn2</span> <span class="n">says</span><span class="p">:</span> <span class="n">bar</span>!
+
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fn2</span><span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foobar</span>" <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">only</span> <span class="n">outputs</span> <span class="n">foobar</span><span class="p">,</span> <span class="n">as</span> <span class="n">fn2</span> <span class="n">has</span> <span class="n">been</span> <span class="n">removed</span><span class="p">.</span>
+</pre></div>
+</div>
+<h3 id="supported-flags">Supported Flags</h3>
+<p>The <code>flags</code> argument is an optional argument to <code>$.Callbacks()</code>, structured as a list of space-separated strings that change how the callback list behaves (eg. <code>$.Callbacks( 'unique stopOnFalse' )</code>).</p>
+<h2>Possible flags:</h2>
+<ul>
+      <li>
+<code>once</code>: Ensures the callback list can only be fired once (like a Deferred).</li>
+      <li>
+<code>memory</code>: Keep track of previous values and will call any callback added after the list has been fired right away with the latest "memorized" values (like a Deferred).</li>
+      <li>
+<code>unique</code>: Ensures a callback can only be added once (so there are no duplicates in the list).</li>
+      <li>
+<code>stopOnFalse</code>: Interrupts callings when a callback returns false.</li>
+    </ul>
+<p>By default a callback list will act like an event callback list and can be "fired" multiple times.</p>
+<p>For examples of how <code>flags</code> should ideally be used, see below:</p>
+<h2 id="once">
+<code>$.Callbacks( 'once' )</code>:</h2>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">(</span> "<span class="n">once</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foobar</span>" <span class="p">);</span>
+
+<span class="o">/*</span>
+<span class="n">output</span><span class="p">:</span>
+<span class="n">foo</span>
+<span class="o">*/</span>
+</pre></div>
+</div>
+<h2 id="memory">
+<code>$.Callbacks( 'memory' )</code>:</h2>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">(</span> "<span class="n">memory</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foobar</span>" <span class="p">);</span>
+
+<span class="o">/*</span>
+<span class="n">output</span><span class="p">:</span>
+<span class="n">foo</span>
+<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span><span class="n">foo</span>
+<span class="n">bar</span>
+<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span><span class="n">bar</span>
+<span class="n">foobar</span>
+<span class="o">*/</span>
+</pre></div>
+</div>
+<h2 id="unique">
+<code>$.Callbacks( 'unique' )</code>:</h2>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">(</span> "<span class="n">unique</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span> <span class="o">//</span> <span class="n">repeat</span> <span class="n">addition</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foobar</span>" <span class="p">);</span>
+
+<span class="o">/*</span>
+<span class="n">output</span><span class="p">:</span>
+<span class="n">foo</span>
+<span class="n">bar</span>
+<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span><span class="n">bar</span>
+<span class="n">foobar</span>
+<span class="o">*/</span>
+</pre></div>
+</div>
+<h2 id="stopOnFalse">
+<code>$.Callbacks( 'stopOnFalse' )</code>:</h2>
+<div class="highlightblock"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">fn1</span><span class="p">(</span> value <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">value</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">fn2</span><span class="p">(</span> value <span class="p">){</span>
+    <span class="n">fn1</span><span class="p">(</span>"<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span>" <span class="o">+</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">(</span> "<span class="n">stopOnFalse</span>"<span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foobar</span>" <span class="p">);</span>
+
+<span class="o">/*</span>
+<span class="n">output</span><span class="p">:</span>
+<span class="n">foo</span>
+<span class="n">bar</span>
+<span class="n">foobar</span>
+<span class="o">*/</span>
+</pre></div>
+</div>
+<p>Because $.Callbacks() supports a list of flags rather than just one, setting several flags has a cumulative effect similar to "&amp;&amp;". This means it's possible to combine flags to create callback lists that are say, both <i>unique</i> and <i>ensure if list was already fired, adding more callbacks will have it called with the latest fired value</i> (i.e. <code>$.Callbacks("unique memory")</code>).</p>
+<h2 id="unique-memory">
+<code>$.Callbacks( 'unique memory' )</code>:</h2>
+<div class="highlightblock"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">fn1</span><span class="p">(</span> value <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">value</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">fn2</span><span class="p">(</span> value <span class="p">){</span>
+    <span class="n">fn1</span><span class="p">(</span>"<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span>" <span class="o">+</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">(</span> "<span class="n">unique</span> <span class="n">memory</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foo</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span> <span class="o">//</span> <span class="n">repeat</span> <span class="n">addition</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">bar</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">baz</span>" <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> "<span class="n">foobar</span>" <span class="p">);</span>
+
+<span class="o">/*</span>
+<span class="n">output</span><span class="p">:</span>
+<span class="n">foo</span>
+<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span><span class="n">foo</span>
+<span class="n">bar</span>
+<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span><span class="n">bar</span>
+<span class="n">baz</span>
+<span class="n">fn2</span> <span class="n">says</span><span class="p">:</span><span class="n">baz</span>
+<span class="n">foobar</span>
+<span class="o">*/</span>
+</pre></div>
+</div>
+<p>Flag combinations are internally used with <code>$.Callbacks()</code> in jQuery for the <code>.done()</code> and <code>.fail()</code> buckets on a Deferred - both of which use <code>$.Callbacks('memory once')</code>.</p>
+<p>$.Callbacks methods can also be detached, should there be a need to define short-hand versions for convenience:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">(),</span>
+    <span class="n">add</span> <span class="p">=</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">,</span>
+    <span class="n">remove</span> <span class="p">=</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span><span class="p">,</span>
+    <span class="n">fire</span> <span class="p">=</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">;</span>
+
+<span class="n">add</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="n">fire</span><span class="p">(</span> "<span class="n">hello</span> <span class="n">world</span>"<span class="p">);</span>
+<span class="n">remove</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+</pre></div>
+</div>
+<h3 id="pubsub">$.Callbacks, $.Deferred and Pub/Sub</h3>
+<p>The general idea behind pub/sub (the Observer pattern) is the promotion of loose coupling in applications. Rather than single objects calling on the methods of other objects, an object instead subscribes to a specific task or activity of another object and is notified when it occurs. Observers are also called Subscribers and we refer to the object being observed as the Publisher (or the subject). Publishers notify subscribers when events occur</p>
+<p>As a demonstration of the component-creation capabilities of <code>$.Callbacks()</code>, it's possible to implement a Pub/Sub system using only callback lists. Using <code>$.Callbacks</code> as a topics queue, a system for publishing and subscribing to topics can be implemented as follows:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">topics</span> <span class="p">=</span> <span class="p">{};</span>
+
+<span class="n">jQuery</span><span class="p">.</span><span class="n">Topic</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">id</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">callbacks</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">,</span>
+        <span class="n">topic</span> <span class="p">=</span> <span class="n">id</span> <span class="o">&amp;&amp;</span> <span class="n">topics</span><span class="p">[</span> <span class="n">id</span> <span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span> !<span class="n">topic</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">callbacks</span> <span class="p">=</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+        <span class="n">topic</span> <span class="p">=</span> <span class="p">{</span>
+            <span class="n">publish</span><span class="p">:</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">,</span>
+            <span class="n">subscribe</span><span class="p">:</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">,</span>
+            <span class="n">unsubscribe</span><span class="p">:</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">remove</span>
+        <span class="p">};</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">id</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">topics</span><span class="p">[</span> <span class="n">id</span> <span class="p">]</span> <span class="p">=</span> <span class="n">topic</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">topic</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This can then be used by parts of your application to publish and subscribe to events of interest quite easily:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="c1">// Subscribers</span>
+<span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailArrived"</span> <span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+<span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailArrived"</span> <span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="n">fn2</span> <span class="p">);</span>
+<span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailSent"</span> <span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+
+<span class="c1">// Publisher</span>
+<span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailArrived"</span> <span class="p">).</span><span class="n">publish</span><span class="p">(</span> <span class="s">"hello world!"</span> <span class="p">);</span>
+<span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailSent"</span> <span class="p">).</span><span class="n">publish</span><span class="p">(</span> <span class="s">"woo! mail!"</span> <span class="p">);</span>
+
+<span class="c1">// Here, "hello world!" gets pushed to fn1 and fn2</span>
+<span class="c1">// when the "mailArrived" notification is published</span>
+<span class="c1">// with "woo! mail!" also being pushed to fn1 when</span>
+<span class="c1">// the "mailSent" notification is published.</span>
+
+<span class="cm">/*</span>
+<span class="cm">output:</span>
+<span class="cm">hello world!</span>
+<span class="cm">fn2 says: hello world!</span>
+<span class="cm">woo! mail!</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>Whilst this is useful, the implementation can be taken further. Using <code>$.Deferreds</code>,  it's possible to ensure publishers only publish notifications for subscribers once particular tasks have been completed (resolved). See the below code sample for some further comments on how this could be used in practice:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="c1">// subscribe to the mailArrived notification</span>
+<span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailArrived"</span> <span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="n">fn1</span> <span class="p">);</span>
+
+<span class="c1">// create a new instance of Deferreds</span>
+<span class="k">var</span> <span class="n">dfd</span> <span class="o">=</span> <span class="err">$</span><span class="p">.</span><span class="n">Deferred</span><span class="p">();</span>
+
+<span class="c1">// define a new topic (without directly publishing)</span>
+<span class="k">var</span> <span class="n">topic</span> <span class="o">=</span> <span class="err">$</span><span class="p">.</span><span class="n">Topic</span><span class="p">(</span> <span class="s">"mailArrived"</span> <span class="p">);</span>
+
+<span class="c1">// when the deferred has been resolved, publish a</span>
+<span class="c1">// notification to subscribers</span>
+<span class="n">dfd</span><span class="p">.</span><span class="n">done</span><span class="p">(</span> <span class="n">topic</span><span class="p">.</span><span class="n">publish</span> <span class="p">);</span>
+
+<span class="c1">// Here the Deferred is being resolved with a message</span>
+<span class="c1">// that will be passed back to subscribers. It's possible to</span>
+<span class="c1">// easily integrate this into a more complex routine</span>
+<span class="c1">// (eg. waiting on an ajax call to complete) so that</span>
+<span class="c1">// messages are only published once the task has actually</span>
+<span class="c1">// finished.</span>
+<span class="n">dfd</span><span class="p">.</span><span class="n">resolve</span><span class="p">(</span> <span class="s">"its been published!"</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

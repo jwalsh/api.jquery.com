@@ -1,0 +1,48 @@
+<script>
+	{
+		"title": "callbacks.empty()",
+		"excerpt": "Remove all of the callbacks from a list.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-empty1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.empty()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove all of the callbacks from a list.</p>
+<ul class="signatures"><li class="signature" id="callbacks-empty"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.empty()</h4></li></ul>
+<div class="longdesc">
+<h2 id="example-1">Example</h2>
+<p>Using <code>callbacks.empty()</code> to empty a list of callbacks:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">a</span> <span class="n">sample</span> <span class="n">logging</span> <span class="k">function</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">a</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value1</span><span class="p">,</span> <span class="n">value2</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'foo:'</span> <span class="o">+</span> <span class="n">value1</span> <span class="o">+</span> <span class="s">','</span> <span class="o">+</span> <span class="n">value2</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">another</span> <span class="k">function</span> <span class="n">to</span> <span class="n">also</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value1</span><span class="p">,</span> <span class="n">value2</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'bar:'</span> <span class="o">+</span> <span class="n">value1</span> <span class="o">+</span> <span class="s">','</span> <span class="o">+</span> <span class="n">value2</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="n">two</span> <span class="n">functions</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">bar</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">empty</span> <span class="n">the</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">check</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">all</span> <span class="n">callbacks</span> <span class="n">have</span> <span class="n">been</span> <span class="n">removed</span>
+<span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">has</span><span class="p">(</span> <span class="n">foo</span> <span class="p">)</span> <span class="p">);</span> <span class="o">//</span> <span class="n">false</span>
+<span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">has</span><span class="p">(</span> <span class="n">bar</span> <span class="p">)</span> <span class="p">);</span> <span class="o">//</span> <span class="n">false</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

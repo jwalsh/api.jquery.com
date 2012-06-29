@@ -1,0 +1,65 @@
+<script>
+	{
+		"title": ":not() Selector",
+		"excerpt": "Selects all elements that do not match the given selector.",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-filter-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="not1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">not</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery(':not(selector)')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>selector</dt>
+<dd>A selector with which to filter by.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all elements that do not match the given selector.</p>
+<div class="longdesc">
+<p>All selectors are accepted inside <code>:not()</code>,  for example: <code>:not(div a)</code> and <code>:not(div,a)</code>.</p>
+<h3>Additional Notes</h3>
+<p>The <code><a href="/not/">.not()</a></code> method will end up providing you with more readable selections than pushing complex selectors or variables into a <code>:not()</code> selector filter. In most cases, it is a better choice.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs that are not checked and highlights the next sibling span.  Notice there is no change when clicking the checkboxes since no click events have been linked.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"a"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Mary<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"b"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;span&gt;</span>lcm<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"c"</span> <span class="na">checked=</span><span class="s">"checked"</span> <span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;span&gt;</span>Peter<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  $("input:not(:checked) + span").css("background-color", "yellow");
+  $("input").attr("disabled", "disabled");
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

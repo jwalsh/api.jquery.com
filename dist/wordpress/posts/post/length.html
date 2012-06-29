@@ -1,0 +1,52 @@
+<script>
+	{
+		"title": ".length",
+		"excerpt": "The number of elements in the jQuery object.",
+		"termSlugs": {
+			"category": [
+				"properties/jquery-object-instance-properties","version/1.0"
+			]
+		}
+	}
+</script><div id="length1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">length</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Number">Number</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>The number of elements in the jQuery object.</p>
+<ul class="signatures"><li class="signature" id="length"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>length</h4></li></ul>
+<div class="longdesc"><p>The number of elements currently matched. The .<a href="/size">size()</a> method will return the same value.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Count the divs.  Click to add more.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  body { cursor:pointer; }
+  div { width:50px; height:30px; margin:5px; float:left;
+        background:green; }
+  span { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$(document.body).click(function () {
+  $(document.body).append($("<span class="nt">&lt;div&gt;</span>"));
+  var n = $("div").length;
+  $("span").text("There are " + n + " divs." +
+                 "Click to add more.");
+}).trigger('click'); // trigger the click to start<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

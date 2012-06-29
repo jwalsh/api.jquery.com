@@ -1,0 +1,50 @@
+<script>
+	{
+		"title": ":header Selector",
+		"excerpt": "Selects all elements that are headers, like h1, h2, h3 and so on.",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-filter-selectors","selectors/jquery-selector-extensions","version/1.2"
+			]
+		}
+	}
+</script><div id="header1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">header</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>jQuery(':header')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements that are headers, like h1, h2, h3 and so on.</p>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery-selector-extension.xml">
+	Because <code>:header</code> is a jQuery extension and not part of the CSS specification, queries using <code>:header</code> cannot take advantage of the performance boost provided by the native DOM <code>querySelectorAll()</code> method. To achieve the best performance when using <code>:header</code> to select elements, first select the elements using a pure CSS selector, then use <a href="http://api.jquery.com/filter/">.filter(":header")</a>.
+</li></ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Adds a background and text color to all the headers on the page.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  body { font-size: 10px; font-family: Arial; }
+  h1, h2 { margin: 3px 0; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Header 1<span class="nt">&lt;/h1&gt;</span>
+
+  <span class="nt">&lt;p&gt;</span>Contents 1<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Header 2<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Contents 2<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>$(":header").css({ background:'#CCC', color:'blue' });<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

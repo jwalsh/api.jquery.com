@@ -1,0 +1,97 @@
+<script>
+	{
+		"title": ".mouseup()",
+		"excerpt": "Bind an event handler to the \"mouseup\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/mouse-events","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="mouseup1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.mouseup( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "mouseup" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="mouseup-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mouseup( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mouseup-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.mouseup(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mouseup"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mouseup()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('mouseup', handler)</code> in the first variation, and <code>.trigger('mouseup')</code> in the second.</p>
+<p>The <code>mouseup</code> event is sent to an element when the mouse pointer is over the element, and the mouse button is released. Any HTML element can receive this event.</p>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"target"</span><span class="nt">&gt;</span>
+  Click here
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p class="image">
+      <img src="/resources/0042_05_02.png" alt="" />
+    </p>
+<p>The event handler can be bound to any <code>&lt;div&gt;</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#target'</span><span class="p">).</span><span class="n">mouseup</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Handler for .mouseup() called.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now if we click on this element, the alert is displayed:</p>
+<p>
+      <span class="output">Handler for .mouseup() called.</span>
+    </p>
+<p>We can also trigger the event when a different element is clicked:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#other'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#target'</span><span class="p">).</span><span class="n">mouseup</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>If the user clicks outside an element, drags onto it, and releases the button, this is still counted as a <code>mouseup</code> event. This sequence of actions is not treated as a button press in most user interfaces, so it is usually better to use the <code>click</code> event unless we know that the <code>mouseup</code> event is preferable for a particular situation.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show texts when mouseup and mousedown event triggering.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Press mouse and release here.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    $("p").mouseup(function(){
+      $(this).append('<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color:#F00;"</span><span class="nt">&gt;</span>Mouse up.<span class="nt">&lt;/span&gt;</span>');
+    }).mousedown(function(){
+      $(this).append('<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color:#00F;"</span><span class="nt">&gt;</span>Mouse down.<span class="nt">&lt;/span&gt;</span>');
+    });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

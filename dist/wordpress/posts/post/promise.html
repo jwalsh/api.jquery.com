@@ -1,0 +1,143 @@
+<script>
+	{
+		"title": ".promise()",
+		"excerpt": " Return a Promise object to observe when all actions of a certain type bound to the collection, queued or not, have finished. ",
+		"termSlugs": {
+			"category": [
+				"deferred-object","version/1.6"
+			]
+		}
+	}
+</script><div id="promise1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.promise(  [type]  [, target]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Promise">Promise</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> Return a Promise object to observe when all actions of a certain type bound to the collection, queued or not, have finished. </p>
+<ul class="signatures"><li class="signature" id="promise-type-target">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.promise(  [type] [, target] )</h4>
+<p class="argument"><strong>type: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                           The type of queue that needs to be observed. </p>
+<p class="argument"><strong>target: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          Object onto which the promise methods have to be attached</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.promise()</code> method returns a dynamically generated Promise that is resolved once all actions of a certain type bound to the collection, queued or not, have ended.</p>
+<p> By default, <code>type</code> is <code>"fx"</code>, which means the returned Promise is resolved when all animations of the selected elements have completed.</p>
+<p> Resolve context and sole argument is the collection onto which <code>.promise()</code> has been called. </p>
+<p> If <code>target</code> is provided, <code>.promise()</code> will attach the methods onto it and then return this object rather than create a new one. This can be useful to attach the Promise behavior to an object that already exists.</p>
+<blockquote>
+      <p><strong>Note: </strong>The returned Promise is linked to a Deferred object stored on the <code>.data()</code> for an element. Since the<code>.remove()</code> method removes the element's data as well as the element itself, it will prevent any of the element's unresolved Promises from resolving. If it is necessary to remove an element from the DOM before its Promise is resolved, use <code>.detach()</code> instead and follow with <code>.removeData()</code> after resolution.</p>
+    </blockquote>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Using .promise() on a collection with no active animation returns a resolved Promise:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">div</span> <span class="p">=</span> $<span class="p">(</span> "<span class="o">&lt;</span><span class="n">div</span> <span class="o">/&gt;</span>" <span class="p">);</span>
+
+<span class="n">div</span><span class="p">.</span><span class="n">promise</span><span class="p">().</span><span class="n">done</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">arg1</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">will</span> <span class="n">fire</span> <span class="n">right</span> <span class="n">away</span> <span class="n">and</span> <span class="n">alert</span> "<span class="n">true</span>"
+  <span class="n">alert</span><span class="p">(</span> <span class="n">this</span> <span class="o">==</span><span class="p">=</span> <span class="n">div</span> <span class="o">&amp;&amp;</span> <span class="n">arg1</span> <span class="o">==</span><span class="p">=</span> <span class="n">div</span> <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Resolve the returned Promise when all animations have ended (including those initiated in the animation callback or added later on):</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div {
+  height: 50px; width: 50px;
+  float: left; margin-right: 10px;
+  display: none; background-color: #090;
+}
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;button&gt;</span>Go<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;p&gt;</span>Ready...<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+
+<span class="nt">&lt;script&gt;</span>
+$("button").bind( "click", function() {
+  $("p").append( "Started...");
+
+  $("div").each(function( i ) {
+    $( this ).fadeIn().fadeOut( 1000 * (i+1) );
+  });
+
+  $( "div" ).promise().done(function() {
+    $( "p" ).append( " Finished! " );
+  });
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Resolve the returned Promise using a $.when() statement (the .promise() method makes it possible to do this with jQuery collections):</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div {
+  height: 50px; width: 50px;
+  float: left; margin-right: 10px;
+  display: none; background-color: #090;
+}
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;button&gt;</span>Go<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;p&gt;</span>Ready...<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+
+<span class="nt">&lt;script&gt;</span>
+var effect = function() {
+  return $("div").fadeIn(800).delay(1200).fadeOut();
+};
+
+$("button").bind( "click", function() {
+  $("p").append( " Started... ");
+
+  $.when( effect() ).done(function() {
+    $("p").append(" Finished! ");
+  });
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

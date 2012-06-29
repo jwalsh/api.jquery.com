@@ -1,0 +1,113 @@
+<script>
+	{
+		"title": ".remove()",
+		"excerpt": "Remove the set of matched elements from the DOM.",
+		"termSlugs": {
+			"category": [
+				"manipulation/dom-removal","version/1.0"
+			]
+		}
+	}
+</script><div id="remove1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.remove(  [selector]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove the set of matched elements from the DOM.</p>
+<ul class="signatures"><li class="signature" id="remove-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.remove(  [selector] )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A selector expression that filters the set of matched elements to be removed.</p>
+</li></ul>
+<div class="longdesc">
+<p>Similar to <code><a href="/empty">.empty()</a></code>, the <code>.remove()</code> method takes elements out of the DOM. Use <code>.remove()</code> when you want to remove the element itself, as well as everything inside it. In addition to the elements themselves, all bound events and jQuery data  associated with the elements are removed. To remove the elements without removing data and events, use <code><a href="http://api.jquery.com/detach/">.detach()</a></code> instead.</p>
+<p>Consider the following HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hello"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"goodbye"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>We can target any element for removal:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'.hello'</span><span class="p">).</span><span class="n">remove</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This will result in a DOM structure with the <code>&lt;div&gt;</code> element deleted:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"goodbye"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>If we had any number of nested elements inside <code>&lt;div class="hello"&gt;</code>, they would be removed, too. Other jQuery constructs such as data or event handlers are erased as well.</p>
+<p>We can also include a selector as an optional parameter. For example, we could rewrite the previous DOM removal code as follows:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'div'</span><span class="p">).</span><span class="n">remove</span><span class="p">(</span><span class="s">'.hello'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This would result in the same DOM structure:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"goodbye"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Removes all paragraphs from the DOM</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>p { background:yellow; margin:6px 0; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  how are
+  <span class="nt">&lt;p&gt;</span>you?<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Call remove() on paragraphs<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("button").click(function () {
+  $("p").remove();
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Removes all paragraphs that contain "Hello" from the DOM.  Analogous to doing $("p").filter(":contains('Hello')").remove().</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>p { background:yellow; margin:6px 0; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"hello"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  how are
+  <span class="nt">&lt;p&gt;</span>you?<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;button&gt;</span>Call remove(":contains('Hello')") on paragraphs<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("button").click(function () {
+  $("p").remove(":contains('Hello')");
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

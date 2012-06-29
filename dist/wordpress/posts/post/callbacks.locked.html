@@ -1,0 +1,46 @@
+<script>
+	{
+		"title": "callbacks.locked()",
+		"excerpt": "Determine if the callbacks list has been locked.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-locked1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.locked()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Determine if the callbacks list has been locked.</p>
+<ul class="signatures"><li class="signature" id="callbacks-locked"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.locked()</h4></li></ul>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Using callbacks.locked() to determine the lock-state of a callback list:</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="c1">// a sample logging function to be added to a callbacks list</span>
+  <span class="k">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+      <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="p">'</span><span class="nl">foo:</span><span class="p">'</span> <span class="o">+</span> <span class="n">value</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">var</span> <span class="n">callbacks</span> <span class="o">=</span> <span class="err">$</span><span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+  <span class="c1">// add the logging function to the callback list</span>
+  <span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+  <span class="c1">// fire the items on the list, passing an argument</span>
+  <span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="mh">'he</span><span class="n">llo</span><span class="p">'</span> <span class="p">);</span>
+  <span class="c1">// outputs 'foo: hello'</span>
+
+  <span class="c1">// lock the callbacks list</span>
+  <span class="n">callbacks</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+
+  <span class="c1">// test the lock-state of the list</span>
+  <span class="n">console</span><span class="p">.</span><span class="n">log</span> <span class="p">(</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">locked</span><span class="p">()</span> <span class="p">);</span> <span class="c1">//true</span>
+  
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>

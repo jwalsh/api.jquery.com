@@ -1,0 +1,144 @@
+<script>
+	{
+		"title": ".removeClass()",
+		"excerpt": "Remove a single class, multiple classes, or all classes from each element in the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"attributes","manipulation/class-attribute","css","version/1.0","version/1.4"
+			]
+		}
+	}
+</script><div id="removeClass1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.removeClass(  [className]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove a single class, multiple classes, or all classes from each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="removeClass-className">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.removeClass(  [className] )</h4>
+<p class="argument"><strong>className: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          One or more space-separated classes to be removed from the class attribute of each matched element.</p>
+</li>
+<li class="signature" id="removeClass-functionindex--class">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.removeClass( function(index, class) )</h4>
+<p class="argument"><strong>function(index, class): </strong>Function()
+                          A function returning one or more space-separated class names to be removed. Receives the index position of the element in the set and the old class value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>If a class name is included as a parameter, then only that class will be removed from the set of matched elements. If no class names are specified in the parameter, all classes will be removed.</p>
+<p>More than one class may be removed at a time, separated by a space, from the set of matched elements, like so:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'p'</span><span class="p">).</span><span class="n">removeClass</span><span class="p">(</span><span class="s">'myClass yourClass'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method is often used with <code>.addClass()</code> to switch elements' classes from one to another, like so:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'p'</span><span class="p">).</span><span class="n">removeClass</span><span class="p">(</span><span class="s">'myClass noClass'</span><span class="p">).</span><span class="n">addClass</span><span class="p">(</span><span class="s">'yourClass'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, the <code>myClass</code> and <code>noClass</code> classes are removed from all paragraphs, while <code>yourClass</code> is added.</p>
+<p>To replace all existing classes with another class, we can use <code>.attr('class', 'newClass')</code> instead.</p>
+<p>As of jQuery 1.4, the <code>.removeClass()</code> method allows us to indicate the class to be removed by passing in a function.</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li:last'</span><span class="p">).</span><span class="n">removeClass</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">prev</span><span class="p">().</span><span class="n">attr</span><span class="p">(</span><span class="s">'class'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This example removes the class name of the penultimate <code>&lt;li&gt;</code> from the last <code>&lt;li&gt;</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Remove the class 'blue' from the matched elements.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under highlight"</span><span class="nt">&gt;</span>and<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>then<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("p:even").removeClass("blue");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Remove the class 'blue' and 'under' from the matched elements.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under highlight"</span><span class="nt">&gt;</span>and<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>then<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("p:odd").removeClass("blue under");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Remove all the classes from the matched elements.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under highlight"</span><span class="nt">&gt;</span>and<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>then<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"blue under"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("p:eq(1)").removeClass();<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

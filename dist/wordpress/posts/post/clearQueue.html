@@ -1,0 +1,78 @@
+<script>
+	{
+		"title": ".clearQueue()",
+		"excerpt": "Remove from the queue all items that have not yet been run.",
+		"termSlugs": {
+			"category": [
+				"effects/custom-effects","data","utilities","version/1.4"
+			]
+		}
+	}
+</script><div id="clearQueue1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.clearQueue(  [queueName]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove from the queue all items that have not yet been run.</p>
+<ul class="signatures"><li class="signature" id="clearQueue-queueName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.clearQueue(  [queueName] )</h4>
+<p class="argument"><strong>queueName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+</li></ul>
+<div class="longdesc"><p>When the <code>.clearQueue()</code> method is called, all functions on the queue that have not been executed are removed from the queue. When used without an argument, <code>.clearQueue()</code> removes the remaining functions from <code>fx</code>, the standard effects queue. In this way it is similar to <code>.stop(true)</code>. However,  while the <code>.stop()</code> method is meant to be used only with animations, <code>.clearQueue()</code> can also be used to remove any function that has been added to a generic jQuery queue with the <code>.queue()</code> method. </p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Empty the queue.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { margin:3px; width:40px; height:40px;
+    position:absolute; left:0px; top:30px;
+    background:green; display:none; }
+div.newcolor { background:blue; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"start"</span><span class="nt">&gt;</span>Start<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"stop"</span><span class="nt">&gt;</span>Stop<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("#start").click(function () {
+
+  var myDiv = $("div");
+  myDiv.show("slow");
+  myDiv.animate({left:'+=200'},5000);
+  myDiv.queue(function () {
+    var _this = $(this);
+    _this.addClass("newcolor");
+    _this.dequeue();
+  });
+
+  myDiv.animate({left:'-=200'},1500);
+  myDiv.queue(function () {
+    var _this = $(this);
+    _this.removeClass("newcolor");
+    _this.dequeue();
+  });
+  myDiv.slideUp();
+
+});
+
+$("#stop").click(function () {
+  var myDiv = $("div");
+  myDiv.clearQueue();
+  myDiv.stop();
+});<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

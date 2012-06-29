@@ -1,0 +1,44 @@
+<script>
+	{
+		"title": "callbacks.disable()",
+		"excerpt": "Disable a callback list from doing anything more.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-disable1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.disable()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Disable a callback list from doing anything more.</p>
+<ul class="signatures"><li class="signature" id="callbacks-disable"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.disable()</h4></li></ul>
+<div class="longdesc">
+<h2 id="example-1">Example</h2>
+<p>Using <code>callbacks.disable()</code> to disable further calls being made to a callback list:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">a</span> <span class="n">sample</span> <span class="n">logging</span> <span class="k">function</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">a</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="n">above</span> <span class="k">function</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">fire</span> <span class="n">the</span> <span class="n">items</span> <span class="n">on</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'foo'</span> <span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">foo</span>
+
+<span class="o">//</span> <span class="n">disable</span> <span class="n">further</span> <span class="n">calls</span> <span class="n">being</span> <span class="n">possible</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">disable</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">attempt</span> <span class="n">to</span> <span class="n">fire</span> <span class="n">with</span> <span class="s">'foobar'</span> <span class="n">as</span> <span class="n">an</span> <span class="n">argument</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'foobar'</span> <span class="p">);</span> <span class="o">//</span> <span class="n">foobar</span> <span class="n">isn</span><span class="o">'</span><span class="n">t</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

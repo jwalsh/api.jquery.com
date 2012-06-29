@@ -1,0 +1,178 @@
+<script>
+	{
+		"title": ".unbind()",
+		"excerpt": "Remove a previously-attached event handler from the elements.",
+		"termSlugs": {
+			"category": [
+				"events/event-handler-attachment","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="unbind1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.unbind(  [eventType]  [, handler(eventObject)]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove a previously-attached event handler from the elements.</p>
+<ul class="signatures">
+<li class="signature" id="unbind-eventType-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.unbind(  [eventType] [, handler(eventObject)] )</h4>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a JavaScript event type, such as <code>click</code> or <code>submit</code>.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          The function that is to be no longer executed.</p>
+</li>
+<li class="signature" id="unbind-eventType-false">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.unbind( eventType, false )</h4>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a JavaScript event type, such as <code>click</code> or <code>submit</code>.</p>
+<p class="argument"><strong>false: </strong><a href="http://api.jquery.com/Types#Boolean">Boolean</a>
+                          Unbinds the corresponding 'return false' function that was bound using <code>.bind( eventType, false )</code>.</p>
+</li>
+<li class="signature" id="unbind-event">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.unbind( event )</h4>
+<p class="argument"><strong>event: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A JavaScript event object as passed to an event handler.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Event handlers attached with <code>.bind()</code> can be removed with <code>.unbind()</code>. (As of jQuery 1.7, the <a href="http://api.jquery.com/on"><code>.on()</code></a> and <a href="http://api.jquery.com/off"><code>.off()</code></a> methods are preferred to attach and remove event handlers on elements.) In the simplest case, with no arguments, <code>.unbind()</code> removes all handlers attached to the elements:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This version removes the handlers regardless of type. To be more precise, we can pass an event type:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="s">'click'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>By specifying the <code>click</code> event type, only handlers for that event type will be unbound. This approach can still have negative ramifications if other scripts might be attaching behaviors to the same element, however. Robust and extensible applications typically demand the two-argument version for this reason:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">handler</span> <span class="p">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'The quick brown fox jumps over the lazy dog.'</span><span class="p">);</span>
+<span class="p">};</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="n">handler</span><span class="p">);</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="n">handler</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>By naming the handler, we can be assured that no other functions are accidentally removed. Note that the following will <em>not</em> work:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'The quick brown fox jumps over the lazy dog.'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="o">//</span> <span class="n">will</span> <span class="n">NOT</span> <span class="n">work</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'The quick brown fox jumps over the lazy dog.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Even though the two functions are identical in content, they are created separately and so JavaScript is free to keep them as distinct function objects. To unbind a particular handler, we need a reference to that function and not a different one that happens to do the same thing.</p>
+<blockquote>
+      <p><strong>Note:</strong> Using a proxied function to unbind an event on an element will unbind all proxied functions on that element, as the same proxy function is used for all proxied events. To allow unbinding a specific event, use unique class names on the event (e.g. <code>click.proxy1</code>, <code>click.proxy2</code>) when attaching them.</p>
+    </blockquote>
+<h4>Using Namespaces</h4>
+<p>Instead of maintaining references to handlers in order to unbind them, we can namespace the events and use this capability to narrow the scope of our unbinding actions. As shown in the discussion for the <code>.bind()</code> method, namespaces are defined by using a period (<code>.</code>) character when binding a handler:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click.myEvents'</span><span class="p">,</span> <span class="n">handler</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a handler is bound in this fashion, we can still unbind it the normal way:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="s">'click'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>However, if we want to avoid affecting other handlers, we can be more specific:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="s">'click.myEvents'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We can also unbind all of the handlers in a namespace, regardless of event type:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="s">'.myEvents'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It is particularly useful to attach namespaces to event bindings when we are developing plug-ins or otherwise writing code that may interact with other event-handling code in the future.</p>
+<h4>Using the Event Object</h4>
+<p>The third form of the <code>.unbind()</code> method is used when we wish to unbind a handler from within itself. For example, suppose we wish to trigger an event handler only three times:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">timesClicked</span> <span class="p">=</span> 0<span class="p">;</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'The quick brown fox jumps over the lazy dog.'</span><span class="p">);</span>
+  <span class="n">timesClicked</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">timesClicked</span> <span class="o">&gt;</span><span class="p">=</span> 3<span class="p">)</span> <span class="p">{</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">unbind</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The handler in this case must take a parameter, so that we can capture the event object and use it to unbind the handler after the third click. The event object contains the context necessary for <code>.unbind()</code> to know which handler to remove.
+This example is also an illustration of a closure. Since the handler refers to the <code>timesClicked</code> variable, which is defined outside the function, incrementing the variable has an effect even between invocations of the handler.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Can bind and unbind events to the colored button.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"theone"</span><span class="nt">&gt;</span>Does nothing...<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"bind"</span><span class="nt">&gt;</span>Bind Click<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"unbind"</span><span class="nt">&gt;</span>Unbind Click<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"display:none;"</span><span class="nt">&gt;</span>Click!<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+function aClick() {
+$("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+// could use .bind('click', aClick) instead but for variety...
+$("#theone").click(aClick)
+  .text("Can Click!");
+});
+$("#unbind").click(function () {
+$("#theone").unbind('click', aClick)
+  .text("Does nothing...");
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To unbind all events from all paragraphs, write:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">unbind</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To unbind all click events from all paragraphs, write:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">unbind</span><span class="p">(</span> "<span class="n">click</span>" <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To unbind just one previously bound handler, pass the function in as the second argument:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="o">//</span> <span class="n">code</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">some</span> <span class="n">kind</span> <span class="n">of</span> <span class="n">event</span>
+<span class="p">};</span>
+
+$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="o">//</span> <span class="p">...</span> <span class="n">now</span> <span class="n">foo</span> <span class="n">will</span> <span class="n">be</span> <span class="n">called</span> <span class="n">when</span> <span class="n">paragraphs</span> <span class="n">are</span> <span class="n">clicked</span> <span class="p">...</span>
+
+$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">unbind</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="o">//</span> <span class="p">...</span> <span class="n">foo</span> <span class="n">will</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">be</span> <span class="n">called</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

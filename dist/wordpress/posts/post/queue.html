@@ -1,0 +1,229 @@
+<script>
+	{
+		"title": ".queue()",
+		"excerpt": "Show the queue of functions to be executed on the matched elements.",
+		"termSlugs": {
+			"category": [
+				"effects/custom-effects","data","utilities","version/1.2","effects/custom-effects","data","utilities","version/1.2"
+			]
+		}
+	}
+</script><div class="toc">
+<h4><span>Contents:</span></h4>
+<ul class="toc-list">
+<li>
+<a href="#queue1">queue( [&nbsp;queueName&nbsp;] &nbsp;) </a><ul><li>.queue(  [queueName]  )
+              </li></ul>
+</li>
+<li>
+<a href="#queue2">queue( [&nbsp;queueName&nbsp;] , newQueue &nbsp;) </a><ul>
+<li>.queue(  [queueName] , newQueue )
+              </li>
+<li>.queue(  [queueName] , callback( next ) )
+              </li>
+</ul>
+</li>
+</ul>
+</div><div id="queue1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.queue(  [queueName]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Array">Array</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Show the queue of functions to be executed on the matched elements.</p>
+<ul class="signatures"><li class="signature" id="queue-queueName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.queue(  [queueName] )</h4>
+<p class="argument"><strong>queueName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+</li></ul>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the length of the queue.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:60px;
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  p { color:red; }  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+  <span class="nt">&lt;p&gt;</span>The queue length is: <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var div = $("div");
+
+function runIt() {
+  div.show("slow");
+  div.animate({left:'+=200'},2000);
+  div.slideToggle(1000);
+  div.slideToggle("fast");
+  div.animate({left:'-=200'},1500);
+  div.hide("slow");
+  div.show(1200);
+  div.slideUp("normal", runIt);
+}
+
+function showIt() {
+  var n = div.queue("fx");
+  $("span").text( n.length );
+  setTimeout(showIt, 100);
+}
+
+runIt();
+showIt();
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div><div id="queue2" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.queue(  [queueName] , newQueue )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Manipulate the queue of functions to be executed on the matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="queue-queueName-newQueue">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.queue(  [queueName], newQueue )</h4>
+<p class="argument"><strong>queueName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+<p class="argument"><strong>newQueue: </strong><a href="http://api.jquery.com/Types#Array">Array</a>
+                          An array of functions to replace the current queue contents.</p>
+</li>
+<li class="signature" id="queue-queueName-callback-next-">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.queue(  [queueName], callback( next ) )</h4>
+<p class="argument"><strong>queueName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+<p class="argument"><strong>callback( next ): </strong>Function()
+                          The new function to add to the queue, with a function to call that will dequeue the next item.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Every element can have one to many queues of functions attached to it by jQuery. In most applications, only one queue (called <code>fx</code>) is used. Queues allow a sequence of actions to be called on an element asynchronously, without halting program execution. The typical example of this is calling multiple animation methods on an element. For example:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">slideUp</span><span class="p">().</span><span class="n">fadeIn</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>When this statement is executed, the element begins its sliding animation immediately, but the fading transition is placed on the <code>fx</code> queue to be called only once the sliding transition is complete.</p>
+<p>The <code>.queue()</code> method allows us to directly manipulate this queue of functions. Calling <code>.queue()</code> with a callback is particularly useful; it allows us to place a new function at the end of the queue.</p>
+<p>This feature is similar to providing a callback function with an animation method, but does not require the callback to be given at the time the animation is performed.</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">slideUp</span><span class="p">();</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">queue</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Animation complete.'</span><span class="p">);</span>
+  $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">dequeue</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This is equivalent to:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">slideUp</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Animation complete.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Note that when adding a function with <code>.queue()</code>, we should ensure that <code>.dequeue()</code> is eventually called so that the next function in line executes.</p>
+<p><strong>As of jQuery 1.4</strong>, the function that's called is passed another function as the first argument. When called, this automatically dequeues the next item and keeps the queue moving. We use it as follows:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">test</span>"<span class="p">).</span><span class="n">queue</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Do</span> <span class="n">some</span> <span class="n">stuff</span><span class="p">...</span>
+    <span class="n">next</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples-1">
+<div id="example-1-0">
+<h4>Example: <span class="desc">Queue a custom function.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:30px;
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  Click here...
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$(document.body).click(function () {
+      $("div").show("slow");
+      $("div").animate({left:'+=200'},2000);
+      $("div").queue(function () {
+        $(this).addClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").animate({left:'-=200'},500);
+      $("div").queue(function () {
+        $(this).removeClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").slideUp();
+    });<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1-1">
+<h4>Example: <span class="desc">Set a queue array to delete the queue.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:30px;
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"start"</span><span class="nt">&gt;</span>Start<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"stop"</span><span class="nt">&gt;</span>Stop<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("#start").click(function () {
+      $("div").show("slow");
+      $("div").animate({left:'+=200'},5000);
+      $("div").queue(function () {
+        $(this).addClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").animate({left:'-=200'},1500);
+      $("div").queue(function () {
+        $(this).removeClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").slideUp();
+    });
+    $("#stop").click(function () {
+      $("div").queue("fx", []);
+      $("div").stop();
+    });<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

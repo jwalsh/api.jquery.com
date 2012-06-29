@@ -1,0 +1,50 @@
+<script>
+	{
+		"title": ":contains() Selector",
+		"excerpt": "Select all elements that contain the specified text.",
+		"termSlugs": {
+			"category": [
+				"selectors/content-filter-selector","version/1.1.4"
+			]
+		}
+	}
+</script><div id="contains1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">contains</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>jQuery(':contains(text)')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>text</dt>
+<dd>A string of text to look for. It's case sensitive.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Select all elements that contain the specified text.</p>
+<div class="longdesc"><p>The matching text can appear directly within the selected element, in any of that element's descendants, or a combination thereof. As with attribute value selectors, text inside the parentheses of <code>:contains()</code> can be written as a bare word or surrounded by quotation marks. The text must have matching case to be selected.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all divs containing "John" and underlines them.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div&gt;</span>John Resig<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div&gt;</span>George Martin<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>Malcom John Sinclair<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>J. Ohn<span class="nt">&lt;/div&gt;</span>
+      
+<span class="nt">&lt;script&gt;</span>
+$("div:contains('John')").css("text-decoration", "underline");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

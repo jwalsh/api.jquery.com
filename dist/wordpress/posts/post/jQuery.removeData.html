@@ -1,0 +1,64 @@
+<script>
+	{
+		"title": "jQuery.removeData()",
+		"excerpt": "Remove a previously-stored piece of data.",
+		"termSlugs": {
+			"category": [
+				"data","utilities","version/1.2.3"
+			]
+		}
+	}
+</script><div id="jQuery-removeData1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.removeData( element [, name]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove a previously-stored piece of data.</p>
+<ul class="signatures"><li class="signature" id="jQuery-removeData-element-name">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.3/">1.2.3</a></span>jQuery.removeData( element [, name] )</h4>
+<p class="argument"><strong>element: </strong><a href="http://api.jquery.com/Types#Element">Element</a>
+                          A DOM element from which to remove data.</p>
+<p class="argument"><strong>name: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string naming the piece of data to remove.</p>
+</li></ul>
+<div class="longdesc">
+<p><strong>Note:</strong> This is a low-level method, you should probably use <code><a href="/removeData">.removeData()</a></code> instead.</p>
+<p>The <code>jQuery.removeData()</code> method allows us to remove values that were previously set using <code><a href="/jQuery.data">jQuery.data()</a></code>. When called with the name of a key, <code>jQuery.removeData()</code> deletes that particular value; when called with no arguments, all values are removed.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Set a data store for 2 names then remove one of them.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+    div { margin:2px; color:blue; }
+    span { color:red; }
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>value1 before creation: <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>value1 after creation: <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>value1 after removal: <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>value2 after removal: <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var div = $("div")[0];
+$("span:eq(0)").text("" + $("div").data("test1"));
+jQuery.data(div, "test1", "VALUE-1");
+jQuery.data(div, "test2", "VALUE-2");
+$("span:eq(1)").text("" + jQuery.data(div, "test1"));
+jQuery.removeData(div, "test1");
+$("span:eq(2)").text("" + jQuery.data(div, "test1"));
+$("span:eq(3)").text("" + jQuery.data(div, "test2"));<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

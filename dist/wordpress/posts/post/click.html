@@ -1,0 +1,115 @@
+<script>
+	{
+		"title": ".click()",
+		"excerpt": "Bind an event handler to the \"click\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/mouse-events","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="click1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.click( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "click" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="click-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.click( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="click-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.click(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="click"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.click()</h4></li>
+</ul>
+<div class="longdesc">
+<p>In the first two variations, this method is a shortcut for <code>.bind("click", handler)</code>, as well as for <code>.on("click", handler)</code> as of jQuery 1.7. In the third variation, when <code>.click()</code> is called without arguments, it is a shortcut for <code>.trigger("click")</code>. </p>
+<p>The <code>click</code> event is sent to an element when the mouse pointer is over the element, and the mouse button is pressed and released. Any HTML element can receive this event.</p>
+<div class="highlightblock"><div class="highlight"><pre>For example, consider the HTML:
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"target"</span><span class="nt">&gt;</span>
+  Click here
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p class="image">
+      <img src="/resources/0042_05_03.png" alt="" />
+    </p>
+<p>The event handler can be bound to any <code>&lt;div&gt;</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">target</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span>"<span class="n">Handler</span> <span class="k">for</span> <span class="p">.</span><span class="n">click</span><span class="p">()</span> <span class="n">called</span><span class="p">.</span>"<span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now if we click on this element, the alert is displayed:</p>
+<p>
+      <span class="output">Handler for .click() called.</span>
+    </p>
+<p>We can also trigger the event when a different element is clicked:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">other</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span>"#<span class="n">target</span>"<span class="p">).</span><span class="n">click</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>The <code>click</code> event is only triggered after this exact series of events:</p>
+<ul>
+      <li>The mouse button is depressed while the pointer is inside the element.</li>
+      <li>The mouse button is released while the pointer is inside the element.</li>
+    </ul>
+<p>This is usually the desired sequence before taking an action. If this is not required, the <code>mousedown</code> or <code>mouseup</code> event may be more suitable.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Hide paragraphs on a page when they are clicked:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { color:red; margin:5px; cursor:pointer; }
+  p:hover { background:yellow; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>First Paragraph<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;p&gt;</span>Second Paragraph<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Yet one more Paragraph<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("p").click(function () {
+      $(this).slideUp();
+    });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Trigger the click event on all of the paragraphs on the page:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">click</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

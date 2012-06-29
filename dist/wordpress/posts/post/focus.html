@@ -1,0 +1,120 @@
+<script>
+	{
+		"title": ".focus()",
+		"excerpt": "Bind an event handler to the \"focus\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/form-events","forms","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="focus1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.focus( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "focus" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="focus-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.focus( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="focus-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.focus(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="focus"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.focus()</h4></li>
+</ul>
+<div class="longdesc">
+<ul>
+      <li>This method is a shortcut for <code>.bind('focus', handler)</code> in the first and second variations, and <code>.trigger('focus')</code> in the third.</li>
+      <li>The <code>focus</code> event is sent to an element when it gains focus. This event is implicitly applicable to a limited set of elements, such as  form elements (<code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, etc.) and links (<code>&lt;a href&gt;</code>). In recent browser versions, the event can be extended to include all element types by explicitly setting the element's <code>tabindex</code> property. An element can gain focus via keyboard commands, such as the Tab key, or by mouse clicks on the element.</li>
+      <li>Elements with focus are usually highlighted in some way by the browser, for example with a dotted line surrounding the element. The focus is used to determine which element is the first to receive keyboard-related events.</li>
+    </ul>
+<blockquote>
+      <p>Attempting to set focus to a hidden element causes an error in Internet Explorer. Take care to only use <code>.focus()</code> on elements that are visible. To run an element's focus event handlers without setting focus to the element, use <code>.triggerHandler("focus")</code> instead of <code>.focus()</code>.</p>
+    </blockquote>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;form&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"target"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Field 1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Field 2"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The event handler can be bound to the first input field:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#target'</span><span class="p">).</span><span class="n">focus</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Handler for .focus() called.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now clicking on the first field, or tabbing to it from another field, displays the alert:</p>
+<p>
+      <span class="output">Handler for .focus() called.</span>
+    </p>
+<p>We can trigger the event when another element is clicked:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#other'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#target'</span><span class="p">).</span><span class="n">focus</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>The <code>focus</code> event does not bubble in Internet Explorer. Therefore, scripts that rely on event delegation with the <code>focus</code> event will not work consistently across browsers. As of version 1.4.2, however, jQuery works around this limitation by mapping <code>focus</code> to the <code>focusin</code> event in its event delegation methods, <a href="http://api.jquery.com/live/"><code>.live()</code></a> and <a href="http://api.jquery.com/delegate/"><code>.delegate()</code></a>.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Fire focus.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>span {display:none;}<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span> <span class="nt">&lt;span&gt;</span>focus fire<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="nt">/&gt;</span> <span class="nt">&lt;span&gt;</span>focus fire<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("input").focus(function () {
+  $(this).next("span").css('display','inline').fadeOut(1000);
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To stop people from writing in text input boxes, try:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">input</span><span class="p">[</span><span class="n">type</span><span class="p">=</span><span class="n">text</span><span class="p">]</span>"<span class="p">).</span><span class="n">focus</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+  $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">blur</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To focus on a login input box with id 'login' on page startup, try:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="n">ready</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+  $<span class="p">(</span>"#<span class="n">login</span>"<span class="p">).</span><span class="n">focus</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

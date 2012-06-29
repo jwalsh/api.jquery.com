@@ -1,0 +1,130 @@
+<script>
+	{
+		"title": ".keypress()",
+		"excerpt": "Bind an event handler to the \"keypress\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/keyboard-events","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="keypress1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.keypress( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "keypress" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="keypress-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.keypress( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="keypress-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.keypress(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="keypress"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.keypress()</h4></li>
+</ul>
+<div class="longdesc">
+<p><strong>Note:</strong> as the <code>keypress</code> event isn't covered by any official specification, the actual behavior encountered when using it may differ across browsers, browser versions, and platforms.</p>
+<p>This method is a shortcut for <code>.bind("keypress", handler)</code> in the first two variations, and <code>.trigger("keypress")</code> in the third.</p>
+<p>The <code>keypress</code> event is sent to an element when the browser registers keyboard input. This is similar to the <code>keydown</code> event, except in the case of key repeats. If the user presses and holds a key, a <code>keydown </code>event is triggered once, but separate <code>keypress</code> events are triggered for each inserted character. In addition, modifier keys (such as Shift) trigger <code>keydown</code> events but not <code>keypress</code> events.</p>
+<p>A <code>keypress</code> event handler can be attached to any element, but the event is only sent to the element that has the focus. Focusable elements can vary between browsers, but form elements can always get focus so are reasonable candidates for this event type.</p>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;form&gt;</span>
+  <span class="nt">&lt;fieldset&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"target"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Hello there"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/fieldset&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The event handler can be bound to the input field:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">target</span>"<span class="p">).</span><span class="n">keypress</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span>"<span class="n">Handler</span> <span class="k">for</span> <span class="p">.</span><span class="n">keypress</span><span class="p">()</span> <span class="n">called</span><span class="p">.</span>"<span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now when the insertion point is inside the field, pressing a key displays the alert:</p>
+<p>
+      <span class="output">Handler for .keypress() called.</span>
+    </p>
+<p>The message repeats if the key is held down. To trigger the event manually, apply <code>.keypress()</code> without an argument::</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#other'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span>"#<span class="n">target</span>"<span class="p">).</span><span class="n">keypress</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>If key presses anywhere need to be caught (for example, to implement global shortcut keys on a page), it is useful to attach this behavior to the <code>document</code> object. Because of event bubbling, all key presses will make their way up the DOM to the <code>document</code> object unless explicitly stopped.</p>
+<p>To determine which character was entered, examine the <code>event</code> object that is passed to the handler function. While browsers use differing properties to store this information, jQuery normalizes the <code>.which</code> property so you can reliably use it to retrieve the character code.</p>
+<p>Note that <code>keydown</code> and <code>keyup</code> provide a code indicating which key is pressed, while <code>keypress</code> indicates which character was entered. For example, a lowercase "a" will be reported as 65 by <code>keydown</code> and <code>keyup</code>, but as 97 by <code>keypress</code>. An uppercase "A" is reported as 65 by all events. Because of this distinction, when catching special keystrokes such as arrow keys, <code>.keydown()</code> or <code>.keyup()</code> is a better choice.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the event object when a key is pressed in the input. Note: This demo relies on a simple $.print() plugin (http://api.jquery.com/scripts/events.js) for the event object's output.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+fieldset { margin-bottom: 1em; }
+input { display: block; margin-bottom: .25em; }
+#print-output {
+  width: 100%;
+}
+.print-output-line {
+  white-space: pre;
+  padding: 5px;
+  font-family: monaco, monospace;
+  font-size: .7em;
+}
+
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+  <span class="nt">&lt;fieldset&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"target"</span><span class="nt">&gt;</span>Type Something:<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"target"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/fieldset&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://api.jquery.com/scripts/events.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  
+<span class="nt">&lt;script&gt;</span>
+var xTriggered = 0;
+$("#target").keypress(function(event) {
+  if ( event.which == 13 ) {
+     event.preventDefault();
+   }
+   xTriggered++;
+   var msg = "Handler for .keypress() called " + xTriggered + " time(s).";
+  $.print( msg, "html" );
+  $.print( event );
+});
+
+$("#other").click(function() {
+  $("#target").keypress();
+});<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="460"></div>
+</div></div>
+</div>
+</div>

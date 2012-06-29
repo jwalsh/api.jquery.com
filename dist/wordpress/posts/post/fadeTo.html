@@ -1,0 +1,192 @@
+<script>
+	{
+		"title": ".fadeTo()",
+		"excerpt": "Adjust the opacity of the matched elements.",
+		"termSlugs": {
+			"category": [
+				"effects/fading","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="fadeTo1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.fadeTo( duration, opacity [, callback]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Adjust the opacity of the matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="fadeTo-duration-opacity-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.fadeTo( duration, opacity [, callback] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#String,Number">String,Number</a>
+                          A string or number determining how long the animation will run.</p>
+<p class="argument"><strong>opacity: </strong><a href="http://api.jquery.com/Types#Number">Number</a>
+                          A number between 0 and 1 denoting the target opacity.</p>
+<p class="argument"><strong>callback: </strong><a href="http://api.jquery.com/Types#Callback">Callback</a>
+                          A function to call once the animation is complete.</p>
+</li>
+<li class="signature" id="fadeTo-duration-opacity-easing-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.fadeTo( duration, opacity [, easing] [, callback] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#String,Number">String,Number</a>
+                          A string or number determining how long the animation will run.</p>
+<p class="argument"><strong>opacity: </strong><a href="http://api.jquery.com/Types#Number">Number</a>
+                          A number between 0 and 1 denoting the target opacity.</p>
+<p class="argument"><strong>easing: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string indicating which easing function to use for the transition.</p>
+<p class="argument"><strong>callback: </strong><a href="http://api.jquery.com/Types#Callback">Callback</a>
+                          A function to call once the animation is complete.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.fadeTo()</code> method animates the opacity of the matched elements.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, the default duration of  <code>400</code> milliseconds is used. Unlike the other effect methods, <code>.fadeTo()</code> requires that <code>duration</code> be explicitly specified.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"clickme"</span><span class="nt">&gt;</span>
+    Click here
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"book"</span> <span class="na">src=</span><span class="s">"book.png"</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">width=</span><span class="s">"100"</span> <span class="na">height=</span><span class="s">"123"</span> <span class="nt">/&gt;</span>
+  With the element initially shown, we can dim it slowly:
+  $('#clickme').click(function() {
+    $('#book').fadeTo('slow', 0.5, function() {
+      // Animation complete.
+    });
+  });
+  
+</pre></div>
+</div>
+<p class="image four-across">
+      <img src="/images/0042_06_41.png" alt="" />
+      <img src="/images/0042_06_42.png" alt="" />
+      <img src="/images/0042_06_43.png" alt="" />
+      <img src="/images/0042_06_44.png" alt="" />
+    </p>
+<p>With <code>duration</code> set to <code>0</code>, this method just changes the <code>opacity</code> CSS property, so <code>.fadeTo(0, opacity)</code> is the same as <code>.css('opacity', opacity)</code>.</p>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery.fx.off.xml">
+  All jQuery effects, including <code>.fadeTo()</code>, can be turned off globally by setting  <code>jQuery.fx.off = true</code>, which effectively sets the duration to 0. For more information, see <a href="http://api.jquery.com/jquery.fx.off">jQuery.fx.off</a>.
+</li></ul></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates first paragraph to fade to an opacity of 0.33 (33%, about one third visible), completing the animation within 600 milliseconds.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+Click this paragraph to see it fade.
+<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>
+Compare to this one that won't fade.
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("p:first").click(function () {
+$(this).fadeTo("slow", 0.33);
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Fade div to a random opacity on each click, completing the animation within 200 milliseconds.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+p { width:80px; margin:0; padding:5px; }
+div { width:40px; height:40px; position:absolute; }
+div#one { top:0; left:0; background:#f00; }
+div#two { top:20px; left:20px; background:#0f0; }
+div#three { top:40px; left:40px; background:#00f; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>And this is the library that John built...<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"one"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"two"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"three"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("div").click(function () {
+$(this).fadeTo("fast", Math.random());
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Find the right answer!  The fade will take 250 milliseconds and change various styles when it completes.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div, p { width:80px; height:40px; top:0; margin:0;
+position:absolute; padding-top:8px; }
+p { background:#fcc; text-align:center; }
+div { background:blue; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Wrong<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;p&gt;</span>Wrong<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>Right!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var getPos = function (n) {
+  return (Math.floor(n) * 90) + "px";
+};
+$("p").each(function (n) {
+  var r = Math.floor(Math.random() * 3);
+  var tmp = $(this).text();
+  $(this).text($("p:eq(" + r + ")").text());
+  $("p:eq(" + r + ")").text(tmp);
+  $(this).css("left", getPos(n));
+});
+$("div").each(function (n) {
+  $(this).css("left", getPos(n));
+})
+.css("cursor", "pointer")
+.click(function () {
+    $(this).fadeTo(250, 0.25, function () {
+      $(this).css("cursor", "")
+        .prev().css({"font-weight": "bolder",
+                     "font-style": "italic"});
+        });
+    });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

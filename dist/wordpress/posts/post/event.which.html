@@ -1,0 +1,75 @@
+<script>
+	{
+		"title": "event.which",
+		"excerpt": " For key or mouse events, this property indicates the specific key or button that was pressed.  ",
+		"termSlugs": {
+			"category": [
+				"events/event-object","version/1.1.3"
+			]
+		}
+	}
+</script><div id="event-which1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.which</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Number">Number</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> For key or mouse events, this property indicates the specific key or button that was pressed.  </p>
+<ul class="signatures"><li class="signature" id="event-which"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.3/">1.1.3</a></span>event.which</h4></li></ul>
+<div class="longdesc">
+<p>The <code>event.which</code> property normalizes <code>event.keyCode</code> and <code>event.charCode</code>. It is recommended to watch <code>event.which</code> for keyboard key input. For more detail, read about <a href="https://developer.mozilla.org/en/DOM/event.charCode#Notes">event.charCode on the MDC</a>. </p>
+<p><code>event.which</code> also normalizes button presses (<code>mousedown</code> and <code>mouseup</code>events), reporting <code>1</code> for left button, <code>2</code> for middle, and <code>3</code> for right. Use <code>event.which</code> instead of <code>event.button</code>.  </p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Log which key was depressed.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"whichkey"</span> <span class="na">value=</span><span class="s">"type something"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$('#whichkey').bind('keydown',function(e){
+  $('#log').html(e.type + ': ' +  e.which );
+});  <span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Log which mouse button was depressed.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"whichkey"</span> <span class="na">value=</span><span class="s">"type something"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$('#whichkey').bind('mousedown',function(e){
+  $('#log').html(e.type + ': ' +  e.which );
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

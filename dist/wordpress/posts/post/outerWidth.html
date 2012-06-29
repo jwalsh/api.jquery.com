@@ -1,0 +1,56 @@
+<script>
+	{
+		"title": ".outerWidth()",
+		"excerpt": "Get the current computed width for the first element in the set of matched elements, including padding and border.",
+		"termSlugs": {
+			"category": [
+				"css","dimensions","manipulation/style-properties","version/1.2.6"
+			]
+		}
+	}
+</script><div id="outerWidth1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.outerWidth(  [includeMargin]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Integer">Integer</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get the current computed width for the first element in the set of matched elements, including padding and border.</p>
+<ul class="signatures"><li class="signature" id="outerWidth-includeMargin">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>.outerWidth(  [includeMargin] )</h4>
+<p class="argument"><strong>includeMargin: </strong><a href="http://api.jquery.com/Types#Boolean">Boolean</a>
+                          A Boolean indicating whether to include the element's margin in the calculation.</p>
+</li></ul>
+<div class="longdesc">
+<p>Returns the width of the element, along with left and right padding, border, and optionally margin, in pixels.</p>
+<p>If <code>includeMargin</code> is omitted or <code>false</code>, the padding and border are included in the calculation; if <code>true</code>, the margin is also included.</p>
+<p>This method is not applicable to <code>window</code> and <code>document</code> objects; for these, use <code><a href="/width">.width()</a></code> instead.</p>
+<p class="image">
+      <img src="/resources/0042_04_06.png" />
+    </p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Get the outerWidth of a paragraph.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { margin:10px;padding:5px;border:2px solid #666; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>var p = $("p:first");
+$("p:last").text( "outerWidth:" + p.outerWidth()+ " , outerWidth(true):" + p.outerWidth(true) );
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

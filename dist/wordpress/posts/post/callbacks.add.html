@@ -1,0 +1,58 @@
+<script>
+	{
+		"title": "callbacks.add()",
+		"excerpt": "Add a callback or a collection of callbacks to a callback list.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-add1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.add( callbacks )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Add a callback or a collection of callbacks to a callback list.</p>
+<ul class="signatures"><li class="signature" id="callbacks-add-callbacks">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.add( callbacks )</h4>
+<p class="argument"><strong>callbacks: </strong>Function()
+                          A function, or array of functions, that are to be added to the callback list.</p>
+</li></ul>
+<div class="longdesc">
+<h2 id="example-1">Example</h2>
+<p>Using <code>callbacks.add()</code> to add new callbacks to a callback list:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">a</span> <span class="n">sample</span> <span class="n">logging</span> <span class="k">function</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">a</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'foo:'</span> <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">another</span> <span class="k">function</span> <span class="n">to</span> <span class="n">also</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'bar:'</span> <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="k">function</span> <span class="s">'foo'</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">fire</span> <span class="n">the</span> <span class="n">items</span> <span class="n">on</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'hello'</span> <span class="p">);</span>
+<span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="s">'foo: hello'</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="k">function</span> <span class="s">'bar'</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">bar</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">fire</span> <span class="n">the</span> <span class="n">items</span> <span class="n">on</span> <span class="n">the</span> <span class="n">list</span> <span class="n">again</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'world'</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">outputs</span><span class="p">:</span>
+<span class="o">//</span> <span class="s">'foo: world'</span>
+<span class="o">//</span> <span class="s">'bar: world'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

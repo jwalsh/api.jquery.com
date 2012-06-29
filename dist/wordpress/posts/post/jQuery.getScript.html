@@ -1,0 +1,142 @@
+<script>
+	{
+		"title": "jQuery.getScript()",
+		"excerpt": "Load a JavaScript file from the server using a GET HTTP request, then execute it.",
+		"termSlugs": {
+			"category": [
+				"ajax/shorthand-methods","version/1.0","version/1.5"
+			]
+		}
+	}
+</script><div id="jQuery-getScript1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.getScript( url [, success(script, textStatus, jqXHR)]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jqXHR">jqXHR</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Load a JavaScript file from the server using a GET HTTP request, then execute it.</p>
+<ul class="signatures"><li class="signature" id="jQuery-getScript-url-successscript--textStatus--jqXHR">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.getScript( url [, success(script, textStatus, jqXHR)] )</h4>
+<p class="argument"><strong>url: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the URL to which the request is sent.</p>
+<p class="argument"><strong>success(script, textStatus, jqXHR): </strong>Function()
+                          A callback function that is executed if the request succeeds.</p>
+</li></ul>
+<div class="longdesc">
+<p>This is a shorthand Ajax function, which is equivalent to:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">ajax</span><span class="p">({</span>
+  <span class="n">url</span><span class="p">:</span> 
+</pre></div>
+</div>
+<p>The script is executed in the global context, so it can refer to other variables and use jQuery functions. Included scripts can have some impact on the current page.</p>
+<h4 id="success-callback">
+        Success Callback
+      </h4>
+<p>The callback is passed the returned JavaScript file. This is generally not useful as the script will already have run at this point.</p>
+<div class="highlightblock"><div class="highlight"><pre>$(".result").html("<span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet.<span class="nt">&lt;/p&gt;</span>");
+</pre></div>
+</div>
+<p>Scripts are included and run by referencing the file name:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">getScript</span><span class="p">(</span>"<span class="n">ajax</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="n">js</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">textStatus</span><span class="p">,</span> <span class="n">jqxhr</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="n">data</span><span class="p">);</span> <span class="o">//</span><span class="n">data</span> <span class="n">returned</span>
+   <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="n">textStatus</span><span class="p">);</span> <span class="o">//</span><span class="n">success</span>
+   <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="n">jqxhr</span><span class="p">.</span><span class="n">status</span><span class="p">);</span> <span class="o">//</span>200
+   <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="s">'Load was performed.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<h4 id="handling-errors">Handling Errors</h4>
+<p>As of jQuery 1.5, you may use <a href="http://api.jquery.com/deferred.fail/"><code>.fail()</code></a> to account for errors:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">getScript</span><span class="p">(</span>"<span class="n">ajax</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="n">js</span>"<span class="p">)</span>
+<span class="p">.</span><span class="n">done</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">textStatus</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">textStatus</span> <span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="n">fail</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">jqxhr</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+  $<span class="p">(</span> "<span class="n">div</span><span class="p">.</span><span class="nb">log</span>" <span class="p">).</span><span class="n">text</span><span class="p">(</span> "<span class="n">Triggered</span> <span class="n">ajaxError</span> <span class="n">handler</span><span class="p">.</span>" <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Prior to jQuery 1.5, the global <code>.ajaxError()</code> callback event had to be used in order to handle <code>$.getScript()</code> errors:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span> "<span class="n">div</span><span class="p">.</span><span class="nb">log</span>" <span class="p">).</span><span class="n">ajaxError</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">jqxhr</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">settings</span><span class="p">.</span><span class="n">dataType</span><span class="o">==</span><span class="s">'script'</span><span class="p">)</span> <span class="p">{</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">text</span><span class="p">(</span> "<span class="n">Triggered</span> <span class="n">ajaxError</span> <span class="n">handler</span><span class="p">.</span>" <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<h4 id="caching-requests">Caching Responses</h4>
+<p>Be default, <code>$.getScript()</code> sets the cache setting to <code>false</code>. This appends a timestamped query parameter to the request URL to ensure that the browser downloads the script each time it is requested. You can override this feature by setting the cache property globally using <a href="http://api.jquery.com/jquery.ajaxsetup/"><code>$.ajaxSetup()</code></a>: </p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">ajaxSetup</span><span class="p">({</span>
+  <span class="n">cache</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Alternatively, you could define a new method that uses the more flexible <code>$.ajax()</code> method.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Define a $.cachedScript() method that allows fetching a cached script:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">jQuery</span><span class="p">.</span><span class="n">cachedScript</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="o">//</span> <span class="n">allow</span> <span class="n">user</span> <span class="n">to</span> <span class="n">set</span> <span class="n">any</span> <span class="n">option</span> <span class="n">except</span> <span class="k">for</span> <span class="n">dataType</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">and</span> <span class="n">url</span>
+  <span class="n">options</span> <span class="p">=</span> $<span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">options</span> <span class="o">||</span> <span class="p">{},</span> <span class="p">{</span>
+    <span class="n">dataType</span><span class="p">:</span> "<span class="n">script</span>"<span class="p">,</span>
+    <span class="n">cache</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">url</span>
+  <span class="p">});</span>
+
+  <span class="o">//</span> <span class="n">Use</span> $<span class="p">.</span><span class="n">ajax</span><span class="p">()</span> <span class="n">since</span> <span class="n">it</span> <span class="n">is</span> <span class="n">more</span> <span class="n">flexible</span> <span class="n">than</span> $<span class="p">.</span><span class="n">getScript</span>
+  <span class="o">//</span> <span class="n">Return</span> <span class="n">the</span> <span class="n">jqXHR</span> <span class="n">object</span> <span class="n">so</span> <span class="n">we</span> <span class="n">can</span> <span class="n">chain</span> <span class="n">callbacks</span>
+  <span class="k">return</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">ajax</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="o">//</span> <span class="n">Usage</span>
+$<span class="p">.</span><span class="n">cachedScript</span><span class="p">(</span>"<span class="n">ajax</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="n">js</span>"<span class="p">).</span><span class="n">done</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">textStatus</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="n">textStatus</span> <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Load the official jQuery Color Animation plugin dynamically and bind some color animations to occur once the new functionality is loaded.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+.block {
+   background-color: blue;
+   width: 150px;
+   height: 70px;
+   margin: 10px;
+}<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"go"</span><span class="nt">&gt;</span><span class="ni">&amp;raquo;</span> Run<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"block"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+$.getScript("/scripts/jquery.color.js", function() {
+  $("#go").click(function(){
+    $(".block").animate( { backgroundColor: "pink" }, 1000)
+      .delay(500)
+      .animate( { backgroundColor: "blue" }, 1000);
+  });
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

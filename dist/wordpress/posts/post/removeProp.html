@@ -1,0 +1,65 @@
+<script>
+	{
+		"title": ".removeProp()",
+		"excerpt": "Remove a property for the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"attributes","manipulation/general-attributes","version/1.6"
+			]
+		}
+	}
+</script><div id="removeProp1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.removeProp( propertyName )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove a property for the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="removeProp-propertyName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.removeProp( propertyName )</h4>
+<p class="argument"><strong>propertyName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          The name of the property to set.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.removeProp()</code> method removes properties set by the <code><a href="http://api.jquery.com/prop">.prop()</a></code> method.</p>
+<p>With some built-in properties of a DOM element or <code>window</code> object, browsers may generate an error if an attempt is made to remove the property. jQuery first assigns the value <code>undefined</code> to the property and ignores any error the browser generates. In general, it is only necessary to remove custom properties that have been set on an object, and not built-in (native) properties.</p>
+<p><strong>Note:</strong> Do not use this method to remove native properties such as checked, disabled, or selected. This will remove the property completely and, once removed, cannot be added again to element. Use <code><a href="http://api.jquery.com/prop">.prop()</a></code> to set these properties to <code>false</code> instead.</p>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/prop-memory-leaks.xml">
+  In Internet Explorer prior to version 9, using <code>.prop()</code> to set a DOM element property to anything other than a simple primitive value (number, string, or boolean) can cause memory leaks if the property is not removed (using <a href="http://api.jquery.com/removeProp/">.removeProp()</a>) before the DOM element is removed from the document. To safely set values on DOM objects without memory leaks, use <a href="http://api.jquery.com/data/">.data()</a>.
+</li></ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Set a numeric property on a paragraph and then remove it. </span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  img <span class="err">{</span> padding:10px; }
+  div <span class="err">{</span> color:red; font-size:24px; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+  <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var <span class="p">$</span><span class="nv">para</span> = <span class="p">$(</span><span class="s2">"p"</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">para</span><span class="p">.</span><span class="nv">prop</span><span class="p">(</span><span class="s2">"luggageCode"</span><span class="p">,</span> <span class="m">1234</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">para</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="s2">"The secret luggage code is: "</span><span class="p">,</span> <span class="err">String</span><span class="p">($</span><span class="nv">para</span><span class="p">.</span><span class="nv">prop</span><span class="p">(</span><span class="s2">"luggageCode"</span><span class="p">)),</span> <span class="s2">". "</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">para</span><span class="p">.</span><span class="nv">removeProp</span><span class="p">(</span><span class="s2">"luggageCode"</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">para</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="s2">"Now the secret luggage code is: "</span><span class="p">,</span> <span class="err">String</span><span class="p">($</span><span class="nv">para</span><span class="p">.</span><span class="nv">prop</span><span class="p">(</span><span class="s2">"luggageCode"</span><span class="p">)),</span> <span class="s2">". "</span><span class="p">)</span>;
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

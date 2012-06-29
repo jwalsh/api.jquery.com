@@ -1,0 +1,56 @@
+<script>
+	{
+		"title": "Attribute Contains Prefix Selector [name|=\"value\"]",
+		"excerpt": "Selects elements that have the specified attribute with a value either equal to a given string or starting with that string followed by a hyphen (-).",
+		"termSlugs": {
+			"category": [
+				"selectors/attribute-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="attributeContainsPrefix1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">attributeContainsPrefix</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('[attribute|="value"]')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>attribute</dt>
+<dd>An attribute name.</dd>
+<dt>value</dt>
+<dd>An attribute value. Can be either an unquoted single word or a quoted string.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects elements that have the specified attribute with a value either equal to a given string or starting with that string followed by a hyphen (-).</p>
+<div class="longdesc"><p>This selector was introduced into the CSS specification to handle language attributes.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all links with an hreflang attribute that is english.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+a { display: inline-block; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"example.html"</span> <span class="na">hreflang=</span><span class="s">"en"</span><span class="nt">&gt;</span>Some text<span class="nt">&lt;/a&gt;</span> 
+
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"example.html"</span> <span class="na">hreflang=</span><span class="s">"en-UK"</span><span class="nt">&gt;</span>Some other text<span class="nt">&lt;/a&gt;</span>
+
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"example.html"</span> <span class="na">hreflang=</span><span class="s">"english"</span><span class="nt">&gt;</span>will not be outlined<span class="nt">&lt;/a&gt;</span>
+  
+<span class="nt">&lt;script&gt;</span>
+$('a[hreflang|="en"]').css('border','3px dotted green');
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

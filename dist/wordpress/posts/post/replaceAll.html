@@ -1,0 +1,79 @@
+<script>
+	{
+		"title": ".replaceAll()",
+		"excerpt": "Replace each target element with the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"manipulation/dom-replacement","version/1.2"
+			]
+		}
+	}
+</script><div id="replaceAll1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.replaceAll( target )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Replace each target element with the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="replaceAll-target">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.replaceAll( target )</h4>
+<p class="argument"><strong>target: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A selector expression indicating which element(s) to replace.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.replaceAll()</code> method is corollary to <code><a href="/replaceWith">.replaceWith()</a></code>, but with the source and target reversed. Consider this DOM structure:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner first"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner second"</span><span class="nt">&gt;</span>And<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner third"</span><span class="nt">&gt;</span>Goodbye<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>We can create an element, then replace other elements with it:</p>
+<div class="highlightblock"><div class="highlight"><pre>$('<span class="nt">&lt;h2&gt;</span>New heading<span class="nt">&lt;/h2&gt;</span>').replaceAll('.inner');
+</pre></div>
+</div>
+<p>This causes all of them to be replaced:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>New heading<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>New heading<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>New heading<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Or, we could select an element to use as the replacement:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'.first'</span><span class="p">).</span><span class="n">replaceAll</span><span class="p">(</span><span class="s">'.third'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This results in the DOM structure:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner second"</span><span class="nt">&gt;</span>And<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner first"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>From this example, we can see that the selected element replaces the target by being moved from its old location, not by being cloned.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Replace all the paragraphs with bold words.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>cruel<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>World<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("<span class="nt">&lt;b&gt;</span>Paragraph. <span class="nt">&lt;/b&gt;</span>").replaceAll("p"); // check replaceWith() examples<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

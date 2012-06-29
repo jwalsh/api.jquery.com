@@ -8,3 +8,6 @@ config.json
 *.patch
 .DS_Store
 .settings
+api.jquery.com.esproj/Project.espressostorage
+
+api.jquery.com.esproj/user.chris.espressostorage

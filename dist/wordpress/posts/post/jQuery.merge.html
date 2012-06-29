@@ -1,0 +1,73 @@
+<script>
+	{
+		"title": "jQuery.merge()",
+		"excerpt": "Merge the contents of two arrays together into the first array. ",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.0"
+			]
+		}
+	}
+</script><div id="jQuery-merge1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.merge( first, second )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Array">Array</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Merge the contents of two arrays together into the first array. </p>
+<ul class="signatures"><li class="signature" id="jQuery-merge-first-second">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.merge( first, second )</h4>
+<p class="argument"><strong>first: </strong><a href="http://api.jquery.com/Types#Array">Array</a>
+                          The first array to merge, the elements of second added.</p>
+<p class="argument"><strong>second: </strong><a href="http://api.jquery.com/Types#Array">Array</a>
+                          The second array to merge into the first, unaltered.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.merge()</code> operation forms an array that contains all elements from the two arrays. The orders of items in the arrays are preserved, with items from the second array appended. The <code>$.merge()</code> function is destructive. It alters the first parameter to add the items from the second.  </p>
+<p>If you need the original first array, make a copy of it before calling <code>$.merge()</code>. Fortunately, <code>$.merge()</code> itself can be used for this duplication:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">newArray</span> <span class="p">=</span> $<span class="p">.</span><span class="n">merge</span><span class="p">([],</span> <span class="n">oldArray</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This shortcut creates a new, empty array and merges the contents of oldArray into it, effectively cloning the array.</p>
+<p>Prior to jQuery 1.4, the arguments should be true Javascript Array objects; use <code>$.makeArray</code> if they are not.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Merges two arrays, altering the first argument.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">merge</span><span class="p">(</span> <span class="p">[</span>0<span class="p">,</span>1<span class="p">,</span>2<span class="p">],</span> <span class="p">[</span>2<span class="p">,</span>3<span class="p">,</span>4<span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<h4>Result:</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">[</span>0<span class="p">,</span>1<span class="p">,</span>2<span class="p">,</span>2<span class="p">,</span>3<span class="p">,</span>4<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Merges two arrays, altering the first argument.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">merge</span><span class="p">(</span> <span class="p">[</span>3<span class="p">,</span>2<span class="p">,</span>1<span class="p">],</span> <span class="p">[</span>4<span class="p">,</span>3<span class="p">,</span>2<span class="p">]</span> <span class="p">)</span>  
+</pre></div>
+</div>
+<h4>Result:</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">[</span>3<span class="p">,</span>2<span class="p">,</span>1<span class="p">,</span>4<span class="p">,</span>3<span class="p">,</span>2<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Merges two arrays, but uses a copy, so the original isn't altered.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">first</span> <span class="p">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">];</span>
+<span class="n">var</span> <span class="n">second</span> <span class="p">=</span> <span class="p">[</span><span class="s">'d'</span><span class="p">,</span><span class="s">'e'</span><span class="p">,</span><span class="s">'f'</span><span class="p">];</span>
+$<span class="p">.</span><span class="n">merge</span><span class="p">(</span> $<span class="p">.</span><span class="n">merge</span><span class="p">([],</span><span class="n">first</span><span class="p">),</span> <span class="n">second</span><span class="p">);</span>
+</pre></div>
+</div>
+<h4>Result:</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">[</span>"<span class="n">a</span>"<span class="p">,</span>"<span class="n">b</span>"<span class="p">,</span>"<span class="n">c</span>"<span class="p">,</span>"<span class="n">d</span>"<span class="p">,</span>"<span class="n">e</span>"<span class="p">,</span>"<span class="n">f</span>"<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,52 @@
+<script>
+	{
+		"title": ":empty Selector",
+		"excerpt": "Select all elements that have no children (including text nodes).",
+		"termSlugs": {
+			"category": [
+				"selectors/content-filter-selector","version/1.0"
+			]
+		}
+	}
+</script><div id="empty1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">empty</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery(':empty')</h4>
+<p class="desc"><strong>Description: </strong>Select all elements that have no children (including text nodes).</p>
+<div class="longdesc">
+<p>This is the inverse of <code>:parent</code>. </p>
+<p>One important thing to note with :empty (and :parent) is that child elements include text nodes.</p>
+<p>The W3C recommends that the <code>&lt;p&gt;</code> element have at least one child node, even if that child is merely text (see http://www.w3.org/TR/html401/struct/text.html#edef-P). Some other elements, on the other hand, are empty (i.e. have no children) by definition: &lt;input&gt;, &lt;img&gt;, &lt;br&gt;, and &lt;hr&gt;, for example.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all elements that are empty - they don't have child elements or text.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  td { text-align:center; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>TD #0<span class="nt">&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>TD #2<span class="nt">&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+
+    <span class="nt">&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;</span>TD#5<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("td:empty").text("Was empty!").css('background', 'rgb(255,220,200)');<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

@@ -1,0 +1,192 @@
+<script>
+	{
+		"title": ".slideToggle()",
+		"excerpt": "Display or hide the matched elements with a sliding motion.",
+		"termSlugs": {
+			"category": [
+				"effects/sliding","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="slideToggle1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.slideToggle(  [duration]  [, callback]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Display or hide the matched elements with a sliding motion.</p>
+<ul class="signatures">
+<li class="signature" id="slideToggle-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideToggle(  [duration] [, callback] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#String,Number">String,Number</a>
+                          A string or number determining how long the animation will run.</p>
+<p class="argument"><strong>callback: </strong><a href="http://api.jquery.com/Types#Callback">Callback</a>
+                          A function to call once the animation is complete.</p>
+</li>
+<li class="signature" id="slideToggle-options">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideToggle( options )</h4>
+<p class="argument"><strong>options: </strong><a href="http://api.jquery.com/Types#Options">Options</a>
+                          A map of additional options to pass to the method.</p>
+<div class="options">
+<h5 class="option">duration: <span class="type"><a href="http://api.jquery.com/Types#Number%7CString">Number|String</a></span>
+</h5>
+<div class="default-value">
+<strong>Default: </strong>400</div>
+<p>A string or number determining how long the animation will run.</p>
+<h5 class="option">easing: <span class="type"><a href="http://api.jquery.com/Types#String">String</a></span>
+</h5>
+<div class="default-value">
+<strong>Default: </strong>swing</div>
+<p>A string indicating which easing function to use for the transition.</p>
+<h5 class="option">complete: <span class="type">Function()</span>
+</h5>
+<p>A function to call once the animation is complete.</p>
+<h5 class="option">step: <span class="type">Function(now: <a href="http://api.jquery.com/Types#Number">Number</a>, fx: <a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>)</span>
+</h5>
+<p>A function to be called after each step of the animation.</p>
+<h5 class="option">queue: <span class="type"><a href="http://api.jquery.com/Types#Boolean">Boolean</a></span>
+</h5>
+<div class="default-value">
+<strong>Default: </strong>true</div>
+<p>A Boolean indicating whether to place the animation in the effects queue. If false, the animation will begin immediately. <strong>As of jQuery 1.7</strong>, the queue option can also accept a string, in which case the animation is added to the queue represented by that string.</p>
+<h5 class="option">specialEasing: <span class="type"><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a></span>
+</h5>
+<p>A map of one or more of the CSS properties defined by the properties argument and their corresponding easing functions (added 1.4).</p>
+</div>
+</li>
+<li class="signature" id="slideToggle-duration-easing-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.slideToggle(  [duration] [, easing] [, callback] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#String,Number">String,Number</a>
+                          A string or number determining how long the animation will run.</p>
+<p class="argument"><strong>easing: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string indicating which easing function to use for the transition.</p>
+<p class="argument"><strong>callback: </strong><a href="http://api.jquery.com/Types#Callback">Callback</a>
+                          A function to call once the animation is complete.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.slideToggle()</code> method animates the height of the matched elements. This causes lower parts of the page to slide up or down, appearing to reveal or conceal the items. If the element is initially displayed, it will be hidden; if hidden, it will be shown. The <code>display</code> property is saved and restored as needed. If an element has a <code>display</code> value of <code>inline</code>, then is hidden and shown, it will once again be displayed <code>inline</code>. When the height reaches 0 after a hiding animation, the <code>display</code> style property is set to <code>none</code> to ensure that the element no longer affects the layout of the page.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively.</p>
+<p>We can animate any element, such as a simple image:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"clickme"</span><span class="nt">&gt;</span>
+  Click here
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"book"</span> <span class="na">src=</span><span class="s">"book.png"</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">width=</span><span class="s">"100"</span> <span class="na">height=</span><span class="s">"123"</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>We will cause <code>.slideToggle()</code> to be called when another element is clicked:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#clickme'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#book'</span><span class="p">).</span><span class="n">slideToggle</span><span class="p">(</span><span class="s">'slow'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Animation</span> <span class="n">complete</span><span class="p">.</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>With the element initially shown, we can hide it slowly with the first click:</p>
+<p class="image four-across">
+      <img src="/resources/0042_06_25.png" alt="" />
+      <img src="/resources/0042_06_26.png" alt="" />
+      <img src="/resources/0042_06_27.png" alt="" />
+      <img src="/resources/0042_06_28.png" alt="" />
+    </p>
+<p>A second click will show the element once again:</p>
+<p class="image four-across">
+      <img src="/resources/0042_06_29.png" alt="" />
+      <img src="/resources/0042_06_30.png" alt="" />
+      <img src="/resources/0042_06_31.png" alt="" />
+      <img src="/resources/0042_06_32.png" alt="" />
+    </p>
+<h4 id="easing">Easing</h4>
+<p><strong>As of jQuery 1.4.3</strong>, an optional string naming an easing function may be used. Easing functions specify the speed at which the animation progresses at different points within the animation. The only easing implementations in the jQuery library are the default, called <code>swing</code>, and one that progresses at a constant pace, called <code>linear</code>. More easing functions are available with the use of plug-ins, most notably the <a href="http://jqueryui.com">jQuery UI suite</a>.</p>
+<h4 id="callback-function">Callback Function</h4>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p><strong>As of jQuery 1.6</strong>, the <code><a href="http://api.jquery.com/promise/">.promise()</a></code> method can be used in conjunction with the <code><a href="http://api.jquery.com/deferred.done/">deferred.done()</a></code> method to execute a single callback for the animation as a whole when <em>all</em> matching elements have completed their animations ( See the <a href="http://api.jquery.com/promise/#example-1">example for .promise()</a> ).  </p>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery.fx.off.xml">
+  All jQuery effects, including <code>.slideToggle()</code>, can be turned off globally by setting  <code>jQuery.fx.off = true</code>, which effectively sets the duration to 0. For more information, see <a href="http://api.jquery.com/jquery.fx.off">jQuery.fx.off</a>.
+</li></ul></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all paragraphs to slide up or down, completing the animation within 600 milliseconds.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { width:400px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Toggle<span class="nt">&lt;/button&gt;</span>
+
+  <span class="nt">&lt;p&gt;</span>
+    This is the paragraph to end all paragraphs.  You
+    should feel <span class="nt">&lt;em&gt;</span>lucky<span class="nt">&lt;/em&gt;</span> to have seen such a paragraph in
+    your life.  Congratulations!
+  <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("button").click(function () {
+      $("p").slideToggle("slow");
+    });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates divs between dividers with a toggle that makes some appear and some disappear.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { background:#b977d1; margin:3px; width:60px;
+        height:60px; float:left; }
+  div.still { background:#345; width:5px; }
+  div.hider { display:none; }
+  span { color:red; }
+  p { clear: left; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"still"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"display:none;"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"still"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"still"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hider"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"still"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hider"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"still"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;p&gt;&lt;button</span> <span class="na">id=</span><span class="s">"aa"</span><span class="nt">&gt;</span>Toggle<span class="nt">&lt;/button&gt;</span> There have been <span class="nt">&lt;span&gt;</span>0<span class="nt">&lt;/span&gt;</span> toggled divs.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  $("#aa").click(function () {
+    $("div:not(.still)").slideToggle("slow", function () {
+      var n = parseInt($("span").text(), 10);
+      $("span").text(n + 1);
+    });
+  });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

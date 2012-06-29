@@ -1,0 +1,52 @@
+<script>
+	{
+		"title": ".unwrap()",
+		"excerpt": "Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.",
+		"termSlugs": {
+			"category": [
+				"manipulation/dom-insertion-around","manipulation/dom-removal","version/1.4"
+			]
+		}
+	}
+</script><div id="unwrap1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.unwrap()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.</p>
+<ul class="signatures"><li class="signature" id="unwrap"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.unwrap()</h4></li></ul>
+<div class="longdesc"><p>The <code>.unwrap()</code> method removes the element's parent. This is effectively the inverse of the <code><a href="/wrap">.wrap()</a></code> method. The matched elements (and their siblings, if any) replace their parents within the DOM structure.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Wrap/unwrap a div around each of the paragraphs.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { border: 2px solid blue; }
+  p { background:yellow; margin:4px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button&gt;</span>wrap/unwrap<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>cruel<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>World<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("button").toggle(function(){
+  $("p").wrap("<span class="nt">&lt;div&gt;&lt;/div&gt;</span>");
+}, function(){
+  $("p").unwrap();
+});<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

@@ -1,0 +1,280 @@
+<script>
+	{
+		"title": ".bind()",
+		"excerpt": "Attach a handler to an event for the elements.",
+		"termSlugs": {
+			"category": [
+				"events/event-handler-attachment","version/1.0","version/1.4","version/1.4.3"
+			]
+		}
+	}
+</script><div id="bind1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.bind( eventType [, eventData] , handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Attach a handler to an event for the elements.</p>
+<ul class="signatures">
+<li class="signature" id="bind-eventType-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.bind( eventType [, eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing one or more DOM event types, such as "click" or "submit," or custom event names.</p>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="bind-eventType-eventData-preventBubble">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.bind( eventType [, eventData], preventBubble )</h4>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing one or more DOM event types, such as "click" or "submit," or custom event names.</p>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>preventBubble: </strong><a href="http://api.jquery.com/Types#Boolean">Boolean</a>
+                          Setting the third argument to false will attach a function that prevents the default action from occurring and stops the event from bubbling. The default is true.</p>
+</li>
+<li class="signature" id="bind-events">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.bind( events )</h4>
+<p class="argument"><strong>events: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of one or more DOM event types and functions to execute for them.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>As of jQuery 1.7, the <a href="http://api.jquery.com/on"><code>.on()</code></a> method is the preferred method for attaching event handlers to a document. For earlier versions, the <code>.bind()</code> method is used for attaching an event handler directly to elements. Handlers are attached to the currently selected elements in the jQuery object, so those elements <em>must exist</em> at the point the call to <code>.bind()</code> occurs. For more flexible event binding, see the discussion of event delegation in <a href="http://api.jquery.com/on"><code>.on()</code></a> or <a href="http://api.jquery.com/delegate"><code>.delegate()</code></a>.</p>
+<p>Any string is legal for <code>eventType</code>; if the string is not the name of a native DOM event, then the handler is bound to a custom event. These events are never called by the browser, but may be triggered manually from other JavaScript code using <code>.trigger()</code> or <code>.triggerHandler()</code>.</p>
+<p>If the <code>eventType</code> string contains a period (<code>.</code>) character, then the event is namespaced. The period character separates the event from its namespace. For example, in the call <code>.bind('click.name', handler)</code>, the string <code>click</code> is the event type, and the string <code>name</code> is the namespace. Namespacing allows us to unbind or trigger some events of a type without affecting others. See the discussion of <code>.unbind()</code> for more information.</p>
+<p>There are shorthand methods for some standard browser events such as <a href="/click"><code>.click()</code></a> that can be used to attach or trigger event handlers. For a complete list of shorthand methods, see the <a href="http://api.jquery.com/category/events/">events category</a>.</p>
+<p>When an event reaches an element, all handlers bound to that event type for the element are fired. If there are multiple handlers registered, they will always execute in the order in which they were bound. After all handlers have executed, the event continues along the normal event propagation path.</p>
+<p>A basic usage of <code>.bind()</code> is:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'User clicked on "foo."'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This code will cause the element with an ID of <code>foo</code> to respond to the <code>click</code> event. When a user clicks inside this element thereafter, the alert will be shown.</p>
+<h4 id="multiple-events">Multiple Events</h4>
+<p>Multiple event types can be bound at once by including each one separated by a space:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'mouseenter mouseleave'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">toggleClass</span><span class="p">(</span><span class="s">'entered'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The effect of this on <code>&lt;div id="foo"&gt;</code> (when it does not initially have the "entered" class) is to add the "entered" class when the mouse enters the <code>&lt;div&gt;</code> and remove the class when the mouse leaves. </p>
+<p>As of jQuery 1.4 we can bind multiple event handlers simultaneously by passing a map of event type/handler pairs:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">({</span>
+  <span class="n">click</span><span class="p">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">do</span> <span class="n">something</span> <span class="n">on</span> <span class="n">click</span>
+  <span class="p">},</span>
+  <span class="n">mouseenter</span><span class="p">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">do</span> <span class="n">something</span> <span class="n">on</span> <span class="n">mouseenter</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<h4 id="event-handlers">Event Handlers</h4>
+<p>The <code>handler</code> parameter takes a callback function, as shown above. Within the handler, the keyword <code>this</code> refers to the DOM element to which the handler is bound. To make use of the element in jQuery, it can be passed to the normal <code>$()</code> function. For example:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">text</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code is executed, when the user clicks inside the element with an ID of <code>foo</code>, its text contents will be shown as an alert.
+    </p>
+<p>As of jQuery 1.4.2 duplicate event handlers can be bound to an element instead of being discarded. This is useful when the event data feature is being used, or when other unique data resides in a closure around the event handler function.</p>
+<p>In jQuery 1.4.3 you can now pass in <code>false</code> in place of an event handler. This will bind an event handler equivalent to: <code>function(){ return false; }</code>. This function can be removed at a later time by calling: <code>.unbind( eventName, false )</code>.</p>
+<h4 id="event-object">
+      <a href="http://api.jquery.com/category/events/event-object/">The Event object</a>
+    </h4>
+<p>The <code>handler</code> callback function can also take parameters. When the function is called, the event object will be passed to the first parameter.</p>
+<p>The event object is often unnecessary and the parameter omitted, as sufficient context is usually available when the handler is bound to know exactly what needs to be done when the handler is triggered. However, at times it becomes necessary to gather more information about the user's environment at the time the event was initiated. <a href="http://api.jquery.com/category/events/event-object/">View the full Event Object</a>.</p>
+<p>Returning <code>false</code> from a handler is equivalent to calling both <code>.preventDefault()</code> and <code>.stopPropagation()</code> on the event object.</p>
+<p>Using the event object in a handler looks like this:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="n">ready</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">alert</span><span class="p">(</span><span class="s">'The mouse cursor is at ('</span>
+      <span class="o">+</span> <span class="n">event</span><span class="p">.</span><span class="n">pageX</span> <span class="o">+</span> <span class="s">', '</span> <span class="o">+</span> <span class="n">event</span><span class="p">.</span><span class="n">pageY</span> <span class="o">+</span> <span class="s">')'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Note the parameter added to the anonymous function. This code will cause a click on the element with ID <code>foo</code> to report the page coordinates of the mouse cursor at the time of the click.</p>
+<h4 id="passing-event-data">Passing Event Data</h4>
+<p>The optional <code>eventData</code> parameter is not commonly used. When provided, this argument allows us to pass additional information to the handler. One handy use of this parameter is to work around issues caused by closures. For example, suppose we have two event handlers that both refer to the same external variable:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">message</span> <span class="p">=</span> <span class="s">'Spoon!'</span><span class="p">;</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="n">message</span> <span class="p">=</span> <span class="s">'Not in the face!'</span><span class="p">;</span>
+$<span class="p">(</span><span class="s">'#bar'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Because the handlers are closures that both have <code>message</code> in their environment, both will display the message <span class="output">Not in the face!</span> when triggered. The variable's value has changed. To sidestep this, we can pass the message in using <code>eventData</code>:
+    </p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">message</span> <span class="p">=</span> <span class="s">'Spoon!'</span><span class="p">;</span>
+$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="p">{</span><span class="n">msg</span><span class="p">:</span> <span class="n">message</span><span class="p">},</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">msg</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="n">message</span> <span class="p">=</span> <span class="s">'Not in the face!'</span><span class="p">;</span>
+$<span class="p">(</span><span class="s">'#bar'</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span><span class="s">'click'</span><span class="p">,</span> <span class="p">{</span><span class="n">msg</span><span class="p">:</span> <span class="n">message</span><span class="p">},</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">msg</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This time the variable is not referred to directly within the handlers; instead, the variable is passed in <em>by value</em> through <code>eventData</code>, which fixes the value at the time the event is bound. The first handler will now display <span class="output">Spoon!</span> while the second will alert <span class="output">Not in the face!</span>
+    </p>
+<blockquote>
+      <p>Note that objects are passed to functions <em>by reference</em>, which further complicates this scenario.</p>
+    </blockquote>
+<p>If <code>eventData</code> is present, it is the second argument to the <code>.bind()</code> method; if no additional data needs to be sent to the handler, then the callback is passed as the second and final argument.</p>
+<blockquote>
+      <p>See the <code>.trigger()</code> method reference for a way to pass data to a handler at the time the event happens rather than when the handler is bound.</p>
+    </blockquote>
+<p>As of jQuery 1.4 we can no longer attach data (and thus, events) to object, embed, or applet elements because critical errors occur when attaching data to Java applets.</p>
+<p><strong>Note: </strong>Although demonstrated in the next example, it is inadvisable to bind handlers to both the <code>click</code> and <code>dblclick</code> events for the same element. The sequence of events triggered varies from browser to browser, with some receiving two click events before the <code>dblclick</code> and others only one. Double-click sensitivity (maximum time between clicks that is detected as a double click) can vary by operating system and browser, and is often user-configurable.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Handle click and double-click for the paragraph.  Note: the coordinates are window relative, so in this case relative to the demo iframe.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+p { background:yellow; font-weight:bold; cursor:pointer;
+padding:5px; }
+p.over { background: #ccc; }
+span { color:red; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Click or double click here.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("p").bind("click", function(event){
+var str = "( " + event.pageX + ", " + event.pageY + " )";
+$("span").text("Click happened! " + str);
+});
+$("p").bind("dblclick", function(){
+$("span").text("Double-click happened in " + this.nodeName);
+});
+$("p").bind("mouseenter mouseleave", function(event){
+$(this).toggleClass("over");
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To display each paragraph's text in an alert box whenever it is clicked:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
+<span class="n">alert</span><span class="p">(</span> $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">text</span><span class="p">()</span> <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">You can pass some extra data before the event handler:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span>event<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">alert</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">foo</span><span class="p">);</span>
+<span class="p">}</span>
+$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="p">{</span><span class="n">foo</span><span class="p">:</span> "<span class="n">bar</span>"<span class="p">},</span> <span class="n">handler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Cancel a default action and prevent it from bubbling up by returning false:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">form</span>"<span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">submit</span>"<span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">false</span><span class="p">;</span> <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Cancel only the default action by using the .preventDefault() method.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">form</span>"<span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">submit</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">event</span><span class="p">.</span><span class="n">preventDefault</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-5">
+<h4>Example: <span class="desc">Stop an event from bubbling without preventing the default action by using the .stopPropagation() method.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">form</span>"<span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">submit</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">event</span><span class="p">.</span><span class="n">stopPropagation</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-6">
+<h4>Example: <span class="desc">Bind custom events.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+p { color:red; }
+span { color:blue; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Has an attached custom event.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;button&gt;</span>Trigger custom event<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"display:none;"</span><span class="nt">&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+
+$("p").bind("myCustomEvent", function(e, myName, myValue){
+$(this).text(myName + ", hi there!");
+$("span").stop().css("opacity", 1)
+.text("myName = " + myName)
+.fadeIn(30).fadeOut(1000);
+});
+$("button").click(function () {
+$("p").trigger("myCustomEvent", [ "John" ]);
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-7">
+<h4>Example: <span class="desc">Bind multiple events simultaneously.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">div</span><span class="p">.</span><span class="n">test</span>"<span class="p">).</span><span class="n">bind</span><span class="p">({</span>
+  <span class="n">click</span><span class="p">:</span> <span class="k">function</span><span class="p">(){</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">addClass</span><span class="p">(</span>"<span class="n">active</span>"<span class="p">);</span>
+  <span class="p">},</span>
+  <span class="n">mouseenter</span><span class="p">:</span> <span class="k">function</span><span class="p">(){</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">addClass</span><span class="p">(</span>"<span class="n">inside</span>"<span class="p">);</span>
+  <span class="p">},</span>
+  <span class="n">mouseleave</span><span class="p">:</span> <span class="k">function</span><span class="p">(){</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">removeClass</span><span class="p">(</span>"<span class="n">inside</span>"<span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

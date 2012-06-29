@@ -1,0 +1,126 @@
+<script>
+	{
+		"title": ".mouseover()",
+		"excerpt": "Bind an event handler to the \"mouseover\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/mouse-events","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="mouseover1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.mouseover( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "mouseover" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="mouseover-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mouseover( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mouseover-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.mouseover(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mouseover"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mouseover()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('mouseover', handler)</code> in the first two variations, and <code>.trigger('mouseover')</code> in the third.</p>
+<p>The <code>mouseover</code> event is sent to an element when the mouse pointer enters the element. Any HTML element can receive this event.</p>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"outer"</span><span class="nt">&gt;</span>
+  Outer
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"inner"</span><span class="nt">&gt;</span>
+    Inner
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p class="image">
+      <img src="/resources/0042_05_06.png" alt="" />
+    </p>
+<p>The event handler can be bound to any element:</p>
+<div class="highlightblock"><div class="highlight"><pre>$('#outer').mouseover(function() {
+  $('#log').append('<span class="nt">&lt;div&gt;</span>Handler for .mouseover() called.<span class="nt">&lt;/div&gt;</span>');
+});
+</pre></div>
+</div>
+<p>Now when the mouse pointer moves over the <span class="output">Outer</span> <code>&lt;div&gt;</code>, the message is appended to <code>&lt;div id="log"&gt;</code>. We can also trigger the event when another element is clicked:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#other'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      $<span class="p">(</span><span class="s">'#outer'</span><span class="p">).</span><span class="n">mouseover</span><span class="p">();</span>
+      <span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also append the message.</p>
+<p>This event type can cause many headaches due to event bubbling. For instance, when the mouse pointer moves over the <span class="output">Inner</span> element in this example, a <code>mouseover</code> event will be sent to that, then trickle up to <span class="output">Outer</span>. This can trigger our bound <code>mouseover</code> handler at inopportune times. See the discussion for <code>.mouseenter()</code> for a useful alternative.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the number of times mouseover and mouseenter events are triggered.
+mouseover fires when the pointer moves into the child element as well, while mouseenter fires only when the pointer moves into the bound element.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div.out { width:40%; height:120px; margin:0 15px;
+          background-color:#D6EDFC; float:left; }
+div.in {  width:60%; height:60%;
+          background-color:#FFCC00; margin:10px auto; }
+p { line-height:1em; margin:0; padding:0; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"out overout"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span&gt;</span>move your mouse<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"in"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"out enterleave"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span&gt;</span>move your mouse<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"in"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  var i = 0;
+  $("div.overout").mouseover(function() {
+    i += 1;
+    $(this).find("span").text( "mouse over x " + i );
+  }).mouseout(function(){
+    $(this).find("span").text("mouse out ");
+  });
+
+  var n = 0;
+  $("div.enterleave").mouseenter(function() {
+    n += 1;
+    $(this).find("span").text( "mouse enter x " + n );
+  }).mouseleave(function() {
+    $(this).find("span").text("mouse leave");
+  });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

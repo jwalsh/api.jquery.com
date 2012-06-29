@@ -1,0 +1,101 @@
+<script>
+	{
+		"title": "deferred.promise()",
+		"excerpt": " Return a Deferred's Promise object. ",
+		"termSlugs": {
+			"category": [
+				"deferred-object","version/1.5"
+			]
+		}
+	}
+</script><div id="deferred-promise1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">deferred.promise(  [target]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Promise">Promise</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> Return a Deferred's Promise object. </p>
+<ul class="signatures"><li class="signature" id="deferred-promise-target">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.5/">1.5</a></span>deferred.promise(  [target] )</h4>
+<p class="argument"><strong>target: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          Object onto which the promise methods have to be attached</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>deferred.promise()</code> method allows an asynchronous function to prevent other code from interfering with the progress or status of its internal request. The Promise exposes only the Deferred methods needed to attach additional handlers or determine the state (<code>then</code>, <code>done</code>, <code>fail</code>, <code>always</code>, <code>pipe</code>, <code>progress</code>, and <code>state</code>), but not ones that change the state (<code>resolve</code>, <code>reject</code>, <code>notify</code>, <code>resolveWith</code>, <code>rejectWith</code>, and <code>notifyWith</code>).</p>
+<p>If <code>target</code> is provided, <code>deferred.promise()</code> will attach the methods onto it and then return this object rather than create a new one. This can be useful to attach the Promise behavior to an object that already exists.</p>
+<p>If you are creating a Deferred, keep a reference to the Deferred so that it can be resolved or rejected at some point. Return <em>only</em> the Promise object via <code>deferred.promise()</code> so other code can register callbacks or inspect the current state.</p>
+<p>For more information, see the documentation for <a href="/category/deferred-object/">Deferred object</a>.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Create a Deferred and set two timer-based functions to either resolve or reject the Deferred after a random interval. Whichever one fires first "wins" and will call one of the callbacks. The second timeout has no effect since the Deferred is already complete (in a resolved or rejected state) from the first timeout action. Also set a timer-based progress notification function, and call a progress handler that adds "working..." to the document body.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">asyncEvent</span><span class="p">(){</span>
+    <span class="n">var</span> <span class="n">dfd</span> <span class="p">=</span> <span class="n">new</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">Deferred</span><span class="p">();</span>
+
+    <span class="o">//</span> <span class="n">Resolve</span> <span class="n">after</span> <span class="n">a</span> <span class="n">random</span> <span class="n">interval</span>
+    <span class="n">setTimeout</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+        <span class="n">dfd</span><span class="p">.</span><span class="n">resolve</span><span class="p">(</span>"<span class="n">hurray</span>"<span class="p">);</span>
+    <span class="p">},</span> <span class="n">Math</span><span class="p">.</span><span class="nb">floor</span><span class="p">(</span>400<span class="o">+</span><span class="n">Math</span><span class="p">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span>2000<span class="p">));</span>
+
+    <span class="o">//</span> <span class="n">Reject</span> <span class="n">after</span> <span class="n">a</span> <span class="n">random</span> <span class="n">interval</span>
+    <span class="n">setTimeout</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+        <span class="n">dfd</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span>"<span class="n">sorry</span>"<span class="p">);</span>
+    <span class="p">},</span> <span class="n">Math</span><span class="p">.</span><span class="nb">floor</span><span class="p">(</span>400<span class="o">+</span><span class="n">Math</span><span class="p">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span>2000<span class="p">));</span>
+
+    <span class="o">//</span> <span class="n">Show</span> <span class="n">a</span> "<span class="n">working</span><span class="p">...</span>" <span class="n">message</span> <span class="n">every</span> <span class="n">half</span><span class="o">-</span><span class="n">second</span>
+    <span class="n">setTimeout</span><span class="p">(</span><span class="k">function</span> <span class="n">working</span><span class="p">(){</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">dfd</span><span class="p">.</span><span class="n">state</span><span class="p">()</span> <span class="o">==</span><span class="p">=</span> "<span class="n">pending</span>" <span class="p">)</span> <span class="p">{</span>
+            <span class="n">dfd</span><span class="p">.</span><span class="n">notify</span><span class="p">(</span>"<span class="n">working</span><span class="p">...</span> "<span class="p">);</span>
+            <span class="n">setTimeout</span><span class="p">(</span><span class="n">working</span><span class="p">,</span> 500<span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span> 1<span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Return</span> <span class="n">the</span> <span class="n">Promise</span> <span class="n">so</span> <span class="n">caller</span> <span class="n">can</span><span class="o">'</span><span class="n">t</span> <span class="n">change</span> <span class="n">the</span> <span class="n">Deferred</span>
+    <span class="k">return</span> <span class="n">dfd</span><span class="p">.</span><span class="n">promise</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">Attach</span> <span class="n">a</span> <span class="n">done</span><span class="p">,</span> <span class="n">fail</span><span class="p">,</span> <span class="n">and</span> <span class="n">progress</span> <span class="n">handler</span> <span class="k">for</span> <span class="n">the</span> <span class="n">asyncEvent</span>
+$<span class="p">.</span><span class="n">when</span><span class="p">(</span> <span class="n">asyncEvent</span><span class="p">()</span> <span class="p">).</span><span class="n">then</span><span class="p">(</span>
+<span class="k">    function</span><span class="err">(status){</span><span class="w"></span>
+<span class="w">        </span><span class="nf">alert</span><span class="p">(</span> status+', things are going well' <span class="p">);</span>
+    <span class="p">},</span>
+<span class="k">    function</span><span class="err">(status){</span><span class="w"></span>
+<span class="w">        </span><span class="nf">alert</span><span class="p">(</span> status+', you fail this time' <span class="p">);</span>
+    <span class="p">},</span>
+<span class="k">    function</span><span class="err">(status){</span><span class="w"></span>
+<span class="w">        </span><span class="nf">$("body").append</span><span class="p">(</span>status<span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Use the target argument to promote an existing object to a Promise:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">Existing</span> <span class="n">object</span>
+<span class="n">var</span> <span class="n">obj</span> <span class="p">=</span> <span class="p">{</span>
+  <span class="n">hello</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">name</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">alert</span><span class="p">(</span> "<span class="n">Hello</span> " <span class="o">+</span> <span class="n">name</span> <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+<span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">Deferred</span>
+<span class="n">defer</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Deferred</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">Set</span> <span class="n">object</span> <span class="n">as</span> <span class="n">a</span> <span class="n">promise</span>
+<span class="n">defer</span><span class="p">.</span><span class="n">promise</span><span class="p">(</span> <span class="n">obj</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Resolve</span> <span class="n">the</span> <span class="n">deferred</span>
+<span class="n">defer</span><span class="p">.</span><span class="n">resolve</span><span class="p">(</span> "<span class="n">John</span>" <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">object</span> <span class="n">as</span> <span class="n">a</span> <span class="n">Promise</span>
+<span class="n">obj</span><span class="p">.</span><span class="n">done</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">name</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="n">obj</span><span class="p">.</span><span class="n">hello</span><span class="p">(</span> <span class="n">name</span> <span class="p">);</span> <span class="o">//</span> <span class="n">will</span> <span class="n">alert</span> "<span class="n">Hello</span> <span class="n">John</span>"
+<span class="p">}).</span><span class="n">hello</span><span class="p">(</span> "<span class="n">Karl</span>" <span class="p">);</span> <span class="o">//</span> <span class="n">will</span> <span class="n">alert</span> "<span class="n">Hello</span> <span class="n">Karl</span>"
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

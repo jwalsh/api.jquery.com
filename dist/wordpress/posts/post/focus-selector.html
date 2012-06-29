@@ -1,0 +1,62 @@
+<script>
+	{
+		"title": ":focus Selector",
+		"excerpt": "Selects element if it is currently focused.",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-filter-selectors","selectors/form-selectors","version/1.6"
+			]
+		}
+	}
+</script><div id="focus1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">focus</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>jQuery(':focus')</h4>
+<p class="desc"><strong>Description: </strong>Selects element if it is currently focused.</p>
+<div class="longdesc"><p>As with other pseudo-class selectors (those that begin with a ":"), it is recommended to precede <code>:focus</code> with a tag name or some other selector; otherwise, the universal selector ("*") is implied. In other words, the bare <code>$(':focus')</code> is equivalent to <code>$('*:focus')</code>.  If you are looking for the currently focused element, <code>$( document.activeElement )</code> will retrieve it without having to search the whole DOM tree.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Adds the focused class to whatever element has focus</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+.focused {
+    background: #abcdef;
+}
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">tabIndex=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">tabIndex=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;select</span> <span class="na">tabIndex=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option&gt;</span>select menu<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/select&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">tabIndex=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+        a div
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+$( "#content" ).delegate( "*", "focus blur", function( event ) {
+    var elem = $( this );
+    setTimeout(function() {
+       elem.toggleClass( "focused", elem.is( ":focus" ) );
+    }, 0);
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

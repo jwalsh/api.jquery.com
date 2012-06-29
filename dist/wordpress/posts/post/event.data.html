@@ -1,0 +1,61 @@
+<script>
+	{
+		"title": "event.data",
+		"excerpt": "An optional data map passed to an event method when the current executing handler is bound.  ",
+		"termSlugs": {
+			"category": [
+				"events/event-object","version/1.1"
+			]
+		}
+	}
+</script><div id="event-data1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.data</span> <span class="returns"></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>An optional data map passed to an event method when the current executing handler is bound.  </p>
+<ul class="signatures"><li class="signature" id="event-data"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1/">1.1</a></span>event.data</h4></li></ul>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Within a for loop, pass the value of i to the .on() method so that the current iteration's value is preserved. </span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;button&gt;</span> 0 <span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button&gt;</span> 1 <span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button&gt;</span> 2 <span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button&gt;</span> 3 <span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button&gt;</span> 4 <span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var logDiv = $("#log");
+
+/* Note: This code is for demonstration purposes only. */
+for (var i = 0; i <span class="nt">&lt; 5</span><span class="err">;</span> <span class="err">i++)</span> <span class="err">{</span>
+  <span class="err">$("button").eq(i).on("click",</span> <span class="err">{value:</span> <span class="err">i},</span> <span class="err">function(event)</span> <span class="err">{</span>
+    <span class="err">var</span> <span class="na">msgs =</span> <span class="s">[</span>
+      <span class="err">"</span><span class="na">button =</span> <span class="s">" + $(this).index(),</span>
+<span class="s">      "</span><span class="na">event.data.value =</span> <span class="s">" + event.data.value,</span>
+<span class="s">      "</span><span class="na">i =</span> <span class="s">" + i</span>
+<span class="s">    ];</span>
+<span class="s">    logDiv.append( msgs.join("</span><span class="err">,</span> <span class="err">")</span> <span class="err">+</span> <span class="err">"&lt;br</span><span class="nt">&gt;</span>" );
+  });
+}
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

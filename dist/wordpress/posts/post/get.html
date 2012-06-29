@@ -1,0 +1,132 @@
+<script>
+	{
+		"title": ".get()",
+		"excerpt": "Retrieve the DOM elements matched by the jQuery object.",
+		"termSlugs": {
+			"category": [
+				"miscellaneous/dom-element-methods","version/1.0"
+			]
+		}
+	}
+</script><div id="get1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.get(  [index]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Element,%20Array">Element, Array</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Retrieve the DOM elements matched by the jQuery object.</p>
+<ul class="signatures"><li class="signature" id="get-index">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.get(  [index] )</h4>
+<p class="argument"><strong>index: </strong><a href="http://api.jquery.com/Types#Number">Number</a>
+                          A zero-based integer indicating which element to retrieve.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.get()</code> method grants us access to the DOM nodes underlying each jQuery object. Suppose we had a simple unordered list on the page:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"foo"</span><span class="nt">&gt;</span>foo<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"bar"</span><span class="nt">&gt;</span>bar<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+    
+</pre></div>
+</div>
+<p>Without a parameter, <code>.get()</code> returns all of the elements:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">get</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>All of the matched DOM nodes are returned by this call, contained in a standard array:</p>
+<p>
+      <span class="result">[&lt;li id="foo"&gt;, &lt;li id="bar"&gt;]</span>
+    </p>
+<p>With an index specified, .get() will retrieve a single element:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">get</span><span class="p">(</span>0<span class="p">));</span>
+</pre></div>
+</div>
+<p>Since the index is zero-based, the first list item is returned:</p>
+<p>
+      <span class="output">&lt;li id="foo"&gt;</span>
+    </p>
+<p>Each jQuery object also masquerades as an array, so we can use the array dereferencing operator to get at the list item instead:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="s">'li'</span><span class="p">)[</span>0<span class="p">]);</span>
+</pre></div>
+</div>
+<p>However, this syntax lacks some of the additional capabilities of .get(), such as specifying a negative index:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">get</span><span class="p">(</span><span class="o">-</span>1<span class="p">));</span>
+</pre></div>
+</div>
+<p>A negative index is counted from the end of the matched set, so this example will return the last item in the list:</p>
+<p>
+      <span class="output">&lt;li id="bar"&gt;</span>
+    </p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Selects all divs in the document and returns the DOM Elements as an Array, then uses the built-in reverse-method to reverse that array.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  span { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  Reversed - <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+
+  <span class="nt">&lt;div&gt;</span>One<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>Two<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>Three<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+function disp(divs) {
+  var a = [];
+  for (var i = 0; i <span class="nt">&lt; divs.length</span><span class="err">;</span> <span class="err">i++)</span> <span class="err">{</span>
+    <span class="err">a.push(divs[i].innerHTML);</span>
+  <span class="err">}</span>
+  <span class="err">$("span").text(a.join("</span> <span class="err">"));</span>
+<span class="err">}</span>
+<span class="err">disp(</span> <span class="err">$("div").get().reverse()</span> <span class="err">);</span>
+<span class="err">&lt;/script</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Gives the tag name of the element clicked on.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  span { color:red; }
+  div { background:yellow; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;span&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;p&gt;</span>In this paragraph is an <span class="nt">&lt;span&gt;</span>important<span class="nt">&lt;/span&gt;</span> section<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("*", document.body).click(function (e) {
+  e.stopPropagation();
+  var domEl = $(this).get(0);
+  $("span:first").text("Clicked on - " + domEl.tagName);
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

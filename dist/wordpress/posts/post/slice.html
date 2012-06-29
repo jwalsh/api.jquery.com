@@ -1,0 +1,152 @@
+<script>
+	{
+		"title": ".slice()",
+		"excerpt": "Reduce the set of matched elements to a subset specified by a range of indices.",
+		"termSlugs": {
+			"category": [
+				"traversing/filtering","version/1.1.4"
+			]
+		}
+	}
+</script><div id="slice1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.slice( start [, end]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Reduce the set of matched elements to a subset specified by a range of indices.</p>
+<ul class="signatures"><li class="signature" id="slice-start-end">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>.slice( start [, end] )</h4>
+<p class="argument"><strong>start: </strong><a href="http://api.jquery.com/Types#Integer">Integer</a>
+                          An integer indicating the 0-based position at which the elements begin to be selected. If negative, it indicates an offset from the end of the set.</p>
+<p class="argument"><strong>end: </strong><a href="http://api.jquery.com/Types#Integer">Integer</a>
+                          An integer indicating the 0-based position at which the elements stop being selected. If negative, it indicates an offset from the end of the set. If omitted, the range continues until the end of the set.</p>
+</li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.slice()</code> method constructs a new jQuery object from a subset of the matching elements. The supplied <code>start</code> index identifies the position of one of the elements in the set; if <code>end</code> is omitted, all elements after this one will be included in the result.</p>
+<p>Consider a page with a simple list on it:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 1<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 2<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 4<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+    
+</pre></div>
+</div>
+<p>We can apply this method to the set of list items:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">slice</span><span class="p">(</span>2<span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The result of this call is a red background for items 3, 4, and 5. Note that the supplied index is zero-based, and refers to the position of elements within the jQuery object, not within the DOM tree.</p>
+<p>The end parameter allows us to limit the selected range even further. For example:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">slice</span><span class="p">(</span>2<span class="p">,</span> 4<span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now only items 3 and 4 are selected. The index is once again zero-based; the range extends up to but not including the specified index.</p>
+<h4>Negative Indices</h4>
+<p>The jQuery <code>.slice()</code> method is patterned after the JavaScript .slice() method for arrays. One of the features that it mimics is the ability for negative numbers to be passed as either the <code>start</code> or <code>end</code> parameter. If a negative number is provided, this indicates a position starting from the end of the set, rather than the beginning. For example:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">slice</span><span class="p">(</span><span class="o">-</span>2<span class="p">,</span> <span class="o">-</span>1<span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This time only list item 4 is turned red, since it is the only item in the range between two from the end (<code>-2</code>) and one from the end (<code>-1</code>).</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Turns divs yellow based on a random slice.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div <span class="err">{</span> width:40px; height:40px; margin:10px; float:left;
+        border:2px solid blue; }
+  span <span class="err">{</span> color:red; font-weight:bold; }
+  button <span class="err">{</span> margin:5px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;button&gt;</span>Turn slice yellow<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Click the button!<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+function colorEm() <span class="err">{</span>
+  var <span class="p">$</span><span class="nv">div</span> = <span class="p">$(</span><span class="s2">"div"</span><span class="p">)</span>;
+  var start = Math.floor(Math.random() *
+                         <span class="p">$</span><span class="nv">div</span><span class="p">.</span><span class="nv">length</span>);
+  var end = Math.floor(Math.random() *
+                       (<span class="p">$</span><span class="nv">div</span><span class="p">.</span><span class="nv">length</span> - start)) +
+                       start + 1;
+  if (end == <span class="p">$</span><span class="nv">div</span><span class="p">.</span><span class="nv">length</span>) end = undefined;
+  <span class="p">$</span><span class="nv">div</span><span class="p">.</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>;
+  if (end)
+    <span class="p">$</span><span class="nv">div</span><span class="p">.</span><span class="nv">slice</span><span class="p">(</span><span class="err">start</span><span class="p">,</span> <span class="err">end</span><span class="p">).</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">"yellow"</span><span class="p">)</span>;
+   else
+    <span class="p">$</span><span class="nv">div</span><span class="p">.</span><span class="nv">slice</span><span class="p">(</span><span class="err">start</span><span class="p">).</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">"yellow"</span><span class="p">)</span>;
+
+  <span class="p">$(</span><span class="s2">"span"</span><span class="p">).</span><span class="nv">text</span><span class="p">(</span><span class="s1">'$("div").slice('</span> <span class="err">+</span> <span class="err">start</span> <span class="err">+</span>
+                 <span class="p">(</span><span class="err">end</span> <span class="err">?</span> <span class="s1">', '</span> <span class="err">+</span> <span class="err">end</span> <span class="err">:</span> <span class="s1">''</span><span class="p">)</span> <span class="err">+</span>
+                 <span class="s1">').css("background", "yellow");'</span><span class="p">)</span>;
+}
+
+<span class="p">$(</span><span class="s2">"button"</span><span class="p">).</span><span class="nv">click</span><span class="p">(</span><span class="err">colorEm</span><span class="p">)</span>;
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="240"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Selects all paragraphs, then slices the selection to include only the first element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$("p").slice(0, 1).wrapInner("<span class="nt">&lt;b&gt;&lt;/b&gt;</span>");
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Selects all paragraphs, then slices the selection to include only the first and second element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$("p").slice(0, 2).wrapInner("<span class="nt">&lt;b&gt;&lt;/b&gt;</span>");
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Selects all paragraphs, then slices the selection to include only the second element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$("p").slice(1, 2).wrapInner("<span class="nt">&lt;b&gt;&lt;/b&gt;</span>");
+</pre></div>
+</div>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Selects all paragraphs, then slices the selection to include only the second and third element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$("p").slice(1).wrapInner("<span class="nt">&lt;b&gt;&lt;/b&gt;</span>");
+</pre></div>
+</div>
+</div>
+<div id="example-5">
+<h4>Example: <span class="desc">Selects all paragraphs, then slices the selection to include only the third element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$("p").slice(-1).wrapInner("<span class="nt">&lt;b&gt;&lt;/b&gt;</span>");
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

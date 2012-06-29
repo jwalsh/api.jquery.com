@@ -1,0 +1,27 @@
+<script>
+	{
+		"title": "deferred.resolve()",
+		"excerpt": " Resolve a Deferred object and call any doneCallbacks with the given <code>args</code>. ",
+		"termSlugs": {
+			"category": [
+				"deferred-object","version/1.5"
+			]
+		}
+	}
+</script><div id="deferred-resolve1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">deferred.resolve( args )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Deferred">Deferred</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> Resolve a Deferred object and call any doneCallbacks with the given &lt;code&gt;args&lt;/code&gt;. </p>
+<ul class="signatures"><li class="signature" id="deferred-resolve-args">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.5/">1.5</a></span>deferred.resolve( args )</h4>
+<p class="argument"><strong>args: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          
+        Optional arguments that are passed to the doneCallbacks.
+      </p>
+</li></ul>
+<div class="longdesc"><p>When the Deferred is resolved, any doneCallbacks added by <a href="/deferred.then/"><code>deferred.then</code></a> or <a href="/deferred.done/"><code>deferred.done</code></a> are called. Callbacks are executed in the order they were added. Each callback is passed the <code>args</code> from the <code>.resolve()</code>. Any doneCallbacks added after the Deferred enters the resolved state are executed immediately when they are added, using the arguments that were passed to the <code>.resolve()</code> call. For more information, see the documentation for <a href="/category/deferred-object/">Deferred object</a>.</p></div>
+</div>
+</div>

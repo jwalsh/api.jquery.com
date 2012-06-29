@@ -1,0 +1,91 @@
+<script>
+	{
+		"title": "Class Selector (\".class\")",
+		"excerpt": "Selects all elements with the given class. ",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-css-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="class1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">class</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('.class')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>class</dt>
+<dd>A class to search for. An element can have multiple classes; only one of them must match.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all elements with the given class. </p>
+<div class="longdesc"><p>For class selectors, jQuery uses JavaScript's native <code>getElementsByClassName()</code> function if the browser supports it.</p></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Finds the element with the class "myClass".</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div,span {
+    width: 100px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"notMe"</span><span class="nt">&gt;</span>div class="notMe"<span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"myClass"</span><span class="nt">&gt;</span>div class="myClass"<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"myClass"</span><span class="nt">&gt;</span>span class="myClass"<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;script&gt;</span>$(".myClass").css("border","3px solid red");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Finds the element with both "myclass" and "otherclass" classes.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div,span {
+    width: 100px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"myclass"</span><span class="nt">&gt;</span>div class="notMe"<span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"myclass otherclass"</span><span class="nt">&gt;</span>div class="myClass"<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"myclass otherclass"</span><span class="nt">&gt;</span>span class="myClass"<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;script&gt;</span>$(".myclass.otherclass").css("border","13px solid red");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

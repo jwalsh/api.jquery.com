@@ -1,0 +1,47 @@
+<script>
+	{
+		"title": ".jquery",
+		"excerpt": "A string containing the jQuery version number.",
+		"termSlugs": {
+			"category": [
+				"internals","properties/jquery-object-instance-properties"
+			]
+		}
+	}
+</script><div id="jquery1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jquery</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#String">String</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>A string containing the jQuery version number.</p>
+<ul class="signatures"><li class="signature" id="jquery"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jquery</h4></li></ul>
+<div class="longdesc"><p>The <code>.jquery</code> property is assigned to the jQuery prototype, commonly referred to by its alias <code>$.fn</code>. It is a string containing the version number of <code>jQuery</code>, such as "1.5.0" or "1.4.4".</p></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Determine if an object is a jQuery object</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">a</span> <span class="p">=</span> <span class="p">{</span> <span class="n">what</span><span class="p">:</span> "<span class="n">A</span> <span class="n">regular</span> <span class="n">JS</span> <span class="n">object</span>" <span class="p">},</span>
+    <span class="n">b</span> <span class="p">=</span> $<span class="p">(</span><span class="s">'body'</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="n">a</span><span class="p">.</span><span class="n">jquery</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">falsy</span><span class="p">,</span> <span class="n">since</span> <span class="n">it</span><span class="o">'</span><span class="n">s</span> <span class="n">undefined</span>
+    <span class="n">alert</span><span class="p">(</span><span class="s">' a is a jQuery object! '</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="n">b</span><span class="p">.</span><span class="n">jquery</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">truthy</span><span class="p">,</span> <span class="n">since</span> <span class="n">it</span><span class="o">'</span><span class="n">s</span> <span class="n">a</span> <span class="n">string</span>
+    <span class="n">alert</span><span class="p">(</span><span class="s">' b is a jQuery object! '</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Get the current version of jQuery running on the page</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">alert</span><span class="p">(</span> <span class="s">'You are running jQuery version: '</span> <span class="o">+</span> $<span class="p">.</span><span class="n">fn</span><span class="p">.</span><span class="n">jquery</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

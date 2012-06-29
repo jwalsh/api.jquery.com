@@ -1,0 +1,59 @@
+<script>
+	{
+		"title": "event.timeStamp",
+		"excerpt": "The difference in milliseconds between the time the browser created the event and January 1, 1970.",
+		"termSlugs": {
+			"category": [
+				"events/event-object","version/1.2.6"
+			]
+		}
+	}
+</script><div id="event-timeStamp1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.timeStamp</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Number">Number</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>The difference in milliseconds between the time the browser created the event and January 1, 1970.</p>
+<ul class="signatures"><li class="signature" id="event-timeStamp"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>event.timeStamp</h4></li></ul>
+<div class="longdesc">
+<p>This property can be useful for profiling event performance by getting the <code>event.timeStamp</code> value at two points in the code and noting the difference. To simply determine the current time inside an event handler, use <code>(new Date).getTime()</code> instead.</p>
+<p>Note: Due to a <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=238041">bug open since 2004</a>, this value is not populated correctly in Firefox and it is not possible to know the time the event was created in that browser.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Display the time since the click handler last executed.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { height: 100px; width: 300px; margin: 10px;
+      background-color: #ffd; overflow: auto; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div&gt;</span>Click.<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var last, diff;
+$('div').click(function(event) {
+  if ( last ) {
+    diff = event.timeStamp - last
+    $('div').append('time since last event: ' + diff + '<span class="nt">&lt;br/&gt;</span>');
+  } else {
+    $('div').append('Click again.<span class="nt">&lt;br/&gt;</span>');
+  }
+  last = event.timeStamp;
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

@@ -1,0 +1,62 @@
+<script>
+	{
+		"title": ":first-child Selector",
+		"excerpt": "Selects all elements that are the first child of their parent.",
+		"termSlugs": {
+			"category": [
+				"selectors/child-filter-selectors","version/1.1.4"
+			]
+		}
+	}
+</script><div id="first-child1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">first-child</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>jQuery(':first-child')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements that are the first child of their parent.</p>
+<div class="longdesc"><p>While <a href="/first-selector">:first</a> matches only a single element, the <code>:first-child</code> selector can match more than one: one for each parent. This is equivalent to <code>:nth-child(1)</code>.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds the first span in each matched div to underline and add a hover state.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  span { color:#008; }
+  span.sogreen { color:green; font-weight: bolder; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;span&gt;</span>John,<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>Karl,<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>Brandon<span class="nt">&lt;/span&gt;</span>
+
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;span&gt;</span>Glen,<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>Tane,<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>Ralph<span class="nt">&lt;/span&gt;</span>
+
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("div span:first-child")
+    .css("text-decoration", "underline")
+    .hover(function () {
+          $(this).addClass("sogreen");
+        }, function () {
+          $(this).removeClass("sogreen");
+        });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

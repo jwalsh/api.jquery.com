@@ -1,0 +1,192 @@
+<script>
+	{
+		"title": "jQuery.extend()",
+		"excerpt": "Merge the contents of two or more objects together into the first object.",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.0"
+			]
+		}
+	}
+</script><div id="jQuery-extend1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.extend( target [, object1]  [, objectN]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Object">Object</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Merge the contents of two or more objects together into the first object.</p>
+<ul class="signatures">
+<li class="signature" id="jQuery-extend-target-object1-objectN">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.extend( target [, object1] [, objectN] )</h4>
+<p class="argument"><strong>target: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                           An object that will receive the new properties if additional objects are passed in or that will extend the jQuery namespace if it is the sole argument.</p>
+<p class="argument"><strong>object1: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          An object containing additional properties to merge in.</p>
+<p class="argument"><strong>objectN: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          Additional objects containing properties to merge in.</p>
+</li>
+<li class="signature" id="jQuery-extend-deep-target-object1-objectN">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>jQuery.extend(  [deep], target, object1 [, objectN] )</h4>
+<p class="argument"><strong>deep: </strong><a href="http://api.jquery.com/Types#Boolean">Boolean</a>
+                          If true, the merge becomes recursive (aka. deep copy).</p>
+<p class="argument"><strong>target: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          The object to extend. It will receive the new properties.</p>
+<p class="argument"><strong>object1: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          An object containing additional properties to merge in.</p>
+<p class="argument"><strong>objectN: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          Additional objects containing properties to merge in.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>When we supply two or more objects to <code>$.extend()</code>, properties from all of the objects are added to the target object.</p>
+<p>If only one argument is supplied to <code>$.extend()</code>, this means the target argument was omitted. In this case, the jQuery object itself is assumed to be the target. By doing this, we can add new functions to the jQuery namespace.  This can be useful for plugin authors wishing to add new methods to JQuery.</p>
+<p>Keep in mind that the target object (first argument) will be modified, and will also be returned from <code>$.extend()</code>. If, however, we want to preserve both of the original objects, we can do so by passing an empty object as the target:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">object</span> <span class="p">=</span> $<span class="p">.</span><span class="n">extend</span><span class="p">({},</span> <span class="n">object1</span><span class="p">,</span> <span class="n">object2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The merge performed by <code>$.extend()</code> is not recursive by default; if a property of the first object is itself an object or array, it will be completely overwritten by a property with the same key in the second object. The values are not merged. This can be seen in the example below by examining the value of banana. However, by passing <code>true</code> for the first function argument, objects will be recursively merged. (Passing <code>false</code> for the first argument is not supported.)</p>
+<p>Undefined properties are not copied. However, properties inherited from the object's prototype <em>will</em> be copied over. Properties that are an object constructed via <code>new MyCustomObject(args)</code>, or built-in JavaScript types such as Date or RegExp, are not re-constructed and will appear as plain Objects in the resulting object or array.</p>
+<p>On a <code>deep</code> extend, Object and Array are extended, but object wrappers on primitive types such as String, Boolean, and Number are not.</p>
+<p>For needs that fall outside of this behavior, write a custom extend method instead. </p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Merge two objects, modifying the first.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var object1 = {
+  apple: 0,
+  banana: {weight: 52, price: 100},
+  cherry: 97
+};
+var object2 = {
+  banana: {price: 200},
+  durian: 100
+};
+
+/* merge object2 into object1 */
+$.extend(object1, object2);
+
+var printObj = typeof JSON != "undefined" ? JSON.stringify : function(obj) {
+  var arr = [];
+  $.each(obj, function(key, val) {
+    var next = key + ": ";
+    next += $.isPlainObject(val) ? printObj(val) : val;
+    arr.push( next );
+  });
+  return "{ " +  arr.join(", ") + " }";
+};
+
+$("#log").append( printObj(object1) );
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Merge two objects recursively, modifying the first.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var object1 = {
+  apple: 0,
+  banana: {weight: 52, price: 100},
+  cherry: 97
+};
+var object2 = {
+  banana: {price: 200},
+  durian: 100
+};
+
+/* merge object2 into object1, recursively */
+$.extend(true, object1, object2);
+
+var printObj = typeof JSON != "undefined" ? JSON.stringify : function(obj) {
+  var arr = [];
+  $.each(obj, function(key, val) {
+    var next = key + ": ";
+    next += $.isPlainObject(val) ? printObj(val) : val;
+    arr.push( next );
+  });
+  return "{ " +  arr.join(", ") + " }";
+};
+
+$("#log").append( printObj(object1) );
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Merge defaults and options, without modifying the defaults. This is a common plugin development pattern.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var defaults = { validate: false, limit: 5, name: "foo" };
+var options = { validate: true, name: "bar" };
+
+/* merge defaults and options, without modifying defaults */
+var settings = $.extend({}, defaults, options);
+
+var printObj = typeof JSON != "undefined" ? JSON.stringify : function(obj) {
+  var arr = [];
+  $.each(obj, function(key, val) {
+    var next = key + ": ";
+    next += $.isPlainObject(val) ? printObj(val) : val;
+    arr.push( next );
+  });
+  return "{ " +  arr.join(", ") + " }";
+};
+
+
+$("#log").append( "<span class="nt">&lt;div&gt;&lt;b&gt;</span>defaults -- <span class="nt">&lt;/b&gt;</span>" + printObj(defaults) + "<span class="nt">&lt;/div&gt;</span>" );
+$("#log").append( "<span class="nt">&lt;div&gt;&lt;b&gt;</span>options -- <span class="nt">&lt;/b&gt;</span>" + printObj(options) + "<span class="nt">&lt;/div&gt;</span>" );
+$("#log").append( "<span class="nt">&lt;div&gt;&lt;b&gt;</span>settings -- <span class="nt">&lt;/b&gt;</span>" + printObj(settings) + "<span class="nt">&lt;/div&gt;</span>" );
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

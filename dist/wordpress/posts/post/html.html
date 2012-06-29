@@ -1,0 +1,199 @@
+<script>
+	{
+		"title": ".html()",
+		"excerpt": "Get the HTML contents of the first element in the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"attributes","manipulation/dom-insertion-inside","version/1.0","version/1.4","attributes","manipulation/dom-insertion-inside","version/1.0","version/1.4"
+			]
+		}
+	}
+</script><div class="toc">
+<h4><span>Contents:</span></h4>
+<ul class="toc-list">
+<li>
+<a href="#html1">html() </a><ul><li>.html()
+              </li></ul>
+</li>
+<li>
+<a href="#html2">html( htmlString &nbsp;) </a><ul>
+<li>.html( htmlString )
+              </li>
+<li>.html( function(index, oldhtml) )
+              </li>
+</ul>
+</li>
+</ul>
+</div><div id="html1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.html()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#String">String</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get the HTML contents of the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="html"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.html()</h4></li></ul>
+<div class="longdesc">
+<p>This method is not available on XML documents.</p>
+<p>In an HTML document, <code>.html()</code> can be used to get the contents of any element. If the selector expression matches more than one element, only the first match will have its HTML content returned. Consider this code:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'div.demo-container'</span><span class="p">).</span><span class="n">html</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In order for the following <code>&lt;div&gt;</code>'s content to be retrieved, it would have to be the first one with <code>class="demo-container"</code> in the document:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo-container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo-box"</span><span class="nt">&gt;</span>Demonstration Box<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The result would look like this:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo-box"</span><span class="nt">&gt;</span>Demonstration Box<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>This method uses the browser's <code>innerHTML</code> property. Some browsers may not return HTML that exactly replicates the HTML source in an original document. For example, Internet Explorer sometimes leaves off the quotes around attribute values if they contain only alphanumeric characters.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Click a paragraph to convert it from html to text.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { margin:8px; font-size:20px; color:blue;
+      cursor:pointer; }
+  b { text-decoration:underline; }
+  button { cursor:pointer; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    <span class="nt">&lt;b&gt;</span>Click<span class="nt">&lt;/b&gt;</span> to change the <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"tag"</span><span class="nt">&gt;</span>html<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    to a <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"text"</span><span class="nt">&gt;</span>text<span class="nt">&lt;/span&gt;</span> node.
+  <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    This <span class="nt">&lt;button</span> <span class="na">name=</span><span class="s">"nada"</span><span class="nt">&gt;</span>button<span class="nt">&lt;/button&gt;</span> does nothing.
+  <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("p").click(function () {
+  var htmlStr = $(this).html();
+  $(this).text(htmlStr);
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div><div id="html2" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.html( htmlString )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Set the HTML contents of each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="html-htmlString">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.html( htmlString )</h4>
+<p class="argument"><strong>htmlString: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string of HTML to set as the content of each matched element.</p>
+</li>
+<li class="signature" id="html-functionindex--oldhtml">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.html( function(index, oldhtml) )</h4>
+<p class="argument"><strong>function(index, oldhtml): </strong>Function()
+                          A function returning the HTML content to set. Receives the index position of the element in the set and the old HTML value as arguments. jQuery empties the element before calling the function; use the oldhtml argument to reference the previous content. Within the function, <code>this</code> refers to the current element in the set.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.html()</code> method is not available in XML documents. </p>
+<p>When <code>.html()</code> is used to set an element's content, any content that was in that element is completely replaced by the new content. Consider the following HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo-container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo-box"</span><span class="nt">&gt;</span>Demonstration Box<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The content of <code>&lt;div class="demo-container"&gt;</code> can be set like this:</p>
+<div class="highlightblock"><div class="highlight"><pre>$('div.demo-container')
+  .html('<span class="nt">&lt;p&gt;</span>All new content. <span class="nt">&lt;em&gt;</span>You bet!<span class="nt">&lt;/em&gt;&lt;/p&gt;</span>');
+</pre></div>
+</div>
+<p>That line of code will replace everything inside <code>&lt;div class="demo-container"&gt;</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo-container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p&gt;</span>All new content. <span class="nt">&lt;em&gt;</span>You bet!<span class="nt">&lt;/em&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>As of jQuery 1.4, the <code>.html()</code> method allows the HTML content to be set by passing in a function.</p>
+<div class="highlightblock"><div class="highlight"><pre>$('div.demo-container').html(function() {
+  var emph = '<span class="nt">&lt;em&gt;</span>' + $('p').length + ' paragraphs!<span class="nt">&lt;/em&gt;</span>';
+  return '<span class="nt">&lt;p&gt;</span>All new content for ' + emph + '<span class="nt">&lt;/p&gt;</span>';
+});
+</pre></div>
+</div>
+<p>Given a document with six paragraphs, this example will set the HTML of <code>&lt;div class="demo-container"&gt;</code> to <code>&lt;p&gt;All new content for &lt;em&gt;6 paragraphs!&lt;/em&gt;&lt;/p&gt;</code>.</p>
+<p>This method uses the browser's <code>innerHTML</code> property. Some browsers may not generate a DOM that exactly replicates the HTML source provided. For example, Internet Explorer prior to version 8 will convert all <code>href</code> properties on links to absolute URLs, and Internet Explorer prior to version 9 will not correctly handle HTML5 elements without the addition of a separate <a href="http://code.google.com/p/html5shiv/">compatibility layer</a>.</p>
+<p><strong>Note:</strong> In Internet Explorer up to and including version 9, setting the text content of an HTML element may corrupt the text nodes of its children that are being removed from the document as a result of the operation. If you are keeping references to these DOM elements and need them to be unchanged, use <code>.empty().html(string)</code> instead of <code>.html(string)</code> so that the elements are removed from the document before the new string is assigned to the element.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples-1">
+<div id="example-1-0">
+<h4>Example: <span class="desc">Add some html to each div.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  .red { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Hello<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("div").html("<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'red'</span><span class="nt">&gt;</span>Hello <span class="nt">&lt;b&gt;</span>Again<span class="nt">&lt;/b&gt;&lt;/span&gt;</span>");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1-1">
+<h4>Example: <span class="desc">Add some html to each div then immediately do further manipulations to the inserted html.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { color:blue; font-size:18px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("div").html("<span class="nt">&lt;b&gt;</span>Wow!<span class="nt">&lt;/b&gt;</span> Such excitement...");
+    $("div b").append(document.createTextNode("!!!"))
+              .css("color", "red");
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

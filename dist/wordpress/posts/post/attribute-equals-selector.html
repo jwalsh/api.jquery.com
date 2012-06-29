@@ -1,0 +1,62 @@
+<script>
+	{
+		"title": "Attribute Equals Selector [name=\"value\"]",
+		"excerpt": "Selects elements that have the specified attribute with a value exactly equal to a certain value.",
+		"termSlugs": {
+			"category": [
+				"selectors/attribute-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="attributeEquals1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">attributeEquals</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('[attribute="value"]')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>attribute</dt>
+<dd>An attribute name.</dd>
+<dt>value</dt>
+<dd>An attribute value. <strong>Can be either an unquoted single word or a quoted string.</strong>
+</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects elements that have the specified attribute with a value exactly equal to a certain value.</p>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs with a value of "Hot Fuzz" and changes the text of the next sibling span.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"newsletter"</span> <span class="na">value=</span><span class="s">"Hot Fuzz"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;span&gt;</span>name?<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"newsletter"</span> <span class="na">value=</span><span class="s">"Cold Fusion"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;span&gt;</span>value?<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"newsletter"</span> <span class="na">value=</span><span class="s">"Evil Plans"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;span&gt;</span>value?<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$('input[value="Hot Fuzz"]').next().text(" Hot Fuzz");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

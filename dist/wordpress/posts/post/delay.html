@@ -1,0 +1,71 @@
+<script>
+	{
+		"title": ".delay()",
+		"excerpt": "Set a timer to delay execution of subsequent items in the queue.",
+		"termSlugs": {
+			"category": [
+				"effects/custom-effects","version/1.4"
+			]
+		}
+	}
+</script><div id="delay1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.delay( duration [, queueName]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Set a timer to delay execution of subsequent items in the queue.</p>
+<ul class="signatures"><li class="signature" id="delay-duration-queueName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.delay( duration [, queueName] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#Integer">Integer</a>
+                          An integer indicating the number of milliseconds to delay execution of the next item in the queue.</p>
+<p class="argument"><strong>queueName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+</li></ul>
+<div class="longdesc">
+<p>Added to jQuery in version 1.4, the <code>.delay()</code> method allows us to delay the execution of functions that follow it in the queue. It can be used with the standard effects queue or with a custom queue. Only subsequent events in a queue are delayed; for example this will <em>not</em> delay the no-arguments forms of <code>.show()</code> or <code>.hide()</code>  which do not use the effects queue.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of 200 and 600 milliseconds, respectively.</p>
+<p>Using the standard effects queue, we can, for example, set an 800-millisecond delay between the <code>.slideUp()</code> and <code>.fadeIn()</code> of <code>&lt;div id="foo"&gt;</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#foo'</span><span class="p">).</span><span class="n">slideUp</span><span class="p">(</span>300<span class="p">).</span><span class="n">delay</span><span class="p">(</span>800<span class="p">).</span><span class="n">fadeIn</span><span class="p">(</span>400<span class="p">);</span>
+</pre></div>
+</div>
+<p>When this statement is executed, the element slides up for 300 milliseconds and then pauses for 800 milliseconds before fading in for 400 milliseconds.</p>
+<blockquote>
+      <p>
+        <strong>The <code>.delay()</code> method is best for delaying between queued jQuery effects. Because it is limited—it doesn't, for example, offer a way to cancel the delay—<code>.delay()</code> is not a replacement for JavaScript's native <a href="https://developer.mozilla.org/en/DOM/window.setTimeout">setTimeout</a> function, which may be more appropriate for certain use cases.</strong>
+      </p>
+    </blockquote>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Animate the hiding and showing of two divs, delaying the first before showing it.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { position: absolute; width: 60px; height: 60px; float: left; }
+.first { background-color: #3f3; left: 0;}
+.second { background-color: #33f; left: 80px;}
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;p&gt;&lt;button&gt;</span>Run<span class="nt">&lt;/button&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"first"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"second"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("button").click(function() {
+      $("div.first").slideUp(300).delay(800).fadeIn(400);
+      $("div.second").slideUp(300).fadeIn(400);
+    });<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

@@ -1,0 +1,142 @@
+<script>
+	{
+		"title": ".not()",
+		"excerpt": "Remove elements from the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"traversing/filtering","traversing/miscellaneous-traversal","version/1.0","version/1.4"
+			]
+		}
+	}
+</script><div id="not1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.not( selector )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove elements from the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="not-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.not( selector )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A string containing a selector expression to match elements against.</p>
+</li>
+<li class="signature" id="not-elements">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.not( elements )</h4>
+<p class="argument"><strong>elements: </strong><a href="http://api.jquery.com/Types#Elements">Elements</a>
+                          One or more DOM elements to remove from the matched set.</p>
+</li>
+<li class="signature" id="not-functionindex">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.not( function(index) )</h4>
+<p class="argument"><strong>function(index): </strong>Function()
+                          A function used as a test for each element in the set. <code>this</code> is the current DOM element.</p>
+</li>
+<li class="signature" id="not-jQuery-object">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.not( jQuery object )</h4>
+<p class="argument"><strong>jQuery object: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          An existing jQuery object to match the current set of elements against.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.not()</code> method constructs a new jQuery object from a subset of the matching elements. The supplied selector is tested against each element; the elements that don't match the selector will be included in the result.</p>
+<p>Consider a page with a simple list on it:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 1<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 2<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 4<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>We can apply this method to the set of list items:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">not</span><span class="p">(</span><span class="s">':even'</span><span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The result of this call is a red background for items 2 and 4, as they do not match the selector (recall that :even and :odd use 0-based indexing).</p>
+<h4>Removing Specific Elements</h4>
+<p>The second version of the <code>.not()</code> method allows us to remove elements from the matched set, assuming we have found those elements previously by some other means. For example, suppose our list had an id applied to one of its items:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 1<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 2<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"notli"</span><span class="nt">&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 4<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>We can fetch the third list item using the native JavaScript <code>getElementById()</code> function, then remove it from a jQuery object:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">not</span><span class="p">(</span><span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s">'notli'</span><span class="p">))</span>
+  <span class="p">.</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This statement changes the color of items 1, 2, 4, and 5. We could have accomplished the same thing with a simpler jQuery expression, but this technique can be useful when, for example, other libraries provide references to plain DOM nodes.</p>
+<p>As of jQuery 1.4, the <code>.not()</code> method can take a function as its argument in the same way that <code>.filter()</code> does. Elements for which the function returns <code>true</code> are excluded from the filtered set; all other elements are included.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Adds a border to divs that are not green or blue.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { width:50px; height:50px; margin:10px; float:left;
+      background:yellow; border:2px solid white; }
+.green { background:#8f8; }
+.gray { background:#ccc; }
+#blueone { background:#99f; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"blueone"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"green"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"green"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"gray"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+$("div").not(".green, #blueone")
+        .css("border-color", "red");
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Removes the element with the ID "selected" from the set of all paragraphs.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">not</span><span class="p">(</span> $<span class="p">(</span>"#<span class="n">selected</span>"<span class="p">)[</span>0<span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Removes the element with the ID "selected" from the set of all paragraphs.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">not</span><span class="p">(</span>"#<span class="n">selected</span>"<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Removes all elements that match "div p.selected" from the total set of all paragraphs.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">not</span><span class="p">(</span>$<span class="p">(</span>"<span class="n">div</span> <span class="n">p</span><span class="p">.</span><span class="n">selected</span>"<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

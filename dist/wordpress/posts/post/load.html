@@ -1,0 +1,161 @@
+<script>
+	{
+		"title": ".load()",
+		"excerpt": "Load data from the server and place the returned HTML into the matched element.",
+		"termSlugs": {
+			"category": [
+				"ajax/shorthand-methods","version/1.0"
+			]
+		}
+	}
+</script><div id="load1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.load( url [, data]  [, complete(responseText, textStatus, XMLHttpRequest)]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Load data from the server and place the returned HTML into the matched element.</p>
+<ul class="signatures"><li class="signature" id="load-url-data-completeresponseText--textStatus--XMLHttpRequest">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.load( url [, data] [, complete(responseText, textStatus, XMLHttpRequest)] )</h4>
+<p class="argument"><strong>url: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the URL to which the request is sent.</p>
+<p class="argument"><strong>data: </strong><a href="http://api.jquery.com/Types#Map,%20String">Map, String</a>
+                          A map or string that is sent to the server with the request.</p>
+<p class="argument"><strong>complete(responseText, textStatus, XMLHttpRequest): </strong>Function()
+                          A callback function that is executed when the request completes.</p>
+</li></ul>
+<div class="longdesc">
+<blockquote>
+      <p>Note: The event handling suite also has a method named <code><a href="/load-event">.load()</a></code>. jQuery determines which method to fire based on the set of arguments passed to it.</p>
+    </blockquote>
+<p>This method is the simplest way to fetch data from the server. It is roughly equivalent to <code>$.get(url, data, success)</code> except that it is a method rather than global function and it has an implicit callback function.  When a successful response is detected (i.e. when <code>textStatus</code> is "success" or "notmodified"), <code>.load()</code> sets the HTML contents of the matched element to the returned data. This means that most uses of the method can be quite simple:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#result'</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">'ajax/test.html'</span><span class="p">);</span>
+</pre></div>
+</div>
+<h4 id="callback-function">Callback Function</h4>
+<p>If a "complete" callback is provided, it is executed after post-processing and HTML insertion has been performed. The callback is fired once for each element in the jQuery collection, and <code>this</code> is set to each DOM element in turn.</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#result'</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">'ajax/test.html'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Load was performed.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>In the two examples above, if the current document does not contain an element with an ID of "result," the <code>.load()</code> method is not executed.</p>
+<h4 id="request-method">Request Method</h4>
+<p>The POST method is used if data is provided as an object; otherwise, GET is assumed.</p>
+<h4 id="loading-page-fragments">Loading Page Fragments</h4>
+<p>The <code>.load()</code> method, unlike <code><a href="/jQuery.get">$.get()</a></code>, allows us to specify a portion of the remote document to be inserted. This is achieved with a special syntax for the <code>url</code> parameter. If one or more space characters are included in the string, the portion of the string following the first space is assumed to be a jQuery selector that determines the content to be loaded.   </p>
+<p>We could modify the example above to use only part of the document that is fetched:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#result'</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">'ajax/test.html #container'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When this method executes, it retrieves the content of <code>ajax/test.html</code>, but then jQuery parses the returned document to find the element with an ID of <code>container</code>. This element, along with its contents, is inserted into the element with an ID of <code>result</code>, and the rest of the retrieved document is discarded.</p>
+<p>jQuery uses the browser's <code>.innerHTML</code> property to parse the retrieved document and insert it into the current document. During this process, browsers often filter elements from the document such as <code>&lt;html&gt;</code>, <code>&lt;title&gt;</code>, or <code>&lt;head&gt;</code> elements. As a result, the elements retrieved by <code>.load()</code> may not be exactly the same as if the document were retrieved directly by the browser.</p>
+<h4 id="script-execution">Script Execution</h4>
+<p> When calling <code>.load()</code> using a URL without a suffixed selector expression, the content is passed to <code>.html()</code> prior to scripts being removed. This executes the script blocks before they are discarded. If <code>.load()</code> is called with a selector expression appended to the URL, however, the scripts are stripped out prior to the DOM being updated, and thus are <em>not</em> executed. An example of both cases can be seen below:
+</p>
+<p>Here, any JavaScript loaded into <code>#a</code> as a part of the document will successfully execute.</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#a'</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">'article.html'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>However, in the following case, script blocks in the document being loaded into <code>#b</code> are stripped out and not executed:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#b'</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">'article.html #target'</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/same-origin-policy.xml">
+	Due to browser security restrictions, most "Ajax" requests are subject to the <a title="Same Origin Policy on Wikipedia" href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin policy</a>; the request can not successfully retrieve data from a different domain, subdomain, or protocol.
+</li></ul></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Load the main page's footer navigation into an ordered list.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+ body{ font-size: 12px; font-family: Arial; }
+ <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;b&gt;</span>Footer navigation:<span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;ol</span> <span class="na">id=</span><span class="s">"new-nav"</span><span class="nt">&gt;&lt;/ol&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  $("#new-nav").load("/ #jq-footerNavigation li");
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Display a notice if the Ajax request encounters an error.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  body{ font-size: 12px; font-family: Arial; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;b&gt;</span>Successful Response (should be blank):<span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"success"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;b&gt;</span>Error Response:<span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"error"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  
+<span class="nt">&lt;script&gt;</span>
+$("#success").load("/not-here.php", function(response, status, xhr) {
+  if (status == "error") {
+    var msg = "Sorry but there was an error: ";
+    $("#error").html(msg + xhr.status + " " + xhr.statusText);
+  }
+});
+  <span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Load the feeds.html file into the div with the ID of feeds.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">feeds</span>"<span class="p">).</span><span class="n">load</span><span class="p">(</span>"<span class="n">feeds</span><span class="p">.</span><span class="n">html</span>"<span class="p">);</span>
+</pre></div>
+</div>
+<h4>Result:</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"feeds"</span><span class="nt">&gt;&lt;b&gt;</span>45<span class="nt">&lt;/b&gt;</span> feeds found.<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">pass arrays of data to the server.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">objectID</span>"<span class="p">).</span><span class="n">load</span><span class="p">(</span>"<span class="n">test</span><span class="p">.</span><span class="n">php</span>"<span class="p">,</span> <span class="p">{</span> <span class="s">'choices[]'</span><span class="p">:</span> <span class="p">[</span>"<span class="n">Jon</span>"<span class="p">,</span> "<span class="n">Susan</span>"<span class="p">]</span> <span class="p">}</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Same as above, but will POST the additional parameters to the server and a callback that is executed when the server is finished responding.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">feeds</span>"<span class="p">).</span><span class="n">load</span><span class="p">(</span>"<span class="n">feeds</span><span class="p">.</span><span class="n">php</span>"<span class="p">,</span> <span class="p">{</span><span class="n">limit</span><span class="p">:</span> 25<span class="p">},</span> <span class="k">function</span><span class="p">(){</span>
+<span class="n">alert</span><span class="p">(</span>"<span class="n">The</span> <span class="n">last</span> 25 <span class="n">entries</span> <span class="n">in</span> <span class="n">the</span> <span class="n">feed</span> <span class="n">have</span> <span class="n">been</span> <span class="n">loaded</span>"<span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

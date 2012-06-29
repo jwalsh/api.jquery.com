@@ -1,0 +1,64 @@
+<script>
+	{
+		"title": ".focusin()",
+		"excerpt": "Bind an event handler to the \"focusin\" event.",
+		"termSlugs": {
+			"category": [
+				"events/keyboard-events","events/mouse-events","version/1.4","version/1.4.3"
+			]
+		}
+	}
+</script><div id="focusin1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.focusin( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "focusin" event.</p>
+<ul class="signatures">
+<li class="signature" id="focusin-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.focusin( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="focusin-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.focusin(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('focusin', handler)</code>.</p>
+<p>The <code>focusin</code> event is sent to an element when it, or any element inside of it, gains focus. This is distinct from the <a href="/focus">focus</a> event in that it supports detecting the focus event on parent elements (in other words, it supports event bubbling).</p>
+<p>This event will likely be used together with the <a href="/focusout">focusout</a> event.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Watch for a focus to occur within the paragraphs on the page.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>span {display:none;}<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span> <span class="nt">&lt;span&gt;</span>focusin fire<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="nt">/&gt;</span> <span class="nt">&lt;span&gt;</span>focusin fire<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("p").focusin(function() {
+  $(this).find("span").css('display','inline').fadeOut(1000);
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

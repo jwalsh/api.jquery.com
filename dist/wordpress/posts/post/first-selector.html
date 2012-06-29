@@ -1,0 +1,57 @@
+<script>
+	{
+		"title": ":first Selector",
+		"excerpt": "Selects the first matched element.",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-filter-selectors","selectors/jquery-selector-extensions","version/1.0"
+			]
+		}
+	}
+</script><div id="first1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">first</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery(':first')</h4>
+<p class="desc"><strong>Description: </strong>Selects the first matched element.</p>
+<div class="longdesc"><p>The <code>:first</code> pseudo-class is equivalent to <code>:eq(0)</code>. It could also be written as <code>:lt(1)</code>. While this matches only a single element, <a href="first-child-selector">:first-child</a> can match more than one: One for each parent.</p></div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul>
+<li xml:base="../notes/jquery-selector-extension.xml">
+	Because <code>:first</code> is a jQuery extension and not part of the CSS specification, queries using <code>:first</code> cannot take advantage of the performance boost provided by the native DOM <code>querySelectorAll()</code> method. To achieve the best performance when using <code>:first</code> to select elements, first select the elements using a pure CSS selector, then use <a href="http://api.jquery.com/filter/">.filter(":first")</a>.
+</li>
+<li xml:base="../notes/document-order.xml">
+  Selected elements are in the order of their appearance in the document.
+</li>
+</ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds the first table row.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  td { color:blue; font-weight:bold; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;table&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Row 1<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Row 2<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Row 3<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("tr:first").css("font-style", "italic");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

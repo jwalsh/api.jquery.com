@@ -1,0 +1,194 @@
+<script>
+	{
+		"title": ".map()",
+		"excerpt": "Pass each element in the current matched set through a function, producing a new jQuery object containing the return values.",
+		"termSlugs": {
+			"category": [
+				"traversing/filtering","version/1.2"
+			]
+		}
+	}
+</script><div id="map1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.map( callback(index, domElement) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Pass each element in the current matched set through a function, producing a new jQuery object containing the return values.</p>
+<ul class="signatures"><li class="signature" id="map-callbackindex--domElement">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.map( callback(index, domElement) )</h4>
+<p class="argument"><strong>callback(index, domElement): </strong>Function()
+                          A function object that will be invoked for each element in the current set.</p>
+</li></ul>
+<div class="longdesc">
+<p>As the return value is a jQuery-wrapped array, it's very common to <code>get()</code> the returned object to work with a basic array.</p>
+<p>The <code>.map()</code> method is particularly useful for getting or setting the value of a collection of elements. Consider a form with a set of checkboxes in it:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">action=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;fieldset&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"two"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"2"</span> <span class="na">id=</span><span class="s">"two"</span> <span class="na">name=</span><span class="s">"number[]"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"four"</span><span class="nt">&gt;</span>4<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"4"</span> <span class="na">id=</span><span class="s">"four"</span> <span class="na">name=</span><span class="s">"number[]"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"six"</span><span class="nt">&gt;</span>6<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"6"</span> <span class="na">id=</span><span class="s">"six"</span> <span class="na">name=</span><span class="s">"number[]"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"eight"</span><span class="nt">&gt;</span>8<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"8"</span> <span class="na">id=</span><span class="s">"eight"</span> <span class="na">name=</span><span class="s">"number[]"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/fieldset&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>We can get a comma-separated list of checkbox <code>ID</code>s:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">':checkbox'</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">this</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+    <span class="p">}).</span><span class="n">get</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="s">','</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The result of this call is the string, <code>"two,four,six,eight"</code>.</p>
+<p>Within the callback function, <code>this</code> refers to the current DOM element for each iteration. The function can return an individual data item or an array of data items to be inserted into the resulting set. If an array is returned, the elements inside the array are inserted into the set. If the function returns <code>null</code> or <code>undefined</code>, no element will be inserted.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Build a list of all the values within a form.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;b&gt;</span>Values: <span class="nt">&lt;/b&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"John"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">"password"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"url"</span> <span class="na">value=</span><span class="s">"http://ejohn.org/"</span><span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("p").append( $("input").map(function(){
+      return $(this).val();
+    }).get().join(", ") );
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">A contrived example to show some functionality.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  body { font-size:16px; }
+  ul { float:left; margin:0 30px; color:blue; }
+  #results { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>First<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Second<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Third<span class="nt">&lt;/li&gt;</span>
+
+    <span class="nt">&lt;li&gt;</span>Fourth<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Fifth<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"results"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var mappedItems = $("li").map(function (index) {
+  var replacement = $("<span class="nt">&lt;li&gt;</span>").text($(this).text()).get(0);
+  if (index == 0) {
+    /* make the first item all caps */
+    $(replacement).text($(replacement).text().toUpperCase());
+  } else if (index == 1 || index == 3) {
+    /* delete the second and fourth items */
+    replacement = null;
+  } else if (index == 2) {
+    /* make two of the third item and add some text */
+    replacement = [replacement,$("<span class="nt">&lt;li&gt;</span>").get(0)];
+    $(replacement[0]).append("<span class="nt">&lt;b&gt;</span> - A<span class="nt">&lt;/b&gt;</span>");
+    $(replacement[1]).append("Extra <span class="nt">&lt;b&gt;</span> - B<span class="nt">&lt;/b&gt;</span>");
+  }
+
+  /* replacement will be a dom element, null,
+     or an array of dom elements */
+  return replacement;
+});
+$("#results").append(mappedItems);
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Equalize the heights of the divs.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { width: 40px; float:left; }
+input { clear:left}
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"equalize div heights"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"background:red; height: 40px; "</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"background:green; height: 70px;"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"background:blue; height: 50px; "</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+
+<span class="nt">&lt;script&gt;</span>
+$.fn.equalizeHeights = function() {
+  var maxHeight = this.map(function(i,e) {
+    return $(e).height();
+  }).get();
+
+  return this.height( Math.max.apply(this, maxHeight) );
+};
+
+$('input').click(function(){
+  $('div').equalizeHeights();
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

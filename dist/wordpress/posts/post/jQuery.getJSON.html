@@ -1,0 +1,149 @@
+<script>
+	{
+		"title": "jQuery.getJSON()",
+		"excerpt": "Load JSON-encoded data from the server using a GET HTTP request.",
+		"termSlugs": {
+			"category": [
+				"ajax/shorthand-methods","version/1.0","version/1.5"
+			]
+		}
+	}
+</script><div id="jQuery-getJSON1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.getJSON( url [, data]  [, success(data, textStatus, jqXHR)]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jqXHR">jqXHR</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Load JSON-encoded data from the server using a GET HTTP request.</p>
+<ul class="signatures"><li class="signature" id="jQuery-getJSON-url-data-successdata--textStatus--jqXHR">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.getJSON( url [, data] [, success(data, textStatus, jqXHR)] )</h4>
+<p class="argument"><strong>url: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing the URL to which the request is sent.</p>
+<p class="argument"><strong>data: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map or string that is sent to the server with the request.</p>
+<p class="argument"><strong>success(data, textStatus, jqXHR): </strong>Function()
+                          A callback function that is executed if the request succeeds.</p>
+</li></ul>
+<div class="longdesc">
+<p>This is a shorthand Ajax function, which is equivalent to:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">ajax</span><span class="p">({</span>
+  <span class="n">url</span><span class="p">:</span> 
+</pre></div>
+</div>
+<p>Data that is sent to the server is appended to the URL as a query string. If the value of the <code>data</code> parameter is an object (map), it is converted to a string and url-encoded before it is appended to the URL.</p>
+<p>Most implementations will specify a success handler:</p>
+<div class="highlightblock"><div class="highlight"><pre>$.getJSON('ajax/test.json', function(data) {
+  var items = [];
+
+  $.each(data, function(key, val) {
+    items.push('<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"' + key + '"</span><span class="nt">&gt;</span>' + val + '<span class="nt">&lt;/li&gt;</span>');
+  });
+
+  $('<span class="nt">&lt;ul/&gt;</span>', {
+    'class': 'my-new-list',
+    html: items.join('')
+  }).appendTo('body');
+});
+</pre></div>
+</div>
+<p>This example, of course, relies on the structure of the JSON file:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">{</span>
+  "<span class="n">one</span>"<span class="p">:</span> "<span class="n">Singular</span> <span class="n">sensation</span>"<span class="p">,</span>
+  "<span class="n">two</span>"<span class="p">:</span> "<span class="n">Beady</span> <span class="n">little</span> <span class="n">eyes</span>"<span class="p">,</span>
+  "<span class="n">three</span>"<span class="p">:</span> "<span class="n">Little</span> <span class="n">birds</span> <span class="n">pitch</span> <span class="n">by</span> <span class="n">my</span> <span class="n">doorstep</span>"
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using this structure, the example loops through the requested data, builds an unordered list, and appends it to the body.</p>
+<p>The <code>success</code> callback is passed the returned data, which is typically a JavaScript object or array as defined by the JSON structure and parsed using the <code><a href="/jQuery.parseJSON">$.parseJSON()</a></code> method. It is also passed the text status of the response.</p>
+<p><strong>As of jQuery 1.5</strong>, the <code>success</code> callback function receives a <a href="http://api.jquery.com/jQuery.get/#jqxhr-object">"jqXHR" object</a> (in <strong>jQuery 1.4</strong>, it received the <code>XMLHttpRequest</code> object). However, since JSONP and cross-domain GET requests do not use <abbr title="XMLHTTPRequest">XHR</abbr>, in those cases the <code>jqXHR</code> and <code>textStatus</code> parameters passed to the success callback are undefined.</p>
+<blockquote>
+      <p><strong>Important:</strong> As of jQuery 1.4, if the JSON file contains a syntax error, the request will usually fail silently. Avoid frequent hand-editing of JSON data for this reason. JSON is a data-interchange format with syntax rules that are stricter than those of JavaScript's object literal notation. For example, all strings represented in JSON, whether they are properties or values, must be enclosed in double-quotes. For details on the JSON format, see <a href="http://json.org/">http://json.org/</a>.</p>
+    </blockquote>
+<h4 id="jsonp">JSONP</h4>
+<p>If the URL includes the string "callback=?" (or similar, as defined by the server-side API), the request is treated as JSONP instead. See the discussion of the <code>jsonp</code> data type in <code><a href="http://api.jquery.com/jQuery.ajax/">$.ajax()</a></code> for more details.</p>
+<h4 id="jqxhr-object">The jqXHR Object</h4>
+<p><strong>As of jQuery 1.5</strong>, all of jQuery's Ajax methods return  a superset of the <code>XMLHTTPRequest</code> object. This jQuery XHR object, or "jqXHR," returned by <code>$.getJSON()</code> implements the Promise interface, giving it all the properties, methods, and behavior of a Promise (see <a href="http://api.jquery.com/category/deferred-object/">Deferred object</a> for more information). For convenience and consistency with the callback names used by <code><a href="http://api.jquery.com/jQuery.ajax/">$.ajax()</a></code>, it provides <code>.error()</code>, <code>.success()</code>, and <code>.complete()</code> methods. These methods take a function argument that is called when the request terminates, and the function receives the same arguments as the correspondingly-named <code>$.ajax()</code> callback.</p>
+<p>The Promise interface in jQuery 1.5 also allows jQuery's Ajax methods, including <code>$.getJSON()</code>, to chain multiple <code>.success()</code>, <code>.complete()</code>, and <code>.error()</code> callbacks on a single request, and even to assign these callbacks after the request may have completed. If the request is already complete, the callback is fired immediately.</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="c1">// Assign handlers immediately after making the request,</span>
+<span class="c1">// and remember the jqxhr object for this request</span>
+<span class="k">var</span> <span class="n">jqxhr</span> <span class="o">=</span> <span class="err">$</span><span class="p">.</span><span class="n">getJSON</span><span class="p">(</span><span class="s">"example.json"</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">"success"</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="n">alert</span><span class="p">(</span><span class="s">"second success"</span><span class="p">);</span> <span class="p">})</span>
+<span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="n">alert</span><span class="p">(</span><span class="s">"error"</span><span class="p">);</span> <span class="p">})</span>
+<span class="p">.</span><span class="n">complete</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="n">alert</span><span class="p">(</span><span class="s">"complete"</span><span class="p">);</span> <span class="p">});</span>
+
+<span class="c1">// perform other work here ...</span>
+
+<span class="c1">// Set another completion function for the request above</span>
+<span class="n">jqxhr</span><span class="p">.</span><span class="n">complete</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span> <span class="n">alert</span><span class="p">(</span><span class="s">"second complete"</span><span class="p">);</span> <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul>
+<li xml:base="../notes/same-origin-policy.xml">
+	Due to browser security restrictions, most "Ajax" requests are subject to the <a title="Same Origin Policy on Wikipedia" href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin policy</a>; the request can not successfully retrieve data from a different domain, subdomain, or protocol.
+</li>
+<li xml:base="../notes/same-origin-policy-exceptions.xml">
+  Script and JSONP requests are not subject to the same origin policy restrictions.
+</li>
+</ul></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Loads the four most recent cat pictures from the Flickr JSONP API.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>img{ height: 100px; float: left; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"images"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+  {
+    tags: "mount rainier",
+    tagmode: "any",
+    format: "json"
+  },
+  function(data) {
+    $.each(data.items, function(i,item){
+      $("<span class="nt">&lt;img/&gt;</span>").attr("src", item.media.m).appendTo("#images");
+      if ( i == 3 ) return false;
+    });
+  });<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Load the JSON data from test.js and access a name from the returned JSON data.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">getJSON</span><span class="p">(</span>"<span class="n">test</span><span class="p">.</span><span class="n">js</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">json</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">alert</span><span class="p">(</span>"<span class="n">JSON</span> <span class="n">Data</span><span class="p">:</span> " <span class="o">+</span> <span class="n">json</span><span class="p">.</span><span class="n">users</span><span class="p">[</span>3<span class="p">].</span><span class="n">name</span><span class="p">);</span>
+ <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Load the JSON data from test.js, passing along additional data, and access a name from the returned JSON data.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">getJSON</span><span class="p">(</span>"<span class="n">test</span><span class="p">.</span><span class="n">js</span>"<span class="p">,</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> "<span class="n">John</span>"<span class="p">,</span> <span class="n">time</span><span class="p">:</span> "2<span class="n">pm</span>" <span class="p">},</span> <span class="k">function</span><span class="p">(</span><span class="n">json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">alert</span><span class="p">(</span>"<span class="n">JSON</span> <span class="n">Data</span><span class="p">:</span> " <span class="o">+</span> <span class="n">json</span><span class="p">.</span><span class="n">users</span><span class="p">[</span>3<span class="p">].</span><span class="n">name</span><span class="p">);</span>
+    <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

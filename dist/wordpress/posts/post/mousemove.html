@@ -1,0 +1,122 @@
+<script>
+	{
+		"title": ".mousemove()",
+		"excerpt": "Bind an event handler to the \"mousemove\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/mouse-events","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="mousemove1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.mousemove( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "mousemove" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="mousemove-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mousemove( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mousemove-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.mousemove(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mousemove"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mousemove()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('mousemove', handler)</code> in the first two variations, and <code>.trigger('mousemove')</code> in the third.</p>
+<p>The <code>mousemove</code> event is sent to an element when the mouse pointer moves inside the element. Any HTML element can receive this event.</p>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"target"</span><span class="nt">&gt;</span>
+  Move here
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The event handler can be bound to the target:</p>
+<div class="highlightblock"><div class="highlight"><pre>$("#target").mousemove(function(event) {
+  var msg = "Handler for .mousemove() called at ";
+  msg += event.pageX + ", " + event.pageY;
+  $("#log").append("<span class="nt">&lt;div&gt;</span>" + msg + "<span class="nt">&lt;/div&gt;</span>");
+});
+</pre></div>
+</div>
+<p>Now when the mouse pointer moves within the target button, the messages are appended to &lt;div id="log"&gt;:</p>
+<p>
+      <span class="output">Handler for .mousemove() called at (399, 48)</span>
+      <br />
+      <span class="output">Handler for .mousemove() called at (398, 46)</span>
+      <br />
+      <span class="output">Handler for .mousemove() called at (397, 44)</span>
+      <br />
+      <span class="output">Handler for .mousemove() called at (396, 42)</span>
+      <br />
+    </p>
+<p>To trigger the event manually, apply <code>.mousemove()</code> without an argument:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">other</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span>"#<span class="n">target</span>"<span class="p">).</span><span class="n">mousemove</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on the Trigger button will also append the message:</p>
+<p>
+      <span class="output">Handler for .mousemove() called at (undefined, undefined)</span>
+    </p>
+<p>When tracking mouse movement, you usually need to know the actual position of the mouse pointer. The event object that is passed to the handler contains some information about the mouse coordinates. Properties such as <code>.clientX</code>, <code>.offsetX</code>, and <code>.pageX</code> are available, but support for them differs between browsers. Fortunately, jQuery normalizes the <code>.pageX</code> and <code>.pageY</code> properties so that they can be used in all browsers. These properties provide the X and Y coordinates of the mouse pointer relative to the top-left corner of the document, as illustrated in the example output above.</p>
+<p>Keep in mind that the <code>mousemove</code> event is triggered whenever the mouse pointer moves, even for a pixel. This means that hundreds of events can be generated over a very small amount of time. If the handler has to do any significant processing, or if multiple handlers for the event exist, this can be a serious performance drain on the browser. It is important, therefore, to optimize <code>mousemove </code>handlers as much as possible, and to unbind them as soon as they are no longer needed.</p>
+<p>A common pattern is to bind the <code>mousemove</code> handler from within a <code>mousedown</code> hander, and to unbind it from a corresponding <code>mouseup</code> handler. If implementing this sequence of events, remember that the <code>mouseup</code> event might be sent to a different HTML element than the <code>mousemove</code> event was. To account for this, the <code>mouseup</code> handler should typically be bound to an element high up in the DOM tree, such as <code>&lt;body&gt;</code>.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the mouse coordinates when the mouse is moved over the yellow div.  Coordinates are relative to the window, which in this case is the iframe.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { width:220px; height:170px; margin: 10px 50px 10px 10px;
+      background:yellow; border:2px groove; float:right; }
+p { margin:0; margin-left:10px; color:red; width:220px;
+    height:120px; padding-top:70px;
+    float:left; font-size:14px; }
+span { display:block; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Move the mouse over the div.<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("div").mousemove(function(e){
+  var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
+  var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
+  $("span:first").text("( e.pageX, e.pageY ) : " + pageCoords);
+  $("span:last").text("( e.clientX, e.clientY ) : " + clientCoords);
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="300"></div>
+</div></div>
+</div>
+</div>

@@ -1,0 +1,64 @@
+<script>
+	{
+		"title": "Descendant Selector (\"ancestor descendant\")",
+		"excerpt": "Selects all elements that are descendants of a given ancestor.",
+		"termSlugs": {
+			"category": [
+				"selectors/hierarchy-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="descendant1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">descendant</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('ancestor descendant')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>ancestor</dt>
+<dd>Any valid selector.</dd>
+<dt>descendant</dt>
+<dd>A selector to filter the descendant elements.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all elements that are descendants of a given ancestor.</p>
+<div class="longdesc"><p>A descendant of an element could be a child, grandchild, great-grandchild, and so on, of that element.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all input descendants of forms.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  body { font-size:14px; }
+  form { border:2px green solid; padding:2px; margin:0;
+         background:#efe; }
+  div { color:red; }
+  fieldset { margin:1px; padding:3px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+    <span class="nt">&lt;div&gt;</span>Form is surrounded by the green outline<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Child:<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"name"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;fieldset&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Grandchild:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"newsletter"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/fieldset&gt;</span>
+
+  <span class="nt">&lt;/form&gt;</span>
+  Sibling to form: <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"none"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("form input").css("border", "2px dotted blue");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

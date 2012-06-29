@@ -1,0 +1,60 @@
+<script>
+	{
+		"title": ".detach()",
+		"excerpt": "Remove the set of matched elements from the DOM.",
+		"termSlugs": {
+			"category": [
+				"manipulation/dom-removal","version/1.4"
+			]
+		}
+	}
+</script><div id="detach1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.detach(  [selector]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove the set of matched elements from the DOM.</p>
+<ul class="signatures"><li class="signature" id="detach-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.detach(  [selector] )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A selector expression that filters the set of matched elements to be removed.</p>
+</li></ul>
+<div class="longdesc"><p>The <code>.detach()</code> method is the same as <code><a href="/remove">.remove()</a></code>, except that <code>.detach()</code> keeps all jQuery data associated with the removed elements. This method is useful when removed elements are to be reinserted into the DOM at a later time.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Detach all paragraphs from the DOM</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>p { background:yellow; margin:6px 0; } p.off { background: black; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  how are
+  <span class="nt">&lt;p&gt;</span>you?<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Attach/detach paragraphs<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("p").click(function(){
+      $(this).toggleClass("off");
+    });
+    var p;
+    $("button").click(function(){
+      if ( p ) {
+        p.appendTo("body");
+        p = null;
+      } else {
+        p = $("p").detach();
+      }
+    });<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

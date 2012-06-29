@@ -1,0 +1,132 @@
+<script>
+	{
+		"title": ".mouseout()",
+		"excerpt": "Bind an event handler to the \"mouseout\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/mouse-events","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="mouseout1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.mouseout( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "mouseout" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="mouseout-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mouseout( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mouseout-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.mouseout(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mouseout"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mouseout()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('mouseout', handler)</code> in the first two variation, and <code>.trigger('mouseout')</code> in the third.</p>
+<p>The <code>mouseout</code> event is sent to an element when the mouse pointer leaves the element. Any HTML element can receive this event.</p>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"outer"</span><span class="nt">&gt;</span>
+  Outer
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"inner"</span><span class="nt">&gt;</span>
+    Inner
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p class="image">
+      <img src="/resources/0042_05_07.png" alt="" />
+    </p>
+<p>The event handler can be bound to any element:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#outer'</span><span class="p">).</span><span class="n">mouseout</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#log'</span><span class="p">).</span><span class="n">append</span><span class="p">(</span><span class="s">'Handler for .mouseout() called.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now when the mouse pointer moves out of the <span class="output">Outer</span> <code>&lt;div&gt;</code>, the message is appended to <code>&lt;div id="log"&gt;</code>. To trigger the event manually, apply <code>.mouseout()</code> without an argument::</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#other'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#outer'</span><span class="p">).</span><span class="n">mouseout</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also append the message.</p>
+<p>This event type can cause many headaches due to event bubbling. For instance, when the mouse pointer moves out of the <span class="output">Inner</span> element in this example, a <code>mouseout</code> event will be sent to that, then trickle up to <span class="output">Outer</span>. This can trigger the bound <code>mouseout</code> handler at inopportune times. See the discussion for <code>.<a href="/mouseleave">mouseleave</a>()</code> for a useful alternative.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the number of times mouseout and mouseleave events are triggered.
+  mouseout fires when the pointer moves out of the child element as well, while mouseleave fires only when the pointer moves out of the bound element.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div.out {
+width:40%;
+height:120px;
+margin:0 15px;
+background-color:#D6EDFC;
+float:left;
+}
+div.in {
+width:60%;
+height:60%;
+background-color:#FFCC00;
+margin:10px auto;
+}
+p {
+line-height:1em;
+margin:0;
+padding:0;
+}
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"out overout"</span><span class="nt">&gt;&lt;p&gt;</span>move your mouse<span class="nt">&lt;/p&gt;&lt;div</span> <span class="na">class=</span><span class="s">"in overout"</span><span class="nt">&gt;&lt;p&gt;</span>move your mouse<span class="nt">&lt;/p&gt;&lt;p&gt;</span>0<span class="nt">&lt;/p&gt;&lt;/div&gt;&lt;p&gt;</span>0<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"out enterleave"</span><span class="nt">&gt;&lt;p&gt;</span>move your mouse<span class="nt">&lt;/p&gt;&lt;div</span> <span class="na">class=</span><span class="s">"in enterleave"</span><span class="nt">&gt;&lt;p&gt;</span>move your mouse<span class="nt">&lt;/p&gt;&lt;p&gt;</span>0<span class="nt">&lt;/p&gt;&lt;/div&gt;&lt;p&gt;</span>0<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+
+
+<span class="nt">&lt;script&gt;</span>
+var i = 0;
+$("div.overout").mouseout(function(){
+  $("p:first",this).text("mouse out");
+  $("p:last",this).text(++i);
+}).mouseover(function(){
+  $("p:first",this).text("mouse over");
+});
+
+var n = 0;
+$("div.enterleave").bind("mouseenter",function(){
+  $("p:first",this).text("mouse enter");
+}).bind("mouseleave",function(){
+  $("p:first",this).text("mouse leave");
+  $("p:last",this).text(++n);
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

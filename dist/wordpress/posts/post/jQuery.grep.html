@@ -1,0 +1,100 @@
+<script>
+	{
+		"title": "jQuery.grep()",
+		"excerpt": "Finds the elements of an array which satisfy a filter function. The original array is not affected.",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.0"
+			]
+		}
+	}
+</script><div id="jQuery-grep1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.grep( array, function(elementOfArray, indexInArray) [, invert]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Array">Array</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Finds the elements of an array which satisfy a filter function. The original array is not affected.</p>
+<ul class="signatures"><li class="signature" id="jQuery-grep-array-functionelementOfArray--indexInArray-invert">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.grep( array, function(elementOfArray, indexInArray) [, invert] )</h4>
+<p class="argument"><strong>array: </strong><a href="http://api.jquery.com/Types#Array">Array</a>
+                          The array to search through.</p>
+<p class="argument"><strong>function(elementOfArray, indexInArray): </strong>Function()
+                          The function to process each item against.  The first argument to the function is the item, and the second argument is the index.  The function should return a Boolean value.  <code>this</code> will be the global window object.</p>
+<p class="argument"><strong>invert: </strong><a href="http://api.jquery.com/Types#Boolean">Boolean</a>
+                          If "invert" is false, or not provided, then the function returns an array consisting of all elements for which "callback" returns true.  If "invert" is true, then the function returns an array consisting of all elements for which "callback" returns false.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.grep()</code> method removes items from an array as necessary so that all remaining items pass a provided test. The test is a function that is passed an array item and the index of the item within the array. Only if the test returns true will the item be in the result array.</p>
+<p> The filter function will be passed two arguments: the current array item and its index. The filter function must return 'true' to include the item in the result array.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Filters the original array of numbers leaving that are not 5 and have an index greater than 4.  Then it removes all 9s.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { color:blue; }
+  p { color:green; margin:0; }
+  span { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+  
+<span class="nt">&lt;script&gt;</span>
+var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+$("div").text(arr.join(", "));
+
+arr = jQuery.grep(arr, function(n, i){
+  return (n != 5 <span class="err">&amp;&amp;</span> i &gt; 4);
+});
+$("p").text(arr.join(", "));
+
+arr = jQuery.grep(arr, function (a) { return a != 9; });
+$("span").text(arr.join(", "));
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Filter an array of numbers to include only numbers bigger then zero.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">grep</span><span class="p">(</span> <span class="p">[</span>0<span class="p">,</span>1<span class="p">,</span>2<span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="nb">i</span><span class="p">){</span>
+   <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> 0<span class="p">;</span>
+ <span class="p">});</span>
+</pre></div>
+</div>
+<h4>Result:</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">[</span>1<span class="p">,</span> 2<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Filter an array of numbers to include numbers that are not bigger than zero.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">grep</span><span class="p">(</span> <span class="p">[</span>0<span class="p">,</span>1<span class="p">,</span>2<span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="nb">i</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> 0<span class="p">;</span>
+<span class="p">},</span><span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<h4>Result:</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">[</span>0<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,75 @@
+<script>
+	{
+		"title": ".hasClass()",
+		"excerpt": "Determine whether any of the matched elements are assigned the given class.",
+		"termSlugs": {
+			"category": [
+				"attributes","manipulation/class-attribute","css","version/1.2"
+			]
+		}
+	}
+</script><div id="hasClass1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.hasClass( className )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Determine whether any of the matched elements are assigned the given class.</p>
+<ul class="signatures"><li class="signature" id="hasClass-className">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.hasClass( className )</h4>
+<p class="argument"><strong>className: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          The class name to search for.</p>
+</li></ul>
+<div class="longdesc">
+<p>Elements may have more than one class assigned to them. In HTML, this is represented by separating the class names with a space:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mydiv"</span> <span class="na">class=</span><span class="s">"foo bar"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The <code>.hasClass()</code> method will return <code>true</code> if the class is assigned to an element, even if other classes also are. For example, given the HTML above, the following will return <code>true</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#mydiv'</span><span class="p">).</span><span class="n">hasClass</span><span class="p">(</span><span class="s">'foo'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As would:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#mydiv'</span><span class="p">).</span><span class="n">hasClass</span><span class="p">(</span><span class="s">'bar'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While this would return <code>false</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#mydiv'</span><span class="p">).</span><span class="n">hasClass</span><span class="p">(</span><span class="s">'quux'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Looks for the paragraph that contains 'selected' as a class.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { margin: 8px; font-size:16px; }
+  .selected { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+  <span class="nt">&lt;p&gt;</span>This paragraph is black and is the first paragraph.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"selected"</span><span class="nt">&gt;</span>This paragraph is red and is the second paragraph.<span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"result1"</span><span class="nt">&gt;</span>First paragraph has selected class: <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"result2"</span><span class="nt">&gt;</span>Second paragraph has selected class: <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"result3"</span><span class="nt">&gt;</span>At least one paragraph has selected class: <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("div#result1").append($("p:first").hasClass("selected").toString());
+$("div#result2").append($("p:last").hasClass("selected").toString());
+$("div#result3").append($("p").hasClass("selected").toString());
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

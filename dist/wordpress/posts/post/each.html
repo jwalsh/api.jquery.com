@@ -1,0 +1,171 @@
+<script>
+	{
+		"title": ".each()",
+		"excerpt": "Iterate over a jQuery object, executing a function for each matched element. ",
+		"termSlugs": {
+			"category": [
+				"miscellaneous/collection-manipulation","traversing","version/1.0"
+			]
+		}
+	}
+</script><div id="each1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.each( function(index, Element) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Iterate over a jQuery object, executing a function for each matched element. </p>
+<ul class="signatures"><li class="signature" id="each-functionindex--Element">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.each( function(index, Element) )</h4>
+<p class="argument"><strong>function(index, Element): </strong>Function()
+                          A function to execute for each matched element.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.each()</code> method is designed to make DOM looping constructs concise and less error-prone. When called it iterates over the DOM elements that are part of the jQuery object. Each time the callback runs, it is passed the current loop iteration, beginning from 0. More importantly, the callback is fired in the context of the current DOM element, so the keyword <code>this</code> refers to the element.</p>
+<p>Suppose we had a simple unordered list on the page:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>foo<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>bar<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+    
+</pre></div>
+</div>
+<p>We can select the list items and iterate across them:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">each</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">alert</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="s">': '</span> <span class="o">+</span> $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">text</span><span class="p">());</span>
+<span class="p">});</span>
+  
+</pre></div>
+</div>
+<p>A message is thus alerted for each item in the list:</p>
+<p>
+      <span class="output">0: foo</span>
+      <br />
+      <span class="output">1: bar</span>
+    </p>
+<p>We can stop the loop from within the callback function by returning <code>false</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Iterates over three divs and sets their color property.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { color:red; text-align:center; cursor:pointer; 
+        font-weight:bolder; width:300px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>Click here<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>to iterate through<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>these divs.<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $(document.body).click(function () {
+      $("div").each(function (i) {
+        if (this.style.color != "blue") {
+          this.style.color = "blue";
+        } else {
+          this.style.color = "";
+        }
+      });
+    });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">If you want to have the jQuery object instead of the regular DOM element, use the $(this) function, for example:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  ul { font-size:18px; margin:0; }
+  span { color:blue; text-decoration:underline; cursor:pointer; }
+  .example { font-style:italic; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  To do list: <span class="nt">&lt;span&gt;</span>(click here to change)<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Eat<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Sleep<span class="nt">&lt;/li&gt;</span>
+
+    <span class="nt">&lt;li&gt;</span>Be merry<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("span").click(function () {
+      $("li").each(function(){
+        $(this).toggleClass("example");
+      });
+    });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">You can use 'return' to break out of each() loops early.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { width:40px; height:40px; margin:5px; float:left;
+        border:2px blue solid; text-align:center; }
+  span { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Change colors<span class="nt">&lt;/button&gt;</span> 
+  <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"stop"</span><span class="nt">&gt;</span>Stop here<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("button").click(function () {
+      $("div").each(function (index, domEle) {
+        // domEle == this
+        $(domEle).css("backgroundColor", "yellow"); 
+        if ($(this).is("#stop")) {
+          $("span").text("Stopped at div index #" + index);
+          return false;
+        }
+      });
+    });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

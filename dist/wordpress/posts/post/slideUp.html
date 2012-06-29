@@ -1,0 +1,190 @@
+<script>
+	{
+		"title": ".slideUp()",
+		"excerpt": "Hide the matched elements with a sliding motion.",
+		"termSlugs": {
+			"category": [
+				"effects/sliding","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="slideUp1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.slideUp(  [duration]  [, callback]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Hide the matched elements with a sliding motion.</p>
+<ul class="signatures">
+<li class="signature" id="slideUp-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideUp(  [duration] [, callback] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#String,Number">String,Number</a>
+                          A string or number determining how long the animation will run.</p>
+<p class="argument"><strong>callback: </strong><a href="http://api.jquery.com/Types#Callback">Callback</a>
+                          A function to call once the animation is complete.</p>
+</li>
+<li class="signature" id="slideUp-options">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideUp( options )</h4>
+<p class="argument"><strong>options: </strong><a href="http://api.jquery.com/Types#Options">Options</a>
+                          A map of additional options to pass to the method.</p>
+<div class="options">
+<h5 class="option">duration: <span class="type"><a href="http://api.jquery.com/Types#Number%7CString">Number|String</a></span>
+</h5>
+<div class="default-value">
+<strong>Default: </strong>400</div>
+<p>A string or number determining how long the animation will run.</p>
+<h5 class="option">easing: <span class="type"><a href="http://api.jquery.com/Types#String">String</a></span>
+</h5>
+<div class="default-value">
+<strong>Default: </strong>swing</div>
+<p>A string indicating which easing function to use for the transition.</p>
+<h5 class="option">complete: <span class="type">Function()</span>
+</h5>
+<p>A function to call once the animation is complete.</p>
+<h5 class="option">step: <span class="type">Function(now: <a href="http://api.jquery.com/Types#Number">Number</a>, fx: <a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>)</span>
+</h5>
+<p>A function to be called after each step of the animation.</p>
+<h5 class="option">queue: <span class="type"><a href="http://api.jquery.com/Types#Boolean">Boolean</a></span>
+</h5>
+<div class="default-value">
+<strong>Default: </strong>true</div>
+<p>A Boolean indicating whether to place the animation in the effects queue. If false, the animation will begin immediately. <strong>As of jQuery 1.7</strong>, the queue option can also accept a string, in which case the animation is added to the queue represented by that string.</p>
+<h5 class="option">specialEasing: <span class="type"><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a></span>
+</h5>
+<p>A map of one or more of the CSS properties defined by the properties argument and their corresponding easing functions (added 1.4).</p>
+</div>
+</li>
+<li class="signature" id="slideUp-duration-easing-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.slideUp(  [duration] [, easing] [, callback] )</h4>
+<p class="argument"><strong>duration: </strong><a href="http://api.jquery.com/Types#String,Number">String,Number</a>
+                          A string or number determining how long the animation will run.</p>
+<p class="argument"><strong>easing: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string indicating which easing function to use for the transition.</p>
+<p class="argument"><strong>callback: </strong><a href="http://api.jquery.com/Types#Callback">Callback</a>
+                          A function to call once the animation is complete.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.slideUp()</code> method animates the height of the matched elements. This causes lower parts of the page to slide up, appearing to conceal the items. Once the height reaches 0 (or, if set, to whatever the CSS min-height property is), the <code>display</code> style property is set to <code>none</code> to ensure that the element no longer affects the layout of the page.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, or if the <code>duration</code> parameter is omitted, the default duration of  <code>400</code> milliseconds is used.</p>
+<p>We can animate any element, such as a simple image:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"clickme"</span><span class="nt">&gt;</span>
+  Click here
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"book"</span> <span class="na">src=</span><span class="s">"book.png"</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">width=</span><span class="s">"100"</span> <span class="na">height=</span><span class="s">"123"</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>With the element initially shown, we can hide it slowly:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#clickme'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'#book'</span><span class="p">).</span><span class="n">slideUp</span><span class="p">(</span><span class="s">'slow'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Animation</span> <span class="n">complete</span><span class="p">.</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+  
+</pre></div>
+</div>
+<p class="image four-across">
+      <img src="/resources/0042_06_21.png" alt="" />
+      <img src="/resources/0042_06_22.png" alt="" />
+      <img src="/resources/0042_06_23.png" alt="" />
+      <img src="/resources/0042_06_24.png" alt="" />
+    </p>
+<h4 id="easing">Easing</h4>
+<p><strong>As of jQuery 1.4.3</strong>, an optional string naming an easing function may be used. Easing functions specify the speed at which the animation progresses at different points within the animation. The only easing implementations in the jQuery library are the default, called <code>swing</code>, and one that progresses at a constant pace, called <code>linear</code>. More easing functions are available with the use of plug-ins, most notably the <a href="http://jqueryui.com">jQuery UI suite</a>.</p>
+<h4 id="callback-function">Callback Function</h4>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p><strong>As of jQuery 1.6</strong>, the <code><a href="http://api.jquery.com/promise/">.promise()</a></code> method can be used in conjunction with the <code><a href="http://api.jquery.com/deferred.done/">deferred.done()</a></code> method to execute a single callback for the animation as a whole when <em>all</em> matching elements have completed their animations ( See the <a href="http://api.jquery.com/promise/#example-1">example for .promise()</a> ).  </p>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery.fx.off.xml">
+  All jQuery effects, including <code>.slideUp()</code>, can be turned off globally by setting  <code>jQuery.fx.off = true</code>, which effectively sets the duration to 0. For more information, see <a href="http://api.jquery.com/jquery.fx.off">jQuery.fx.off</a>.
+</li></ul></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all divs to slide up, completing the animation within 400 milliseconds.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { background:#3d9a44; margin:3px; width:80px;
+    height:40px; float:left; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  Click me!
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  $(document.body).click(function () {
+    if ($("div:first").is(":hidden")) {
+      $("div").show("slow");
+    } else {
+      $("div").slideUp();
+    }
+  });
+
+  <span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates the parent paragraph to slide up, completing the animation within 200 milliseconds. Once the animation is done, it displays an alert.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+ div { margin:2px; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Hide One<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"One"</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Hide Two<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Two"</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Hide Three<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Three"</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"msg"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  $("button").click(function () {
+    $(this).parent().slideUp("slow", function () {
+      $("#msg").text($("button", this).text() + " has completed.");
+    });
+  });
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

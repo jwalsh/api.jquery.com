@@ -1,0 +1,61 @@
+<script>
+	{
+		"title": "jQuery.parseXML()",
+		"excerpt": "Parses a string into an XML document.",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.5"
+			]
+		}
+	}
+</script><div id="jQuery-parseXML1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.parseXML( data )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#XMLDocument">XMLDocument</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Parses a string into an XML document.</p>
+<ul class="signatures"><li class="signature" id="jQuery-parseXML-data">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.5/">1.5</a></span>jQuery.parseXML( data )</h4>
+<p class="argument"><strong>data: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          a well-formed XML string to be parsed</p>
+</li></ul>
+<div class="longdesc"><p><code>jQuery.parseXML</code> uses the native parsing function of the browser to create a valid XML Document. This document can then be passed to <code>jQuery</code> to create a typical jQuery object that can be traversed and manipulated.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Create a jQuery object using an XML string and obtain the value of the title node.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"someElement"</span><span class="nt">&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"anotherElement"</span><span class="nt">&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var xml = "<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">'2.0'</span><span class="nt">&gt;&lt;channel&gt;&lt;title&gt;</span>RSS Title<span class="nt">&lt;/title&gt;&lt;/channel&gt;&lt;/rss&gt;</span>",
+    xmlDoc = <span class="p">$.</span><span class="nv">parseXML</span><span class="p">(</span> <span class="err">xml</span> <span class="p">)</span>,
+    <span class="p">$</span><span class="nv">xml</span> = <span class="p">$(</span> <span class="err">xmlDoc</span> <span class="p">)</span>,
+    <span class="p">$</span><span class="nv">title</span> = <span class="p">$</span><span class="nv">xml</span><span class="p">.</span><span class="nv">find</span><span class="p">(</span> <span class="s2">"title"</span> <span class="p">)</span>;
+
+/* append "RSS Title" to <span class="cp">#</span><span class="nf">someElement</span> */
+<span class="p">$(</span> <span class="s2">"#someElement"</span> <span class="p">).</span><span class="nv">append</span><span class="p">(</span> <span class="p">$</span><span class="nv">title</span><span class="p">.</span><span class="nv">text</span><span class="p">()</span> <span class="p">)</span>;
+
+/* change the title to "XML Title" */
+<span class="p">$</span><span class="nv">title</span><span class="p">.</span><span class="nv">text</span><span class="p">(</span> <span class="s2">"XML Title"</span> <span class="p">)</span>;
+
+/* append "XML Title" to <span class="cp">#</span><span class="nf">anotherElement</span> */
+<span class="p">$(</span> <span class="s2">"#anotherElement"</span> <span class="p">).</span><span class="nv">append</span><span class="p">(</span> <span class="p">$</span><span class="nv">title</span><span class="p">.</span><span class="nv">text</span><span class="p">()</span> <span class="p">)</span>;
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

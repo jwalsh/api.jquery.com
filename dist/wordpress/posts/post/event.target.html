@@ -1,0 +1,94 @@
+<script>
+	{
+		"title": "event.target",
+		"excerpt": " The DOM element that initiated the event.  ",
+		"termSlugs": {
+			"category": [
+				"events/event-object","version/1.0"
+			]
+		}
+	}
+</script><div id="event-target1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.target</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Element">Element</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> The DOM element that initiated the event.  </p>
+<ul class="signatures"><li class="signature" id="event-target"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>event.target</h4></li></ul>
+<div class="longdesc"><p>The <code>target</code> property can be the element that registered for the event or a descendant of it.  It is often useful to compare <code>event.target</code> to <code>this</code> in order to determine if the event is being handled due to event bubbling. This property is very useful in event delegation, when events bubble.</p></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Display the tag's name on click</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+span, strong, p {
+  padding: 8px; display: block; border: 1px solid #999;  }
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    <span class="nt">&lt;strong&gt;&lt;span&gt;</span>click<span class="nt">&lt;/span&gt;&lt;/strong&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("body").click(function(event) {
+  $("#log").html("clicked: " + event.target.nodeName);
+});  <span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Implements a simple event delegation: The click handler is added to an unordered list, and the children of its li children are hidden. Clicking one of the li children toggles (see toggle()) their children.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>item 1
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>sub item 1-a<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>sub item 1-b<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>item 2
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>sub item 2-a<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>sub item 2-b<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>function handler(event) <span class="err">{</span>
+  var <span class="p">$</span><span class="nv">target</span> = <span class="p">$(</span><span class="err">event.target</span><span class="p">)</span>;
+  if( <span class="p">$</span><span class="nv">target</span><span class="p">.</span><span class="nv">is</span><span class="p">(</span><span class="s2">"li"</span><span class="p">)</span> ) <span class="err">{</span>
+    <span class="p">$</span><span class="nv">target</span><span class="p">.</span><span class="nv">children</span><span class="p">().</span><span class="nv">toggle</span><span class="p">()</span>;
+  }
+}
+<span class="p">$(</span><span class="s2">"ul"</span><span class="p">).</span><span class="nv">click</span><span class="p">(</span><span class="err">handler</span><span class="p">).</span><span class="nv">find</span><span class="p">(</span><span class="s2">"ul"</span><span class="p">).</span><span class="nv">hide</span><span class="p">()</span>;<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

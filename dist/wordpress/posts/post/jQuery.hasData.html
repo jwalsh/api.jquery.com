@@ -1,0 +1,66 @@
+<script>
+	{
+		"title": "jQuery.hasData()",
+		"excerpt": "Determine whether an element has any jQuery data associated with it.",
+		"termSlugs": {
+			"category": [
+				"data","version/1.5"
+			]
+		}
+	}
+</script><div id="jQuery-hasData1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.hasData( element )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Determine whether an element has any jQuery data associated with it.</p>
+<ul class="signatures"><li class="signature" id="jQuery-hasData-element">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.5/">1.5</a></span>jQuery.hasData( element )</h4>
+<p class="argument"><strong>element: </strong><a href="http://api.jquery.com/Types#Element">Element</a>
+                          A DOM element to be checked for data.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>jQuery.hasData()</code> method provides a way to determine if an element currently has any values that were set using <code><a href="/jQuery.data">jQuery.data()</a></code>. If no data is associated with an element (there is no data object at all or the data object is empty), the method returns <code>false</code>; otherwise it returns <code>true</code>.</p>
+<p>The primary advantage of <code>jQuery.hasData(element)</code> is that it does not create and associate a data object with the element if none currently exists. In contrast, <code>jQuery.data(element)</code> always returns a data object to the caller, creating one if no data object previously existed.
+</p>
+<p>Note that jQuery's event system uses the jQuery data API to store event handlers. Therefore, binding an event to an element using <code>.on()</code>, <code>.bind()</code>, <code>.live()</code>, <code>.delegate()</code>, or one of the shorthand event methods also associates a data object with that element.
+</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Set data on an element and see the results of hasData.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Results: <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var <span class="p">$</span><span class="nv">p</span> = jQuery("p"), p = <span class="p">$</span><span class="nv">p</span>[0];
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="err">jQuery.hasData</span><span class="p">(</span><span class="err">p</span><span class="p">)</span><span class="err">+</span><span class="s2">" "</span><span class="p">)</span>; /* false */
+
+<span class="p">$.</span><span class="nv">data</span><span class="p">(</span><span class="err">p</span><span class="p">,</span> <span class="s2">"testing"</span><span class="p">,</span> <span class="m">123</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="err">jQuery.hasData</span><span class="p">(</span><span class="err">p</span><span class="p">)</span><span class="err">+</span><span class="s2">" "</span><span class="p">)</span>; /* true*/
+
+<span class="p">$.</span><span class="nv">removeData</span><span class="p">(</span><span class="err">p</span><span class="p">,</span> <span class="s2">"testing"</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="err">jQuery.hasData</span><span class="p">(</span><span class="err">p</span><span class="p">)</span><span class="err">+</span><span class="s2">" "</span><span class="p">)</span>; /* false */
+
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="err">function</span><span class="p">()</span> <span class="err">{}</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="err">jQuery.hasData</span><span class="p">(</span><span class="err">p</span><span class="p">)</span><span class="err">+</span><span class="s2">" "</span><span class="p">)</span>; /* true */
+
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">off</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">p</span><span class="p">.</span><span class="nv">append</span><span class="p">(</span><span class="err">jQuery.hasData</span><span class="p">(</span><span class="err">p</span><span class="p">)</span><span class="err">+</span><span class="s2">" "</span><span class="p">)</span>; /* false */
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

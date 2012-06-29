@@ -1,0 +1,117 @@
+<script>
+	{
+		"title": "jQuery.sub()",
+		"excerpt": "Creates a new copy of jQuery whose properties and methods can be modified without affecting the original jQuery object.",
+		"termSlugs": {
+			"category": [
+				"core","deprecated","version/1.5"
+			]
+		}
+	}
+</script><div id="jQuery-sub1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.sub()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Creates a new copy of jQuery whose properties and methods can be modified without affecting the original jQuery object.</p>
+<ul class="signatures"><li class="signature" id="jQuery-sub"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.5/">1.5</a></span>jQuery.sub()</h4></li></ul>
+<div class="longdesc">
+<p>
+      <strong>This method is deprecated as of jQuery 1.7 and will be moved to a plugin in jQuery 1.8.</strong>
+    </p>
+<p>There are two specific use cases for which jQuery.sub() was created. The first was for providing a painless way of overriding jQuery methods without completely destroying the original methods and another was for helping to do encapsulation and basic namespacing for jQuery plugins.</p>
+<p>Note that jQuery.sub() doesn't attempt to do any sort of isolation - that's not its intention. All the methods on the sub'd version of jQuery will still point to the original jQuery (events bound and triggered will still be through the main jQuery, data will be bound to elements through the main jQuery, Ajax queries and events will run through the main jQuery, etc.).</p>
+<p>Note that if you're looking to use this for plugin development you should first <i>strongly</i> consider using something like the jQuery UI widget factory which manages both state and plugin sub-methods. <a href="http://blog.nemikor.com/2010/05/15/building-stateful-jquery-plugins/">Some examples of using the jQuery UI widget factory</a> to build a plugin.</p>
+<p>The particular use cases of this method can be best described through some examples.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Adding a method to a jQuery sub so that it isn't exposed externally:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+  <span class="n">var</span> <span class="n">sub</span>$ <span class="p">=</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">sub</span><span class="p">();</span>
+
+  <span class="n">sub</span>$<span class="p">.</span><span class="n">fn</span><span class="p">.</span><span class="n">myCustomMethod</span> <span class="p">=</span> <span class="k">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="s">'just for me'</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="n">sub</span>$<span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="n">ready</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">sub</span>$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">myCustomMethod</span><span class="p">()</span> <span class="o">//</span> <span class="s">'just for me'</span>
+  <span class="p">});</span>
+<span class="p">})();</span>
+
+<span class="n">typeof</span> <span class="n">jQuery</span><span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">myCustomMethod</span> <span class="o">//</span> <span class="n">undefined</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Override some jQuery methods to provide new functionality.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">myjQuery</span> <span class="p">=</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">sub</span><span class="p">();</span>
+
+  <span class="n">myjQuery</span><span class="p">.</span><span class="n">fn</span><span class="p">.</span><span class="n">remove</span> <span class="p">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">New</span> <span class="n">functionality</span><span class="p">:</span> <span class="n">Trigger</span> <span class="n">a</span> <span class="n">remove</span> <span class="n">event</span>
+    <span class="n">this</span><span class="p">.</span><span class="n">trigger</span><span class="p">(</span>"<span class="n">remove</span>"<span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Be</span> <span class="n">sure</span> <span class="n">to</span> <span class="n">call</span> <span class="n">the</span> <span class="n">original</span> <span class="n">jQuery</span> <span class="n">remove</span> <span class="n">method</span>
+    <span class="k">return</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">fn</span><span class="p">.</span><span class="n">remove</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span> <span class="n">this</span><span class="p">,</span> <span class="n">arguments</span> <span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="n">myjQuery</span><span class="p">(</span><span class="k">function</span><span class="p">(</span>$<span class="p">)</span> <span class="p">{</span>
+    $<span class="p">(</span>"<span class="p">.</span><span class="n">menu</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="nb">find</span><span class="p">(</span>"<span class="p">.</span><span class="n">submenu</span>"<span class="p">).</span><span class="n">remove</span><span class="p">();</span>
+    <span class="p">});</span>
+
+    <span class="o">//</span> <span class="n">A</span> <span class="n">new</span> <span class="n">remove</span> <span class="n">event</span> <span class="n">is</span> <span class="n">now</span> <span class="n">triggered</span> <span class="n">from</span> <span class="n">this</span> <span class="n">copy</span> <span class="n">of</span> <span class="n">jQuery</span>
+    $<span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="n">bind</span><span class="p">(</span>"<span class="n">remove</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      $<span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">target</span><span class="p">).</span><span class="n">parent</span><span class="p">().</span><span class="n">hide</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">})();</span>
+
+<span class="o">//</span> <span class="n">Regular</span> <span class="n">jQuery</span> <span class="n">doesn</span><span class="o">'</span><span class="n">t</span> <span class="n">trigger</span> <span class="n">a</span> <span class="n">remove</span> <span class="n">event</span> <span class="n">when</span> <span class="n">removing</span> <span class="n">an</span> <span class="n">element</span>
+<span class="o">//</span> <span class="n">This</span> <span class="n">functionality</span> <span class="n">is</span> <span class="n">only</span> <span class="n">contained</span> <span class="n">within</span> <span class="n">the</span> <span class="n">modified</span> <span class="s">'myjQuery'</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Create a plugin that returns plugin-specific methods.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">copy</span> <span class="n">of</span> <span class="n">jQuery</span> <span class="n">using</span> <span class="n">sub</span><span class="p">()</span>
+  <span class="n">var</span> <span class="n">plugin</span> <span class="p">=</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">sub</span><span class="p">();</span>
+
+  <span class="o">//</span> <span class="n">Extend</span> <span class="n">that</span> <span class="n">copy</span> <span class="n">with</span> <span class="n">the</span> <span class="n">new</span> <span class="n">plugin</span> <span class="k">methods</span>
+  <span class="n">plugin</span><span class="p">.</span><span class="n">fn</span><span class="p">.</span><span class="n">extend</span><span class="p">({</span>
+    <span class="n">open</span><span class="p">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">this</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="n">close</span><span class="p">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">this</span><span class="p">.</span><span class="n">hide</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="o">//</span> <span class="n">Add</span> <span class="n">our</span> <span class="n">plugin</span> <span class="n">to</span> <span class="n">the</span> <span class="n">original</span> <span class="n">jQuery</span>
+  <span class="n">jQuery</span><span class="p">.</span><span class="n">fn</span><span class="p">.</span><span class="n">myplugin</span> <span class="p">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">this</span><span class="p">.</span><span class="n">addClass</span><span class="p">(</span>"<span class="n">plugin</span>"<span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">our</span> <span class="n">plugin</span> <span class="n">returns</span> <span class="n">our</span> <span class="n">special</span> <span class="n">plugin</span> <span class="n">version</span> <span class="n">of</span> <span class="n">jQuery</span>
+    <span class="k">return</span> <span class="n">plugin</span><span class="p">(</span> <span class="n">this</span> <span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">})();</span>
+
+$<span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="n">ready</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">Call</span> <span class="n">the</span> <span class="n">plugin</span><span class="p">,</span> <span class="n">open</span> <span class="n">method</span> <span class="n">now</span> <span class="n">exists</span>
+  $<span class="p">(</span><span class="s">'#main'</span><span class="p">).</span><span class="n">myplugin</span><span class="p">().</span><span class="n">open</span><span class="p">();</span>
+
+  <span class="o">//</span> <span class="n">Note</span><span class="p">:</span> <span class="n">Calling</span> <span class="n">just</span> $<span class="p">(</span>"#<span class="n">main</span>"<span class="p">).</span><span class="n">open</span><span class="p">()</span> <span class="n">won</span><span class="o">'</span><span class="n">t</span> <span class="n">work</span> <span class="n">as</span> <span class="n">open</span> <span class="n">doesn</span><span class="o">'</span><span class="n">t</span> <span class="n">exist</span>!
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

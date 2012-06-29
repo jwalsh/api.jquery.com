@@ -1,0 +1,52 @@
+<script>
+	{
+		"title": ":has() Selector",
+		"excerpt": "Selects elements which contain at least one element that matches the specified selector.",
+		"termSlugs": {
+			"category": [
+				"selectors/content-filter-selector","selectors/jquery-selector-extensions","version/1.1.4"
+			]
+		}
+	}
+</script><div id="has1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">has</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>jQuery(':has(selector)')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>selector</dt>
+<dd>Any selector.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects elements which contain at least one element that matches the specified selector.</p>
+<div class="longdesc"><p>The expression <code>$('div:has(p)')</code> matches a <code>&lt;div&gt;</code> if a <code>&lt;p&gt;</code> exists anywhere among its descendants, not just as a direct child.</p></div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery-selector-extension-alt.xml">
+	Because <code>:has()</code> is a jQuery extension and not part of the CSS specification, queries using <code>:has()</code> cannot take advantage of the performance boost provided by the native DOM <code>querySelectorAll()</code> method. For better performance in modern browsers, use <code>$("your-pure-css-selector").has(selector/DOMElement)</code> instead.
+</li></ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Adds the class "test" to all divs that have a paragraph inside of them.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  .test{ border: 3px inset red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;p&gt;</span>Hello in a paragraph<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;</span>Hello again! (with no paragraph)<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("div:has(p)").addClass("test");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

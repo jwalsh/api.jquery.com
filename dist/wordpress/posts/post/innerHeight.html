@@ -1,0 +1,48 @@
+<script>
+	{
+		"title": ".innerHeight()",
+		"excerpt": "Get the current computed height for the first element in the set of matched elements, including padding but not border.",
+		"termSlugs": {
+			"category": [
+				"css","dimensions","manipulation/style-properties","version/1.2.6"
+			]
+		}
+	}
+</script><div id="innerHeight1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.innerHeight()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Integer">Integer</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get the current computed height for the first element in the set of matched elements, including padding but not border.</p>
+<ul class="signatures"><li class="signature" id="innerHeight"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>.innerHeight()</h4></li></ul>
+<div class="longdesc">
+<p>This method returns the height of the element, including top and bottom padding, in pixels.</p>
+<p>This method is not applicable to <code>window</code> and <code>document</code> objects; for these, use <code><a href="/height">.height()</a></code> instead.</p>
+<p class="image">
+      <img src="/resources/0042_04_02.png" />
+    </p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Get the innerHeight of a paragraph.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>p { margin:10px;padding:5px;border:2px solid #666; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>var p = $("p:first");
+$("p:last").text( "innerHeight:" + p.innerHeight() );<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

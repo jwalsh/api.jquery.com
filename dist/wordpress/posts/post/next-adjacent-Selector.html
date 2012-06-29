@@ -1,0 +1,55 @@
+<script>
+	{
+		"title": "Next Adjacent Selector (\"prev + next\")",
+		"excerpt": "Selects all next elements matching \"next\" that are immediately preceded by a sibling \"prev\".",
+		"termSlugs": {
+			"category": [
+				"selectors/hierarchy-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="next-adjacent1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">next adjacent</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('prev + next')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>prev</dt>
+<dd>Any valid selector.</dd>
+<dt>next</dt>
+<dd>A selector to match the element that is next to the first selector.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all next elements matching "next" that are immediately preceded by a sibling "prev".</p>
+<div class="longdesc"><p>One important point to consider with both the next adjacent sibling selector (<code>prev + next</code>) and the general sibling selector (<code>prev ~ siblings</code>) is that the elements on either side of the combinator must share the same parent.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs that are next to a label.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+
+  <span class="nt">&lt;label&gt;</span>Name:<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"name"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;fieldset&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Newsletter:<span class="nt">&lt;/label&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"newsletter"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/fieldset&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"none"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("label + input").css("color", "blue").val("Labeled!")<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

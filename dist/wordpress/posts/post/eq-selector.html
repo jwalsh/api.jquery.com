@@ -1,0 +1,99 @@
+<script>
+	{
+		"title": ":eq() Selector",
+		"excerpt": "Select the element at index <code>n</code> within the matched set.",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-filter-selectors","selectors/jquery-selector-extensions","version/1.0"
+			]
+		}
+	}
+</script><div id="eq1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">eq</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery(':eq(index)')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>index</dt>
+<dd>Zero-based index of the element to match.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Select the element at index &lt;code&gt;n&lt;/code&gt; within the matched set.</p>
+<div class="longdesc">
+<p>The index-related selectors (<code>:eq()</code>, <code>:lt()</code>, <code>:gt()</code>, <code>:even</code>, <code>:odd</code>) filter the set of elements that have matched the expressions that precede them. They narrow the set down based on the order of the elements within this matched set. For example, if elements are first selected with a class selector (<code>.myclass</code>) and four elements are returned, these elements are given indices <code>0</code> through <code>3</code> for the purposes of these selectors.</p>
+<p>Note that since JavaScript arrays use <em>0-based indexing</em>, these selectors reflect that fact. This is why <code>$('.myclass:eq(1)')</code> selects the second element in the document with the class myclass, rather than the first. In contrast, <code>:nth-child(n)</code> uses <em>1-based indexing</em> to conform to the CSS specification.</p>
+<p>Unlike the <a href="http://api.jquery.com/eq/"><code>.eq(index)</code></a> method, the <code>:eq(index)</code> selector does <em>not</em> accept a negative value for <code>index</code>. For example, while <code>$('li').eq(-1)</code> selects the last <code>li</code> element, <code>$('li:eq(-1)')</code> selects nothing.</p>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery-selector-extension-alt.xml">
+	Because <code>:eq()</code> is a jQuery extension and not part of the CSS specification, queries using <code>:eq()</code> cannot take advantage of the performance boost provided by the native DOM <code>querySelectorAll()</code> method. For better performance in modern browsers, use <code>$("your-pure-css-selector").eq(index)</code> instead.
+</li></ul></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Finds the third td.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;tr&gt;&lt;td&gt;</span>TD #0<span class="nt">&lt;/td&gt;&lt;td&gt;</span>TD #1<span class="nt">&lt;/td&gt;&lt;td&gt;</span>TD #2<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;&lt;td&gt;</span>TD #3<span class="nt">&lt;/td&gt;&lt;td&gt;</span>TD #4<span class="nt">&lt;/td&gt;&lt;td&gt;</span>TD #5<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;&lt;td&gt;</span>TD #6<span class="nt">&lt;/td&gt;&lt;td&gt;</span>TD #7<span class="nt">&lt;/td&gt;&lt;td&gt;</span>TD #8<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("td:eq(2)").css("color", "red");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Apply three different styles to list items to demonstrate that :eq() is designed to select a single element while :nth-child() or :eq() within a looping construct such as .each() can select multiple elements.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;li&gt;</span>List 1, item 1<span class="nt">&lt;/li&gt;</span>
+   <span class="nt">&lt;li&gt;</span>List 1, item 2<span class="nt">&lt;/li&gt;</span>
+   <span class="nt">&lt;li&gt;</span>List 1, item 3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>List 2, item 1<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>List 2, item 2<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>List 2, item 3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+// applies yellow background color to a single <span class="nt">&lt;li&gt;</span>
+$("ul.nav li:eq(1)").css( "backgroundColor", "#ff0" );
+
+// applies italics to text of the second <span class="nt">&lt;li&gt;</span> within each <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+$("ul.nav").each(function(index) {
+  $(this).find("li:eq(1)").css( "fontStyle", "italic" );
+});
+
+// applies red text color to descendants of <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+// for each <span class="nt">&lt;li&gt;</span> that is the second child of its parent
+$("ul.nav li:nth-child(2)").css( "color", "red" );
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="160"></div>
+</div>
+</div>
+</div>
+</div>

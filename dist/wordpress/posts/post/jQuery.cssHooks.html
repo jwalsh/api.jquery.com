@@ -1,0 +1,185 @@
+<script>
+	{
+		"title": "jQuery.cssHooks",
+		"excerpt": "Hook directly into jQuery to override how particular CSS properties are retrieved or set, normalize CSS property naming, or create custom properties.",
+		"termSlugs": {
+			"category": [
+				"css","version/1.4.3"
+			]
+		}
+	}
+</script><div id="jQuery-cssHooks1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.cssHooks</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Object">Object</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Hook directly into jQuery to override how particular CSS properties are retrieved or set, normalize CSS property naming, or create custom properties.</p>
+<ul class="signatures"><li class="signature" id="jQuery-cssHooks"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>jQuery.cssHooks</h4></li></ul>
+<div class="longdesc">
+<p>The <code>$.cssHooks</code> object provides a way to define functions for getting and setting particular CSS values. It can also be used to create new cssHooks for normalizing CSS3 features such as box shadows and gradients. </p>
+<p>For example, some versions of Webkit-based browsers require <code>-webkit-border-radius</code> to set the <code>border-radius</code> on an element, while earlier Firefox versions require <code>-moz-border-radius</code>. A css hook can normalize these vendor-prefixed properties to let <code>.css()</code> accept a single, standard property name (<code>border-radius</code>, or with DOM property syntax, <code>borderRadius</code>).</p>
+<p>In addition to providing fine-grained control over how specific style properties are handled, <code>$.cssHooks</code> also extends the set of properties available to the <code>.animate()</code> method.</p>
+<p>Defining a new css hook is straight-forward. The skeleton template below can serve as a guide to creating your own. </p>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span><span class="k">function</span><span class="p">(</span>$<span class="p">)</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">first</span><span class="p">,</span> <span class="n">check</span> <span class="n">to</span> <span class="n">see</span> <span class="k">if</span> <span class="n">cssHooks</span> <span class="n">are</span> <span class="n">supported</span>
+  <span class="k">if</span> <span class="p">(</span> !$<span class="p">.</span><span class="n">cssHooks</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="k">if</span> <span class="n">not</span><span class="p">,</span> <span class="n">output</span> <span class="n">an</span> <span class="n">error</span> <span class="n">message</span>
+    <span class="n">throw</span><span class="p">(</span>"<span class="n">jQuery</span> 1<span class="p">.</span>4<span class="p">.</span>3 <span class="n">or</span> <span class="n">above</span> <span class="n">is</span> <span class="n">required</span> <span class="k">for</span> <span class="n">this</span> <span class="n">plugin</span> <span class="n">to</span> <span class="n">work</span>"<span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  $<span class="p">.</span><span class="n">cssHooks</span><span class="p">[</span>"<span class="n">someCSSProp</span>"<span class="p">]</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="n">get</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">computed</span><span class="p">,</span> <span class="n">extra</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="o">//</span> <span class="n">handle</span> <span class="n">getting</span> <span class="n">the</span> <span class="n">CSS</span> <span class="n">property</span>
+    <span class="p">},</span>
+    <span class="n">set</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="o">//</span> <span class="n">handle</span> <span class="n">setting</span> <span class="n">the</span> <span class="n">CSS</span> <span class="n">value</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">})(</span><span class="n">jQuery</span><span class="p">);</span>
+</pre></div>
+</div>
+<h4 id="feature-testing">Feature Testing</h4>
+<p>Before normalizing a vendor-specific CSS property, first determine whether the browser supports the standard property or a vendor-prefixed variation. For example, to check for support of the <code>border-radius</code> property, see if any variation is a member of a temporary element's <code>style</code> object.</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span><span class="k">function</span><span class="p">(</span>$<span class="p">)</span> <span class="p">{</span>
+<span class="k">  function</span><span class="w"> </span><span class="nf">styleSupport</span><span class="p">(</span> prop <span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <span class="n">var</span> <span class="n">vendorProp</span><span class="p">,</span> <span class="n">supportedProp</span><span class="p">,</span>
+
+        <span class="o">//</span> <span class="n">capitalize</span> <span class="n">first</span> <span class="n">character</span> <span class="n">of</span> <span class="n">the</span> <span class="n">prop</span> <span class="n">to</span> <span class="n">test</span> <span class="n">vendor</span> <span class="n">prefix</span>
+        <span class="n">capProp</span> <span class="p">=</span> <span class="n">prop</span><span class="p">.</span><span class="n">charAt</span><span class="p">(</span>0<span class="p">).</span><span class="n">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="n">prop</span><span class="p">.</span><span class="n">slice</span><span class="p">(</span>1<span class="p">),</span>
+        <span class="n">prefixes</span> <span class="p">=</span> <span class="p">[</span> "<span class="n">Moz</span>"<span class="p">,</span> "<span class="n">Webkit</span>"<span class="p">,</span> "<span class="n">O</span>"<span class="p">,</span> "<span class="n">ms</span>" <span class="p">],</span>
+        <span class="n">div</span> <span class="p">=</span> <span class="n">document</span><span class="p">.</span><span class="n">createElement</span><span class="p">(</span> "<span class="n">div</span>" <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">prop</span> <span class="n">in</span> <span class="n">div</span><span class="p">.</span><span class="n">style</span> <span class="p">)</span> <span class="p">{</span>
+
+      <span class="o">//</span> <span class="n">browser</span> <span class="n">supports</span> <span class="n">standard</span> <span class="n">CSS</span> <span class="n">property</span> <span class="n">name</span>
+      <span class="n">supportedProp</span> <span class="p">=</span> <span class="n">prop</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+      <span class="o">//</span> <span class="k">otherwise</span> <span class="n">test</span> <span class="n">support</span> <span class="k">for</span> <span class="n">vendor</span><span class="o">-</span><span class="n">prefixed</span> <span class="n">property</span> <span class="n">names</span>
+      <span class="k">for</span> <span class="p">(</span> <span class="n">var</span> <span class="nb">i</span> <span class="p">=</span> 0<span class="p">;</span> <span class="nb">i</span> <span class="o">&lt;</span> <span class="n">prefixes</span><span class="p">.</span><span class="nb">length</span><span class="p">;</span> <span class="nb">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">vendorProp</span> <span class="p">=</span> <span class="n">prefixes</span><span class="p">[</span><span class="nb">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">capProp</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">vendorProp</span> <span class="n">in</span> <span class="n">div</span><span class="p">.</span><span class="n">style</span> <span class="p">)</span> <span class="p">{</span>
+          <span class="n">supportedProp</span> <span class="p">=</span> <span class="n">vendorProp</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="o">//</span> <span class="n">avoid</span> <span class="n">memory</span> <span class="n">leak</span> <span class="n">in</span> <span class="n">IE</span>
+    <span class="n">div</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+
+    <span class="o">//</span> <span class="n">add</span> <span class="n">property</span> <span class="n">to</span> $<span class="p">.</span><span class="n">support</span> <span class="n">so</span> <span class="n">it</span> <span class="n">can</span> <span class="n">be</span> <span class="n">accessed</span> <span class="n">elsewhere</span>
+    $<span class="p">.</span><span class="n">support</span><span class="p">[</span> <span class="n">prop</span> <span class="p">]</span> <span class="p">=</span> <span class="n">supportedProp</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">supportedProp</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="o">//</span> <span class="n">call</span> <span class="n">the</span> <span class="k">function</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">testing</span> <span class="k">for</span> "<span class="n">border</span><span class="o">-</span><span class="n">radius</span>" <span class="n">support</span><span class="p">:</span>
+  <span class="n">styleSupport</span><span class="p">(</span> "<span class="n">borderRadius</span>" <span class="p">);</span>
+<span class="p">})(</span><span class="n">jQuery</span><span class="p">);</span>
+</pre></div>
+</div>
+<h4 id="defining-complete-csshook">Defining a complete css hook</h4>
+<p>To define a complete css hook, combine the support test with a filled-out version of the skeleton template provided in the first example:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="p">(</span><span class="k">function</span><span class="p">(</span>$<span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span> !$<span class="p">.</span><span class="n">cssHooks</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">throw</span><span class="p">(</span>"<span class="n">jQuery</span> 1<span class="p">.</span>4<span class="p">.</span>3<span class="o">+</span> <span class="n">is</span> <span class="n">needed</span> <span class="k">for</span> <span class="n">this</span> <span class="n">plugin</span> <span class="n">to</span> <span class="n">work</span>"<span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">  function</span><span class="w"> </span><span class="nf">styleSupport</span><span class="p">(</span> prop <span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <span class="n">var</span> <span class="n">vendorProp</span><span class="p">,</span> <span class="n">supportedProp</span><span class="p">,</span>
+        <span class="n">capProp</span> <span class="p">=</span> <span class="n">prop</span><span class="p">.</span><span class="n">charAt</span><span class="p">(</span>0<span class="p">).</span><span class="n">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="n">prop</span><span class="p">.</span><span class="n">slice</span><span class="p">(</span>1<span class="p">),</span>
+        <span class="n">prefixes</span> <span class="p">=</span> <span class="p">[</span> "<span class="n">Moz</span>"<span class="p">,</span> "<span class="n">Webkit</span>"<span class="p">,</span> "<span class="n">O</span>"<span class="p">,</span> "<span class="n">ms</span>" <span class="p">],</span>
+        <span class="n">div</span> <span class="p">=</span> <span class="n">document</span><span class="p">.</span><span class="n">createElement</span><span class="p">(</span> "<span class="n">div</span>" <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">prop</span> <span class="n">in</span> <span class="n">div</span><span class="p">.</span><span class="n">style</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="n">supportedProp</span> <span class="p">=</span> <span class="n">prop</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span> <span class="n">var</span> <span class="nb">i</span> <span class="p">=</span> 0<span class="p">;</span> <span class="nb">i</span> <span class="o">&lt;</span> <span class="n">prefixes</span><span class="p">.</span><span class="nb">length</span><span class="p">;</span> <span class="nb">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">vendorProp</span> <span class="p">=</span> <span class="n">prefixes</span><span class="p">[</span><span class="nb">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">capProp</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">vendorProp</span> <span class="n">in</span> <span class="n">div</span><span class="p">.</span><span class="n">style</span> <span class="p">)</span> <span class="p">{</span>
+          <span class="n">supportedProp</span> <span class="p">=</span> <span class="n">vendorProp</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">div</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+    $<span class="p">.</span><span class="n">support</span><span class="p">[</span> <span class="n">prop</span> <span class="p">]</span> <span class="p">=</span> <span class="n">supportedProp</span>
+    <span class="k">return</span> <span class="n">supportedProp</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">var</span> <span class="n">borderRadius</span> <span class="p">=</span> <span class="n">styleSupport</span><span class="p">(</span> "<span class="n">borderRadius</span>" <span class="p">);</span>
+
+  <span class="o">//</span> <span class="n">Set</span> <span class="n">cssHooks</span> <span class="n">only</span> <span class="k">for</span> <span class="n">browsers</span> <span class="n">that</span>
+  <span class="o">//</span> <span class="n">support</span> <span class="n">a</span> <span class="n">vendor</span><span class="o">-</span><span class="n">prefixed</span> <span class="n">border</span> <span class="n">radius</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">borderRadius</span> <span class="o">&amp;&amp;</span> <span class="n">borderRadius</span> !<span class="o">==</span> "<span class="n">borderRadius</span>" <span class="p">)</span> <span class="p">{</span>
+    $<span class="p">.</span><span class="n">cssHooks</span><span class="p">.</span><span class="n">borderRadius</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="n">get</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">computed</span><span class="p">,</span> <span class="n">extra</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> $<span class="p">.</span><span class="n">css</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">borderRadius</span> <span class="p">);</span>
+      <span class="p">},</span>
+      <span class="n">set</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">elem</span><span class="p">.</span><span class="n">style</span><span class="p">[</span> <span class="n">borderRadius</span> <span class="p">]</span> <span class="p">=</span> <span class="n">value</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">})(</span><span class="n">jQuery</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can then set the border radius in a supported browser using either the DOM (camelCased) style or the CSS (hyphenated) style:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">element</span>"<span class="p">).</span><span class="n">css</span><span class="p">(</span>"<span class="n">borderRadius</span>"<span class="p">,</span> "10<span class="n">px</span>"<span class="p">);</span>
+$<span class="p">(</span>"#<span class="n">another</span>"<span class="p">).</span><span class="n">css</span><span class="p">(</span>"<span class="n">border</span><span class="o">-</span><span class="n">radius</span>"<span class="p">,</span> "20<span class="n">px</span>"<span class="p">);</span>
+</pre></div>
+</div>
+<p>If the browser lacks support for any form of the CSS property, vendor-prefixed or not, the style is not applied to the element. However, if the browser supports a proprietary alternative, it can be applied to the cssHooks instead. </p>
+<div class="highlightblock"><div class="highlight"><pre> <span class="p">(</span><span class="k">function</span><span class="p">(</span>$<span class="p">)</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">feature</span> <span class="n">test</span> <span class="k">for</span> <span class="n">support</span> <span class="n">of</span> <span class="n">a</span> <span class="n">CSS</span> <span class="n">property</span>
+  <span class="o">//</span> <span class="n">and</span> <span class="n">a</span> <span class="n">proprietary</span> <span class="n">alternative</span>
+  <span class="o">//</span> <span class="p">...</span>
+
+
+ <span class="k">if</span> <span class="p">(</span> $<span class="p">.</span><span class="n">support</span><span class="p">.</span><span class="n">someCSSProp</span> <span class="o">&amp;&amp;</span> $<span class="p">.</span><span class="n">support</span><span class="p">.</span><span class="n">someCSSProp</span> !<span class="o">==</span> "<span class="n">someCSSProp</span>" <span class="p">)</span> <span class="p">{</span>
+
+    <span class="o">//</span> <span class="n">Set</span> <span class="n">cssHooks</span> <span class="k">for</span> <span class="n">browsers</span> <span class="n">that</span>
+    <span class="o">//</span> <span class="n">support</span> <span class="n">only</span> <span class="n">a</span> <span class="n">vendor</span><span class="o">-</span><span class="n">prefixed</span> <span class="n">someCSSProp</span>
+    $<span class="p">.</span><span class="n">cssHooks</span><span class="p">.</span><span class="n">someCSSProp</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="n">get</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">computed</span><span class="p">,</span> <span class="n">extra</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> $<span class="p">.</span><span class="n">css</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> $<span class="p">.</span><span class="n">support</span><span class="p">.</span><span class="n">someCSSProp</span> <span class="p">);</span>
+      <span class="p">},</span>
+      <span class="n">set</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">elem</span><span class="p">.</span><span class="n">style</span><span class="p">[</span> $<span class="p">.</span><span class="n">support</span><span class="p">.</span><span class="n">someCSSProp</span> <span class="p">]</span> <span class="p">=</span> <span class="n">value</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">supportsProprietaryAlternative</span> <span class="p">)</span> <span class="p">{</span>
+    $<span class="p">.</span><span class="n">cssHooks</span><span class="p">.</span><span class="n">someCSSProp</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="n">get</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">computed</span><span class="p">,</span> <span class="n">extra</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Handle</span> <span class="n">crazy</span> <span class="n">conversion</span> <span class="n">from</span> <span class="n">the</span> <span class="n">proprietary</span> <span class="n">alternative</span>
+      <span class="p">},</span>
+      <span class="n">set</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span><span class="p">,</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Handle</span> <span class="n">crazy</span> <span class="n">conversion</span> <span class="n">to</span> <span class="n">the</span> <span class="n">proprietary</span> <span class="n">alternative</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">})(</span><span class="n">jQuery</span><span class="p">);</span>
+</pre></div>
+</div>
+<h4 id="special-units">Special units</h4>
+<p>By default, jQuery adds a "px" unit to the values passed to the <code>.css()</code> method. This behavior can be prevented by adding the property to the <code>jQuery.cssNumber</code> object</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">cssNumber</span><span class="p">[</span>"<span class="n">someCSSProp</span>"<span class="p">]</span> <span class="p">=</span> <span class="n">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<h4 id="animating">Animating with cssHooks</h4>
+<p>A css hook can also hook into jQuery's animation mechanism by adding a property to the <code>jQuery.fx.step</code> object:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">fx</span><span class="p">.</span><span class="n">step</span><span class="p">[</span>"<span class="n">someCSSProp</span>"<span class="p">]</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span><span class="n">fx</span><span class="p">){</span>
+  $<span class="p">.</span><span class="n">cssHooks</span><span class="p">[</span>"<span class="n">someCSSProp</span>"<span class="p">].</span><span class="n">set</span><span class="p">(</span> <span class="n">fx</span><span class="p">.</span><span class="n">elem</span><span class="p">,</span> <span class="n">fx</span><span class="p">.</span><span class="n">now</span> <span class="o">+</span> <span class="n">fx</span><span class="p">.</span><span class="n">unit</span> <span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Note that this works best for simple numeric-value animations. More custom code may be required depending on the CSS property, the type of value it returns, and the animation's complexity.</p>
+</div>
+</div>
+</div>

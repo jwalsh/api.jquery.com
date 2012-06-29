@@ -1,0 +1,141 @@
+<script>
+	{
+		"title": ".die()",
+		"excerpt": "Remove all event handlers previously attached using <code>.live()</code> from the elements.",
+		"termSlugs": {
+			"category": [
+				"deprecated","events/event-handler-attachment","version/1.3","version/1.4.1","version/1.4.3","deprecated","events/event-handler-attachment","version/1.3","version/1.4.1","version/1.4.3"
+			]
+		}
+	}
+</script><div class="toc">
+<h4><span>Contents:</span></h4>
+<ul class="toc-list">
+<li>
+<a href="#die1">die() </a><ul><li>.die()
+              </li></ul>
+</li>
+<li>
+<a href="#die2">die( eventType [&nbsp;, handler&nbsp;] &nbsp;) </a><ul>
+<li>.die( eventType [, handler]  )
+              </li>
+<li>.die( events )
+              </li>
+</ul>
+</li>
+</ul>
+</div><div id="die1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.die()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove all event handlers previously attached using &lt;code&gt;.live()&lt;/code&gt; from the elements.</p>
+<ul class="signatures"><li class="signature" id="die"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.1/">1.4.1</a></span>.die()</h4></li></ul>
+<div class="longdesc">
+<p>Any handler that has been attached with <code>.live()</code> can be removed with <code>.die()</code>. This method is analogous to calling <code>.unbind()</code> with no arguments, which is used to remove all handlers attached with <code>.bind()</code>.
+    See the discussions of <code>.live()</code> and <code>.unbind()</code> for further details.</p>
+<p><strong>As of jQuery 1.7</strong>, use of <code>.die()</code> (and its complementary method, <code>.live()</code>) is not recommended. Instead, use <a href="http://api.jquery.com/off/"><code>.off()</code></a> to remove event handlers bound with <a href="http://api.jquery.com/on/"><code>.on()</code></a></p>
+<p><strong>Note:</strong> In order for .die() to function correctly, the selector used with it must match exactly the selector initially used with .live().</p>
+</div>
+</div>
+</div><div id="die2" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.die( eventType [, handler]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove an event handler previously attached using &lt;code&gt;.live()&lt;/code&gt; from the elements.</p>
+<ul class="signatures">
+<li class="signature" id="die-eventType-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>.die( eventType [, handler] )</h4>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a JavaScript event type, such as <code>click</code> or <code>keydown</code>.</p>
+<p class="argument"><strong>handler: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          The function that is no longer to be executed.</p>
+</li>
+<li class="signature" id="die-events">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.die( events )</h4>
+<p class="argument"><strong>events: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of one or more event types, such as <code>click</code> or <code>keydown</code> and their corresponding functions that are no longer to be executed.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Any handler that has been attached with <code>.live()</code> can be removed with <code>.die()</code>. This method is analogous to <code>.unbind()</code>, which is used to remove handlers attached with <code>.bind()</code>.
+See the discussions of <code>.live()</code> and <code>.unbind()</code> for further details.</p>
+<p><strong>Note:</strong> In order for <code>.die()</code> to function correctly, the selector used with it must match exactly the selector initially used with <code>.live()</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples-1">
+<div id="example-1-0">
+<h4>Example: <span class="desc">Can bind and unbind events to the colored button.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"theone"</span><span class="nt">&gt;</span>Does nothing...<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"bind"</span><span class="nt">&gt;</span>Bind Click<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"unbind"</span><span class="nt">&gt;</span>Unbind Click<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"display:none;"</span><span class="nt">&gt;</span>Click!<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+
+function aClick() {
+  $("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+  $("#theone").live("click", aClick)
+              .text("Can Click!");
+});
+$("#unbind").click(function () {
+  $("#theone").die("click", aClick)
+              .text("Does nothing...");
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1-1">
+<h4>Example: <span class="desc">To unbind all live events from all paragraphs, write:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">die</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1-2">
+<h4>Example: <span class="desc">To unbind all live click events from all paragraphs, write:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">die</span><span class="p">(</span> "<span class="n">click</span>" <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-1-3">
+<h4>Example: <span class="desc">To unbind just one previously bound handler, pass the function in as the second argument:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="o">//</span> <span class="n">code</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">some</span> <span class="n">kind</span> <span class="n">of</span> <span class="n">event</span>
+<span class="p">};</span>
+
+$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">live</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="o">//</span> <span class="p">...</span> <span class="n">now</span> <span class="n">foo</span> <span class="n">will</span> <span class="n">be</span> <span class="n">called</span> <span class="n">when</span> <span class="n">paragraphs</span> <span class="n">are</span> <span class="n">clicked</span> <span class="p">...</span>
+
+$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">die</span><span class="p">(</span>"<span class="n">click</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="o">//</span> <span class="p">...</span> <span class="n">foo</span> <span class="n">will</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">be</span> <span class="n">called</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,70 @@
+<script>
+	{
+		"title": ".removeAttr()",
+		"excerpt": "Remove an attribute from each element in the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"attributes","manipulation/general-attributes","version/1.0","version/1.4","version/1.7"
+			]
+		}
+	}
+</script><div id="removeAttr1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.removeAttr( attributeName )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove an attribute from each element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="removeAttr-attributeName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.removeAttr( attributeName )</h4>
+<p class="argument"><strong>attributeName: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          An attribute to remove; as of version 1.7, it can be a space-separated list of attributes.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.removeAttr()</code> method uses the JavaScript <code>removeAttribute()</code> function, but it has the advantage of being able to be called directly on a jQuery object and it accounts for different attribute naming across browsers.</p>
+<p><strong>Note:</strong> Removing an inline <code>onclick</code> event handler using <code>.removeAttr()</code> doesn't achieve the desired effect in Internet Explorer 6, 7, or 8. To avoid potential problems, use <code>.prop()</code> instead:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="n">element</span><span class="p">.</span><span class="n">prop</span><span class="p">(</span>"<span class="n">onclick</span>"<span class="p">,</span> <span class="n">null</span><span class="p">);</span>
+<span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span>"<span class="n">onclick</span> <span class="n">property</span><span class="p">:</span> "<span class="p">,</span> $<span class="n">element</span><span class="p">[</span>0<span class="p">].</span><span class="n">onclick</span><span class="p">);</span>
+    
+</pre></div>
+</div>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Clicking the button enables the input next to it.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Enable<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">title=</span><span class="s">"hello there"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+(function() {
+  var inputTitle = $("input").attr("title");
+  $("button").click(function () {
+    var input = $(this).next();
+
+    if ( input.attr("title") == inputTitle ) {
+      input.removeAttr("title")
+    } else {
+      input.attr("title", inputTitle);
+    }
+
+    $("#log").html( "input title is now " + input.attr("title") );
+  });
+})();
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

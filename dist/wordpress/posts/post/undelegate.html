@@ -1,0 +1,144 @@
+<script>
+	{
+		"title": ".undelegate()",
+		"excerpt": "Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.",
+		"termSlugs": {
+			"category": [
+				"events/event-handler-attachment","version/1.4.2","version/1.4.3","version/1.6"
+			]
+		}
+	}
+</script><div id="undelegate1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.undelegate(  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.</p>
+<ul class="signatures">
+<li class="signature" id="undelegate"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.undelegate()</h4></li>
+<li class="signature" id="undelegate-selector-eventType">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.undelegate( selector, eventType )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A selector which will be used to filter the event results.</p>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a JavaScript event type, such as "click" or "keydown"</p>
+</li>
+<li class="signature" id="undelegate-selector-eventType-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.undelegate( selector, eventType, handler(eventObject) )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A selector which will be used to filter the event results.</p>
+<p class="argument"><strong>eventType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a JavaScript event type, such as "click" or "keydown"</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute at the time the event is triggered.</p>
+</li>
+<li class="signature" id="undelegate-selector-events">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.undelegate( selector, events )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A selector which will be used to filter the event results.</p>
+<p class="argument"><strong>events: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          A map of one or more event types and previously bound functions to unbind from them.</p>
+</li>
+<li class="signature" id="undelegate-namespace">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.undelegate( namespace )</h4>
+<p class="argument"><strong>namespace: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a namespace to unbind all events from.</p>
+</li>
+</ul>
+<div class="longdesc"><p>The <code>.undelegate()</code> method is a way of removing event handlers that have been bound using <a href="/delegate"><code>.delegate()</code></a>. <strong>As of jQuery 1.7</strong>, the <a href="http://api.jquery.com/on"><code>.on()</code></a> and <a href="http://api.jquery.com/off"><code>.off()</code></a> methods are preferred for attaching and removing event handlers.</p></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Can bind and unbind events to the colored button.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"theone"</span><span class="nt">&gt;</span>Does nothing...<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"bind"</span><span class="nt">&gt;</span>Bind Click<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"unbind"</span><span class="nt">&gt;</span>Unbind Click<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"display:none;"</span><span class="nt">&gt;</span>Click!<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+function aClick() {
+  $("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+  $("body").delegate("#theone", "click", aClick)
+    .find("#theone").text("Can Click!");
+});
+$("#unbind").click(function () {
+  $("body").undelegate("#theone", "click", aClick)
+    .find("#theone").text("Does nothing...");
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To unbind all delegated events from all paragraphs, write:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">undelegate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To unbind all delegated click events from all paragraphs, write:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">p</span>"<span class="p">).</span><span class="n">undelegate</span><span class="p">(</span> "<span class="n">click</span>" <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To undelegate just one previously bound handler, pass the function in as the third argument:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">code</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">some</span> <span class="n">kind</span> <span class="n">of</span> <span class="n">event</span>
+<span class="p">};</span>
+
+<span class="o">//</span> <span class="p">...</span> <span class="n">now</span> <span class="n">foo</span> <span class="n">will</span> <span class="n">be</span> <span class="n">called</span> <span class="n">when</span> <span class="n">paragraphs</span> <span class="n">are</span> <span class="n">clicked</span> <span class="p">...</span>
+$<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">delegate</span><span class="p">(</span>"<span class="n">p</span>"<span class="p">,</span> "<span class="n">click</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="p">...</span> <span class="n">foo</span> <span class="n">will</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">be</span> <span class="n">called</span><span class="p">.</span>
+$<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">undelegate</span><span class="p">(</span>"<span class="n">p</span>"<span class="p">,</span> "<span class="n">click</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">To unbind all delegated events by their namespace:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">code</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">some</span> <span class="n">kind</span> <span class="n">of</span> <span class="n">event</span>
+<span class="p">};</span>
+
+<span class="o">//</span> <span class="n">delegate</span> <span class="k">events</span> <span class="n">under</span> <span class="n">the</span> "<span class="p">.</span><span class="n">whatever</span>" <span class="n">namespace</span>
+$<span class="p">(</span>"<span class="n">form</span>"<span class="p">).</span><span class="n">delegate</span><span class="p">(</span>"<span class="p">:</span><span class="n">button</span>"<span class="p">,</span> "<span class="n">click</span><span class="p">.</span><span class="n">whatever</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
+
+$<span class="p">(</span>"<span class="n">form</span>"<span class="p">).</span><span class="n">delegate</span><span class="p">(</span>"<span class="n">input</span><span class="p">[</span><span class="n">type</span><span class="p">=</span><span class="s">'text'</span><span class="p">]</span>"<span class="p">,</span> "<span class="n">keypress</span><span class="p">.</span><span class="n">whatever</span>"<span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">unbind</span> <span class="n">all</span> <span class="k">events</span> <span class="n">delegated</span> <span class="n">under</span> <span class="n">the</span> "<span class="p">.</span><span class="n">whatever</span>" <span class="n">namespace</span>
+
+$<span class="p">(</span>"<span class="n">form</span>"<span class="p">).</span><span class="n">undelegate</span><span class="p">(</span>"<span class="p">.</span><span class="n">whatever</span>"<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

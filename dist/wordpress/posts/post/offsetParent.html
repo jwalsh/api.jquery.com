@@ -1,0 +1,85 @@
+<script>
+	{
+		"title": ".offsetParent()",
+		"excerpt": "Get the closest ancestor element that is positioned.",
+		"termSlugs": {
+			"category": [
+				"offset","traversing/tree-traversal"
+			]
+		}
+	}
+</script><div id="offsetParent1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.offsetParent()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get the closest ancestor element that is positioned.</p>
+<ul class="signatures"><li class="signature" id="offsetParent"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>.offsetParent()</h4></li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.offsetParent()</code> method allows us to search through the ancestors of these elements in the DOM tree and construct a new jQuery object wrapped around the closest positioned ancestor. An element is said to be positioned if it has a CSS position attribute of <code>relative</code>, <code>absolute</code>, or <code>fixed</code>. This information is useful for calculating offsets for performing animations and placing objects on the page.</p>
+<p>Consider a page with a basic nested list on it, with a positioned element:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"level-1"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-i"</span><span class="nt">&gt;</span>I<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-ii"</span> <span class="na">style=</span><span class="s">"position: relative;"</span><span class="nt">&gt;</span>II
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"level-2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-a"</span><span class="nt">&gt;</span>A<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-b"</span><span class="nt">&gt;</span>B
+        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"level-3"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-1"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/li&gt;</span>
+          <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-2"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/li&gt;</span>
+          <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-3"</span><span class="nt">&gt;</span>3<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-c"</span><span class="nt">&gt;</span>C<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-iii"</span><span class="nt">&gt;</span>III<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+    
+</pre></div>
+</div>
+<p>If we begin at item A, we can find its positioned ancestor:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li.item-a'</span><span class="p">).</span><span class="n">offsetParent</span><span class="p">().</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This will change the color of list item II, which is positioned.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Find the offsetParent of item "A."</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"level-1"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-i"</span><span class="nt">&gt;</span>I<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-ii"</span> <span class="na">style=</span><span class="s">"position: relative;"</span><span class="nt">&gt;</span>II
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"level-2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-a"</span><span class="nt">&gt;</span>A<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-b"</span><span class="nt">&gt;</span>B
+        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"level-3"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-1"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/li&gt;</span>
+          <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-2"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/li&gt;</span>
+          <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-3"</span><span class="nt">&gt;</span>3<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-c"</span><span class="nt">&gt;</span>C<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item-iii"</span><span class="nt">&gt;</span>III<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>$('li.item-a').offsetParent().css('background-color', 'red');<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="250"></div>
+</div></div>
+</div>
+</div>

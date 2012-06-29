@@ -1,0 +1,55 @@
+<script>
+	{
+		"title": "jQuery.fx.interval",
+		"excerpt": "The rate (in milliseconds) at which animations fire.",
+		"termSlugs": {
+			"category": [
+				"effects/custom-effects","properties/global-jquery-object-properties","version/1.4.3"
+			]
+		}
+	}
+</script><div id="jQuery-fx-interval1" class="entry property">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.fx.interval</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Number">Number</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>The rate (in milliseconds) at which animations fire.</p>
+<ul class="signatures"><li class="signature" id="jQuery-fx-interval"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>jQuery.fx.interval</h4></li></ul>
+<div class="longdesc">
+<p>This property can be manipulated to adjust the number of frames per second at which animations will run. The default is 13 milliseconds. Making this a lower number could make the animations run smoother in faster browsers (such as Chrome) but there may be performance and CPU implications of doing so.</p>
+<p>Since jQuery uses one global interval, no animation should be running or all animations should stop for the change of this property to take effect.</p>
+<p><strong>Note:</strong><code>jQuery.fx.interval</code> currently has no effect in browsers that support the <code>requestAnimationFrame</code> property, such as Google Chrome 11. This behavior is subject to change in a future release.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Cause all animations to run with less frames.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div { width:50px; height:30px; margin:5px; float:left;
+      background:green; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Run"</span><span class="nt">/&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+jQuery.fx.interval = 100;
+
+$("input").click(function(){
+  $("div").toggle( 3000 );
+});
+  <span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

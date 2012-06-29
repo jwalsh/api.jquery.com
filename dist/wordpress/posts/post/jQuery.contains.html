@@ -1,0 +1,37 @@
+<script>
+	{
+		"title": "jQuery.contains()",
+		"excerpt": "Check to see if a DOM element is within another DOM element.",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.4"
+			]
+		}
+	}
+</script><div id="jQuery-contains1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.contains( container, contained )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Check to see if a DOM element is within another DOM element.</p>
+<ul class="signatures"><li class="signature" id="jQuery-contains-container-contained">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>jQuery.contains( container, contained )</h4>
+<p class="argument"><strong>container: </strong><a href="http://api.jquery.com/Types#Element">Element</a>
+                          The DOM element that may contain the other element.</p>
+<p class="argument"><strong>contained: </strong><a href="http://api.jquery.com/Types#Element">Element</a>
+                          The DOM element that may be contained by the other element.</p>
+</li></ul>
+<div class="longdesc"><blockquote>
+      <p><strong>Note:</strong> The first argument <em>must</em> be a DOM element, not a jQuery object or plain JavaScript object.</p>
+    </blockquote></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Check if an element is inside another. Text and comment nodes are not supported.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">jQuery</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">document</span><span class="p">.</span><span class="n">documentElement</span><span class="p">,</span> <span class="n">document</span><span class="p">.</span><span class="n">body</span><span class="p">);</span> <span class="o">//</span> <span class="n">true</span>
+<span class="n">jQuery</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">document</span><span class="p">.</span><span class="n">body</span><span class="p">,</span> <span class="n">document</span><span class="p">.</span><span class="n">documentElement</span><span class="p">);</span> <span class="o">//</span> <span class="n">false</span>
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>

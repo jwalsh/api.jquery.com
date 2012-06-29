@@ -1,0 +1,79 @@
+<script>
+	{
+		"title": ":text Selector",
+		"excerpt": "Selects all elements of type text.",
+		"termSlugs": {
+			"category": [
+				"selectors/form-selectors","selectors/jquery-selector-extensions","version/1.0"
+			]
+		}
+	}
+</script><div id="text1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">text</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery(':text')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements of type text.</p>
+<div class="longdesc">
+<p><code>$(':text')</code> allows us to select all <code>&lt;input type="text"&gt;</code> elements. As with other pseudo-class selectors (those that begin with a ":") it is recommended to precede it with a tag name or some other selector; otherwise, the universal selector ("*") is implied. In other words, the bare <code>$(':text')</code> is equivalent to <code>$('*:text')</code>, so <code>$('input:text')</code> should be used instead. </p>
+<p><strong>Note:</strong> As of jQuery 1.5.2, <code>:text</code> selects <code>input</code> elements that have no specified <code>type</code> attribute (in which case <code>type="text"</code> is implied).  </p>
+<p>This difference in behavior between <code>$(':text')</code> and <code>$('[type=text]')</code>, can be seen below:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'&lt;input&gt;'</span><span class="p">).</span><span class="n">is</span><span class="p">(</span><span class="s">'[type=text]'</span><span class="p">);</span> <span class="o">//</span> <span class="n">false</span>
+$<span class="p">(</span><span class="s">'&lt;input&gt;'</span><span class="p">).</span><span class="n">is</span><span class="p">(</span><span class="s">':text'</span><span class="p">);</span> <span class="o">//</span> <span class="n">true</span>
+</pre></div>
+</div>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/jquery-selector-extension-alt.xml">
+	Because <code>:text</code> is a jQuery extension and not part of the CSS specification, queries using <code>:text</code> cannot take advantage of the performance boost provided by the native DOM <code>querySelectorAll()</code> method. For better performance in modern browsers, use <code>[type="text"]</code> instead.
+</li></ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all text inputs.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  textarea { height:25px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Input Button"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"image"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"reset"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;select&gt;&lt;option&gt;</span>Option<span class="nt">&lt;/option&gt;&lt;/select&gt;</span>
+
+    <span class="nt">&lt;textarea&gt;&lt;/textarea&gt;</span>
+    <span class="nt">&lt;button&gt;</span>Button<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var input = $("form input:text").css({background:"yellow", border:"3px red solid"});
+$("div").text("For this type jQuery found " + input.length + ".")
+        .css("color", "red");
+$("form").submit(function () { return false; }); // so it won't submit
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

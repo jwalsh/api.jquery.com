@@ -1,0 +1,56 @@
+<script>
+	{
+		"title": ".ajaxStart()",
+		"excerpt": "Register a handler to be called when the first Ajax request begins. This is an <a href='http://docs.jquery.com/Ajax_Events'>Ajax Event</a>.",
+		"termSlugs": {
+			"category": [
+				"ajax/global-ajax-event-handlers","version/1.0"
+			]
+		}
+	}
+</script><div id="ajaxStart1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.ajaxStart( handler() )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Register a handler to be called when the first Ajax request begins. This is an &lt;a href='http://docs.jquery.com/Ajax_Events'&gt;Ajax Event&lt;/a&gt;.</p>
+<ul class="signatures"><li class="signature" id="ajaxStart-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.ajaxStart( handler() )</h4>
+<p class="argument"><strong>handler(): </strong>Function()
+                          The function to be invoked.</p>
+</li></ul>
+<div class="longdesc">
+<p>Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests. If none are in progress, jQuery triggers the <code>ajaxStart</code> event. Any and all handlers that have been registered with the <code>.ajaxStart()</code> method are executed at this time.</p>
+<p>To observe this method in action, we can set up a basic Ajax load request:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"trigger"</span><span class="nt">&gt;</span>Trigger<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"result"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>We can attach our event handler to any element:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'.log'</span><span class="p">).</span><span class="n">ajaxStart</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">text</span><span class="p">(</span><span class="s">'Triggered ajaxStart handler.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now, we can make an Ajax request using any jQuery method:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'.trigger'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'.result'</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">'ajax/test.html'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>When the user clicks the element with class <code>trigger</code> and the Ajax request is sent, the log message is displayed.</p>
+<p><strong>Note:</strong> Because <code>.ajaxStart()</code> is implemented as a method of jQuery object instances, we can use the <code>this</code> keyword as we do here to refer to the selected elements within the callback function.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Show a loading message whenever an Ajax request starts (and none is already active).</span></h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"#<span class="n">loading</span>"<span class="p">).</span><span class="n">ajaxStart</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+   $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">show</span><span class="p">();</span>
+ <span class="p">});</span>
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>

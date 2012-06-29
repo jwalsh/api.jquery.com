@@ -1,0 +1,65 @@
+<script>
+	{
+		"title": "jQuery.inArray()",
+		"excerpt": "Search for a specified value within an array and return its index (or -1 if not found).",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.2"
+			]
+		}
+	}
+</script><div id="jQuery-inArray1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.inArray( value, array [, fromIndex]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Number">Number</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Search for a specified value within an array and return its index (or -1 if not found).</p>
+<ul class="signatures"><li class="signature" id="jQuery-inArray-value-array-fromIndex">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>jQuery.inArray( value, array [, fromIndex] )</h4>
+<p class="argument"><strong>value: </strong><a href="http://api.jquery.com/Types#Any">Any</a>
+                          The value to search for.</p>
+<p class="argument"><strong>array: </strong><a href="http://api.jquery.com/Types#Array">Array</a>
+                          An array through which to search.</p>
+<p class="argument"><strong>fromIndex: </strong><a href="http://api.jquery.com/Types#Number">Number</a>
+                          The index of the array at which to begin the search. The default is 0, which will search the whole array.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.inArray()</code> method is similar to JavaScript's native <code>.indexOf()</code> method in that it returns -1 when it doesn't find a match. If the first element within the array matches <code>value</code>, <code>$.inArray()</code> returns 0.</p>
+<p>Because JavaScript treats 0 as loosely equal to false (i.e. 0 == false, but 0 !== false), if we're checking for the presence of <code>value</code> within <code>array</code>, we need to check if it's not equal to (or greater than) -1.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Report the index of some elements in the array.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div <span class="err">{</span> color:blue; }
+  span <span class="err">{</span> color:red; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div&gt;</span>"John" found at <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>4 found at <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>"Karl" not found, so <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>"Pete" is in the array, but not at or after index 2, so <span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>var arr = [ 4, "Pete", 8, "John" ];
+var <span class="p">$</span><span class="nv">spans</span> = <span class="p">$(</span><span class="s2">"span"</span><span class="p">)</span>;
+<span class="p">$</span><span class="nv">spans</span><span class="p">.</span><span class="nv">eq</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="nv">text</span><span class="p">(</span><span class="err">jQuery.inArray</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span> <span class="err">arr</span><span class="p">))</span>;
+<span class="p">$</span><span class="nv">spans</span><span class="p">.</span><span class="nv">eq</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="nv">text</span><span class="p">(</span><span class="err">jQuery.inArray</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="err">arr</span><span class="p">))</span>;
+<span class="p">$</span><span class="nv">spans</span><span class="p">.</span><span class="nv">eq</span><span class="p">(</span><span class="m">2</span><span class="p">).</span><span class="nv">text</span><span class="p">(</span><span class="err">jQuery.inArray</span><span class="p">(</span><span class="s2">"Karl"</span><span class="p">,</span> <span class="err">arr</span><span class="p">))</span>;
+<span class="p">$</span><span class="nv">spans</span><span class="p">.</span><span class="nv">eq</span><span class="p">(</span><span class="m">3</span><span class="p">).</span><span class="nv">text</span><span class="p">(</span><span class="err">jQuery.inArray</span><span class="p">(</span><span class="s2">"Pete"</span><span class="p">,</span> <span class="err">arr</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>;
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

@@ -1,0 +1,57 @@
+<script>
+	{
+		"title": "callbacks.fire()",
+		"excerpt": "Call all of the callbacks with the given arguments",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-fire1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.fire( arguments )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Call all of the callbacks with the given arguments</p>
+<ul class="signatures"><li class="signature" id="callbacks-fire-arguments">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.fire( arguments )</h4>
+<p class="argument"><strong>arguments: </strong><a href="http://api.jquery.com/Types#"></a>
+                          The argument or list of arguments to pass back to the callback list.</p>
+</li></ul>
+<div class="longdesc">
+<h2 id="example-1">Example</h2>
+<p>Using <code>callbacks.fire()</code> to invoke the callbacks in a list with any arguments that have been passed:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">a</span> <span class="n">sample</span> <span class="n">logging</span> <span class="k">function</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">a</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'foo:'</span> <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="k">function</span> <span class="s">'foo'</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">fire</span> <span class="n">the</span> <span class="n">items</span> <span class="n">on</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'hello'</span> <span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="s">'foo: hello'</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'world '</span><span class="p">);</span> <span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="s">'foo: world'</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">another</span> <span class="k">function</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'bar:'</span> <span class="o">+</span> <span class="n">value</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">this</span> <span class="k">function</span> <span class="n">to</span> <span class="n">the</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">bar</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">fire</span> <span class="n">the</span> <span class="n">items</span> <span class="n">on</span> <span class="n">the</span> <span class="n">list</span> <span class="n">again</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fire</span><span class="p">(</span> <span class="s">'hello again'</span> <span class="p">);</span>
+<span class="o">//</span> <span class="n">outputs</span><span class="p">:</span>
+<span class="o">//</span> <span class="s">'foo: hello again'</span>
+<span class="o">//</span> <span class="s">'bar: hello again'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

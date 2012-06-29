@@ -1,0 +1,160 @@
+<script>
+	{
+		"title": "jQuery.ajaxTransport()",
+		"excerpt": "Creates an object that handles the actual transmission of Ajax data.",
+		"termSlugs": {
+			"category": [
+				"ajax/low-level-interface","version/1.5"
+			]
+		}
+	}
+</script><div id="jQuery-ajaxTransport1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.ajaxTransport( dataType, handler(options, originalOptions, jqXHR) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Creates an object that handles the actual transmission of Ajax data.</p>
+<ul class="signatures"><li class="signature" id="jQuery-ajaxTransport-dataType-handleroptions--originalOptions--jqXHR">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.5/">1.5</a></span>jQuery.ajaxTransport( dataType, handler(options, originalOptions, jqXHR) )</h4>
+<p class="argument"><strong>dataType: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string identifying the data type to use</p>
+<p class="argument"><strong>handler(options, originalOptions, jqXHR): </strong>Function()
+                          A handler to return the new transport object to use with the data type provided in the first argument.</p>
+</li></ul>
+<div class="longdesc">
+<p>A transport is an object that provides two methods, <code>send</code> and <code>abort</code>, that are used internally by <code>$.ajax()</code> to issue requests. A transport is the most advanced way to enhance <code>$.ajax()</code> and should be used only as a last resort when prefilters and converters are insufficient.</p>
+<p>Since each request requires its own transport object instance, transports cannot be registered directly. Therefore, you should provide a function that returns a transport instead.</p>
+<p>Transports factories are registered using <code>$.ajaxTransport()</code>. A typical registration looks like this:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">ajaxTransport</span><span class="p">(</span> <span class="k">function</span><span class="p">(</span> <span class="n">options</span><span class="p">,</span> <span class="n">originalOptions</span><span class="p">,</span> <span class="n">jqXHR</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span> <span class="o">/*</span> <span class="n">transportCanHandleRequest</span> <span class="o">*/</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="n">send</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">headers</span><span class="p">,</span> <span class="n">completeCallback</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="o">/*</span> <span class="n">send</span> <span class="n">code</span> <span class="o">*/</span>
+      <span class="p">},</span>
+      <span class="n">abort</span><span class="p">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="o">/*</span> <span class="n">abort</span> <span class="n">code</span> <span class="o">*/</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul>
+      <li>
+<code>options</code> are the request options</li>
+      <li>
+<code>originalOptions</code> are the options as provided to the ajax method, unmodified and, thus, without defaults from ajaxSettings</li>
+      <li>
+<code>jqXHR</code> is the jqXHR object of the request</li>
+      <li>
+<code>headers</code> is a map of request headers (key/value) that the transport can transmit if it supports it</li>
+      <li>
+<code>completeCallback</code> is the callback used to notify ajax of the completion of the request</li>
+    </ul>
+<p><code>completeCallback</code> has the following signature:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="k">function</span><span class="err">( status, statusText, responses, headers ) {}</span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul>
+      <li>
+<code>status</code> is the HTTP status code of the response, like  200 for a typical success, or 404 for when the resource is not found.</li>
+      <li>
+<code>statusText</code> is the statusText of the response.</li>
+      <li>
+<code>responses</code> (Optional) is a map of dataType/value that contains the response in all the formats the transport could provide (for instance, a native XMLHttpRequest object would set reponses to <code>{ xml: XMLData, text: textData }</code> for a response that is an XML document)</li>
+      <li>
+<code>headers</code> (Optional) is a string containing all the response headers if the transport has access to them (akin to what <code>XMLHttpRequest.getAllResponseHeaders()</code> would provide).</li>
+    </ul>
+<p>Just like prefilters, a transport's factory function can be attached to a specific dataType:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">ajaxTransport</span><span class="p">(</span> "<span class="n">script</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span> <span class="n">options</span><span class="p">,</span> <span class="n">originalOptions</span><span class="p">,</span> <span class="n">jqXHR</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="o">/*</span> <span class="n">Will</span> <span class="n">only</span> <span class="n">be</span> <span class="n">called</span> <span class="k">for</span> <span class="n">script</span> <span class="n">requests</span> <span class="o">*/</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The following example shows how a minimal image transport could be implemented:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">ajaxTransport</span><span class="p">(</span> "<span class="n">image</span>"<span class="p">,</span> <span class="k">function</span><span class="p">(</span> <span class="n">s</span> <span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span> <span class="n">s</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span><span class="p">=</span> "<span class="n">GET</span>" <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">.</span><span class="n">async</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">var</span> <span class="n">image</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+
+      <span class="n">send</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">_</span> <span class="p">,</span> <span class="n">callback</span> <span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">image</span> <span class="p">=</span> <span class="n">new</span> <span class="n">Image</span><span class="p">();</span>
+
+<span class="k">        function</span><span class="w"> </span><span class="nf">done</span><span class="p">(</span> status <span class="p">)</span><span class="w"> </span><span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span> <span class="n">image</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">var</span> <span class="n">statusText</span> <span class="p">=</span> <span class="p">(</span> <span class="n">status</span> <span class="o">==</span> 200 <span class="p">)</span> ? "<span class="n">success</span>" <span class="p">:</span> "<span class="n">error</span>"<span class="p">,</span>
+            <span class="n">tmp</span> <span class="p">=</span> <span class="n">image</span><span class="p">;</span>
+            <span class="n">image</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onreadystatechange</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onerror</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onload</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+            <span class="n">callback</span><span class="p">(</span> <span class="n">status</span><span class="p">,</span> <span class="n">statusText</span><span class="p">,</span> <span class="p">{</span> <span class="n">image</span><span class="p">:</span> <span class="n">tmp</span> <span class="p">}</span> <span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">image</span><span class="p">.</span><span class="n">onreadystatechange</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onload</span> <span class="p">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="n">done</span><span class="p">(</span> 200 <span class="p">);</span>
+        <span class="p">};</span>
+        <span class="n">image</span><span class="p">.</span><span class="n">onerror</span> <span class="p">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="n">done</span><span class="p">(</span> 404 <span class="p">);</span>
+        <span class="p">};</span>
+
+        <span class="n">image</span><span class="p">.</span><span class="n">src</span> <span class="p">=</span> <span class="n">s</span><span class="p">.</span><span class="n">url</span><span class="p">;</span>
+      <span class="p">},</span>
+
+      <span class="n">abort</span><span class="p">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">image</span> <span class="p">)</span> <span class="p">{</span>
+          <span class="n">image</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onreadystatechange</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onerror</span> <span class="p">=</span> <span class="n">image</span><span class="p">.</span><span class="n">onload</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<h4 id="handling-custom-data-types">Handling Custom Data Types</h4>
+<p>The jQuery Ajax implementation comes with a set of standard dataTypes, such as text, json, xml, and html.</p>
+<p>Use the <code>converters</code> option in <code><a href="/jQuery.ajaxSetup">$.ajaxSetup()</a></code> to augment or modify the data type conversion strategies used by <code>$.ajax()</code>.</p>
+<p> The unminified jQuery source itself includes a list of default converters, which effectively illustrates how they can be used: </p>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">List</span> <span class="n">of</span> <span class="n">data</span> <span class="n">converters</span>
+<span class="o">//</span> 1<span class="p">)</span> <span class="n">key</span> <span class="n">format</span> <span class="n">is</span> "<span class="n">source_type</span> <span class="n">destination_type</span>"
+<span class="o">//</span>    <span class="p">(</span><span class="n">a</span> <span class="n">single</span> <span class="n">space</span> <span class="n">in</span><span class="o">-</span><span class="n">between</span><span class="p">)</span>
+<span class="o">//</span> 2<span class="p">)</span> <span class="n">the</span> <span class="n">catchall</span> <span class="n">symbol</span> "<span class="o">*</span>" <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="k">for</span> <span class="n">source_type</span>
+<span class="n">converters</span><span class="p">:</span> <span class="p">{</span>
+
+  <span class="o">//</span> <span class="n">Convert</span> <span class="n">anything</span> <span class="n">to</span> <span class="n">text</span>
+  "<span class="o">*</span> <span class="n">text</span>"<span class="p">:</span> <span class="n">window</span><span class="p">.</span><span class="n">String</span><span class="p">,</span>
+
+  <span class="o">//</span> <span class="n">Text</span> <span class="n">to</span> <span class="n">html</span> <span class="p">(</span><span class="n">true</span> <span class="p">=</span> <span class="n">no</span> <span class="n">transformation</span><span class="p">)</span>
+  "<span class="n">text</span> <span class="n">html</span>"<span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+
+  <span class="o">//</span> <span class="n">Evaluate</span> <span class="n">text</span> <span class="n">as</span> <span class="n">a</span> <span class="n">json</span> <span class="n">expression</span>
+  "<span class="n">text</span> <span class="n">json</span>"<span class="p">:</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">parseJSON</span><span class="p">,</span>
+
+  <span class="o">//</span> <span class="n">Parse</span> <span class="n">text</span> <span class="n">as</span> <span class="n">xml</span>
+  "<span class="n">text</span> <span class="n">xml</span>"<span class="p">:</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">parseXML</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When you specify a <code>converters</code> option globally in <code>$.ajaxSetup()</code> or per call in <code>$.ajax()</code>, the object will map onto the default converters, overwriting those you specify and leaving the others intact.</p>
+<p>For example, the jQuery source uses <code>$.ajaxSetup()</code> to  add a converter for "text script":</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">jQuery</span><span class="p">.</span><span class="n">ajaxSetup</span><span class="p">({</span>
+  <span class="n">accepts</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">script</span><span class="p">:</span> "<span class="n">text</span><span class="o">/</span><span class="n">javascript</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">javascript</span>"
+  <span class="p">},</span>
+  <span class="n">contents</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">script</span><span class="p">:</span> <span class="o">/</span><span class="n">javascript</span><span class="o">/</span>
+  <span class="p">},</span>
+  <span class="n">converters</span><span class="p">:</span> <span class="p">{</span>
+    "<span class="n">text</span> <span class="n">script</span>"<span class="p">:</span> <span class="n">jQuery</span><span class="p">.</span><span class="n">globalEval</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

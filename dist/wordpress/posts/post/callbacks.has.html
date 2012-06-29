@@ -1,0 +1,49 @@
+<script>
+	{
+		"title": "callbacks.has()",
+		"excerpt": "Determine whether a supplied callback is in a list",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-has1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.has( callback )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Determine whether a supplied callback is in a list</p>
+<ul class="signatures"><li class="signature" id="callbacks-has-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.has( callback )</h4>
+<p class="argument"><strong>callback: </strong>Function()
+                          The callback to search for.</p>
+</li></ul>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Using callbacks.has() to check if a callback list contains a specific callback:</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="c1">// a sample logging function to be added to a callbacks list</span>
+<span class="k">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value1</span><span class="p">,</span> <span class="n">value2</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="p">'</span><span class="nl">Received:</span><span class="p">'</span> <span class="o">+</span> <span class="n">value1</span> <span class="o">+</span> <span class="sc">','</span> <span class="o">+</span> <span class="n">value2</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// a second function which will not be added to the list</span>
+<span class="k">var</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value1</span><span class="p">,</span> <span class="n">value2</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="p">'</span><span class="n">foobar</span><span class="p">');</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="n">callbacks</span> <span class="o">=</span> <span class="err">$</span><span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="c1">// add the log method to the callbacks list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="n">foo</span> <span class="p">);</span>
+
+<span class="c1">// determine which callbacks are in the list</span>
+
+<span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">has</span><span class="p">(</span> <span class="n">foo</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// true</span>
+<span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">has</span><span class="p">(</span> <span class="n">bar</span> <span class="p">)</span> <span class="p">);</span> <span class="c1">// false</span>
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>

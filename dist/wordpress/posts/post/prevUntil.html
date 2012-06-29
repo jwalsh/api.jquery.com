@@ -1,0 +1,83 @@
+<script>
+	{
+		"title": ".prevUntil()",
+		"excerpt": "Get all preceding siblings of each element up to but not including the element matched by the selector, DOM node, or jQuery object.",
+		"termSlugs": {
+			"category": [
+				"traversing/tree-traversal","version/1.4","version/1.6"
+			]
+		}
+	}
+</script><div id="prevUntil1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.prevUntil(  [selector]  [, filter]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get all preceding siblings of each element up to but not including the element matched by the selector, DOM node, or jQuery object.</p>
+<ul class="signatures">
+<li class="signature" id="prevUntil-selector-filter">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.prevUntil(  [selector] [, filter] )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A string containing a selector expression to indicate where to stop matching preceding sibling elements.</p>
+<p class="argument"><strong>filter: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A string containing a selector expression to match elements against.</p>
+</li>
+<li class="signature" id="prevUntil-element-filter">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.prevUntil(  [element] [, filter] )</h4>
+<p class="argument"><strong>element: </strong><a href="http://api.jquery.com/Types#Element">Element</a>
+                          A DOM node or jQuery object indicating where to stop matching preceding sibling elements.</p>
+<p class="argument"><strong>filter: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A string containing a selector expression to match elements against.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Given a selector expression that represents a set of DOM elements, the <code>.prevUntil()</code> method searches through the predecessors of these elements in the DOM tree, stopping when it reaches an element matched by the method's argument. The new jQuery object that is returned contains all previous siblings up to but not including the one matched by the <code>.prevUntil()</code> selector; the elements are returned in order from the closest sibling to the farthest.</p>
+<p>If the selector is not matched or is not supplied, all previous siblings will be selected; in these cases it selects the same elements as the <code>.prevAll()</code> method does when no filter selector is provided.</p>
+<p><strong>As of jQuery 1.6</strong>, A DOM node or jQuery object, instead of a selector, may be used for the first <strong>.prevUntil()</strong> argument.</p>
+<p>The method optionally accepts a selector expression for its second argument. If this argument is supplied, the elements will be filtered by testing whether they match it.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Find the siblings that precede &lt;dt id="term-2"&gt; up to the preceding &lt;dt&gt; and give them a red background color. Also, find previous &lt;dd&gt; siblings of &lt;dt id="term-3"&gt; up to &lt;dt id="term-1"&gt; and give them a green text color.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;dl&gt;</span>
+  <span class="nt">&lt;dt</span> <span class="na">id=</span><span class="s">"term-1"</span><span class="nt">&gt;</span>term 1<span class="nt">&lt;/dt&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 1-a<span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 1-b<span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 1-c<span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 1-d<span class="nt">&lt;/dd&gt;</span>
+
+  <span class="nt">&lt;dt</span> <span class="na">id=</span><span class="s">"term-2"</span><span class="nt">&gt;</span>term 2<span class="nt">&lt;/dt&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 2-a<span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 2-b<span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 2-c<span class="nt">&lt;/dd&gt;</span>
+
+  <span class="nt">&lt;dt</span> <span class="na">id=</span><span class="s">"term-3"</span><span class="nt">&gt;</span>term 3<span class="nt">&lt;/dt&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 3-a<span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>definition 3-b<span class="nt">&lt;/dd&gt;</span>
+<span class="nt">&lt;/dl&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("#term-2").prevUntil("dt")
+  .css("background-color", "red");
+
+var term1 = document.getElementById('term-1');
+$("#term-3").prevUntil(term1, "dd")
+  .css("color", "green");
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="250px"></div>
+</div></div>
+</div>
+</div>

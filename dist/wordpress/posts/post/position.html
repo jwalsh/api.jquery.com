@@ -1,0 +1,60 @@
+<script>
+	{
+		"title": ".position()",
+		"excerpt": "Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.",
+		"termSlugs": {
+			"category": [
+				"css","offset","manipulation/style-properties","version/1.2"
+			]
+		}
+	}
+</script><div id="position1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.position()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Object">Object</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.</p>
+<ul class="signatures"><li class="signature" id="position"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.position()</h4></li></ul>
+<div class="longdesc">
+<p>The <code>.position()</code> method allows us to retrieve the current position of an element <em>relative to the offset parent</em>. Contrast this with <code><a href="/offset">.offset()</a></code>, which retrieves the current position <em>relative to the document</em>. When positioning a new element near another one and within the same containing DOM element, <code>.position()</code> is the more useful.</p>
+<p>Returns an object containing the properties <code>top</code> and <code>left</code>.</p>
+<blockquote>
+      <p><strong>Note:</strong> jQuery does not support getting the position coordinates of hidden elements or accounting for borders, margins, or padding set on the body element.</p>
+    </blockquote>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Access the position of the second paragraph:</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  div { padding: 15px;}
+  p { margin-left:10px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+var p = $("p:first");
+var position = p.position();
+$("p:last").text( "left: " + position.left + ", top: " + position.top );
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

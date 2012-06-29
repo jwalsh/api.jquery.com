@@ -1,0 +1,48 @@
+<script>
+	{
+		"title": "callbacks.fireWith()",
+		"excerpt": "Call all callbacks in a list with the given context and arguments.",
+		"termSlugs": {
+			"category": [
+				"callbacks-object","version/1.7"
+			]
+		}
+	}
+</script><div id="callbacks-fireWith1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">callbacks.fireWith(  [context]  [, args]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Call all callbacks in a list with the given context and arguments.</p>
+<ul class="signatures"><li class="signature" id="callbacks-fireWith-context-args">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>callbacks.fireWith(  [context] [, args] )</h4>
+<p class="argument"><strong>context: </strong>
+                          A reference to the context in which the callbacks in the list should be fired.</p>
+<p class="argument"><strong>args: </strong>
+                          An argument, or array of arguments, to pass to the callbacks in the list.</p>
+</li></ul>
+<div class="longdesc">
+<h2 id="example-1">Example</h2>
+<p>Using <code>callbacks.fireWith()</code> to fire a list of callbacks with a specific context and an array of arguments:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="o">//</span> <span class="n">a</span> <span class="n">sample</span> <span class="n">logging</span> <span class="k">function</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">a</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">var</span> <span class="nb">log</span> <span class="p">=</span> <span class="k">function</span><span class="p">(</span> <span class="n">value1</span><span class="p">,</span> <span class="n">value2</span> <span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span> <span class="s">'Received:'</span> <span class="o">+</span> <span class="n">value1</span> <span class="o">+</span> <span class="s">','</span> <span class="o">+</span> <span class="n">value2</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">var</span> <span class="n">callbacks</span> <span class="p">=</span> $<span class="p">.</span><span class="n">Callbacks</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="nb">log</span> <span class="n">method</span> <span class="n">to</span> <span class="n">the</span> <span class="n">callbacks</span> <span class="n">list</span>
+<span class="n">callbacks</span><span class="p">.</span><span class="n">add</span><span class="p">(</span> <span class="nb">log</span> <span class="p">);</span>
+
+<span class="o">//</span> <span class="n">fire</span> <span class="n">the</span> <span class="n">callbacks</span> <span class="n">on</span> <span class="n">the</span> <span class="n">list</span> <span class="n">using</span> <span class="n">the</span> <span class="n">context</span> <span class="s">'window'</span>
+<span class="o">//</span> <span class="n">and</span> <span class="n">an</span> <span class="n">arguments</span> <span class="n">array</span>
+
+<span class="n">callbacks</span><span class="p">.</span><span class="n">fireWith</span><span class="p">(</span> <span class="n">window</span><span class="p">,</span> <span class="p">[</span><span class="s">'foo'</span><span class="p">,</span><span class="s">'bar'</span><span class="p">]);</span>
+
+<span class="o">//</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">Received</span><span class="p">:</span> <span class="n">foo</span><span class="p">,</span> <span class="n">bar</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>

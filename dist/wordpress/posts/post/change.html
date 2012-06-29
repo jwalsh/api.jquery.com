@@ -1,0 +1,120 @@
+<script>
+	{
+		"title": ".change()",
+		"excerpt": "Bind an event handler to the \"change\" JavaScript event, or trigger that event on an element.",
+		"termSlugs": {
+			"category": [
+				"events/form-events","forms","version/1.0","version/1.4.3"
+			]
+		}
+	}
+</script><div id="change1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.change( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "change" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="change-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.change( handler(eventObject) )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="change-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.change(  [eventData], handler(eventObject) )</h4>
+<p class="argument"><strong>eventData: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          A map of data that will be passed to the event handler.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="change"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.change()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('change', handler)</code> in the first two variations, and <code>.trigger('change')</code> in the third.</p>
+<p>The <code>change</code> event is sent to an element when its value changes. This event is limited to <code>&lt;input&gt;</code> elements, <code>&lt;textarea&gt;</code> boxes and <code>&lt;select&gt;</code> elements. For select boxes, checkboxes, and radio buttons, the event is fired immediately when the user makes a selection with the mouse, but for the other element types the event is deferred until the element loses focus.</p>
+<p>For example, consider the HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;form&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"target"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Field 1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;select</span> <span class="na">class=</span><span class="s">"target"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"option1"</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Option 1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"option2"</span><span class="nt">&gt;</span>Option 2<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"other"</span><span class="nt">&gt;</span>
+  Trigger the handler
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The event handler can be bound to the text input and the select box:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'.target'</span><span class="p">).</span><span class="n">change</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Handler for .change() called.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now when the second option is selected from the dropdown, the alert is displayed. It is also displayed if you change the text in the field and then click away. If the field loses focus without the contents having changed, though, the event is not triggered. To trigger the event manually, apply <code>.change()</code> without arguments:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#other'</span><span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  $<span class="p">(</span><span class="s">'.target'</span><span class="p">).</span><span class="n">change</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message. The message will display twice, because the handler has been bound to the <code>change</code> event on both of the form elements.</p>
+<p>As of jQuery 1.4, the <code>change</code> event bubbles in Internet Explorer, behaving consistently with the event in other modern browsers.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Attaches a change event to the select that gets the text for each selected option and writes them in the div.  It then triggers the event for the initial text draw.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">"sweets"</span> <span class="na">multiple=</span><span class="s">"multiple"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Chocolate<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Candy<span class="nt">&lt;/option&gt;</span>
+
+    <span class="nt">&lt;option&gt;</span>Taffy<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Caramel<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Fudge<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Cookie<span class="nt">&lt;/option&gt;</span>
+
+  <span class="nt">&lt;/select&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("select").change(function () {
+  var str = "";
+  $("select option:selected").each(function () {
+            str += $(this).text() + " ";
+  });
+  $("div").text(str);
+})
+.change();
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To add a validity test to all text input elements:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">input</span><span class="p">[</span><span class="n">type</span><span class="p">=</span><span class="s">'text'</span><span class="p">]</span>"<span class="p">).</span><span class="n">change</span><span class="p">(</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">check</span> <span class="n">input</span> <span class="p">(</span>$<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">val</span><span class="p">())</span> <span class="k">for</span> <span class="n">validity</span> <span class="n">here</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

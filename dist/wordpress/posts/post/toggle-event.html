@@ -1,0 +1,121 @@
+<script>
+	{
+		"title": ".toggle()",
+		"excerpt": "Bind two or more handlers to the matched elements, to be executed on alternate clicks.",
+		"termSlugs": {
+			"category": [
+				"events/mouse-events","version/1.0"
+			]
+		}
+	}
+</script><div id="toggle1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.toggle( handler(eventObject), handler(eventObject) [, handler(eventObject)]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Bind two or more handlers to the matched elements, to be executed on alternate clicks.</p>
+<ul class="signatures"><li class="signature" id="toggle-handlereventObject-handlereventObject-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.toggle( handler(eventObject), handler(eventObject) [, handler(eventObject)] )</h4>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute every even time the element is clicked.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          A function to execute every odd time the element is clicked.</p>
+<p class="argument"><strong>handler(eventObject): </strong>Function()
+                          Additional handlers to cycle through after clicks.</p>
+</li></ul>
+<div class="longdesc">
+<blockquote>
+      <p>Note: jQuery also provides an animation method named <a href="http://api.jquery.com/toggle/">.toggle()</a> that toggles the visibility of elements. Whether the animation or the event method is fired depends on the set of arguments passed.</p>
+    </blockquote>
+<p>The <code>.toggle()</code> method binds a handler for the <code>click</code> event, so the rules outlined for the triggering of <code>click</code> apply here as well.</p>
+<div class="highlightblock"><div class="highlight"><pre>For example, consider the HTML:
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"target"</span><span class="nt">&gt;</span>
+  Click here
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Event handlers can then be bound to the <code>&lt;div&gt;</code>:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'#target'</span><span class="p">).</span><span class="n">toggle</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'First handler for .toggle() called.'</span><span class="p">);</span>
+<span class="p">},</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s">'Second handler for .toggle() called.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>As the element is clicked repeatedly, the messages alternate:</p>
+<p>
+      <span class="output">First handler for .toggle() called.</span>
+      <br />
+      <span class="output">Second handler for .toggle() called.</span>
+      <br />
+      <span class="output">First handler for .toggle() called.</span>
+      <br />
+      <span class="output">Second handler for .toggle() called.</span>
+      <br />
+      <span class="output">First handler for .toggle() called.</span>
+    </p>
+<p>If more than two handlers are provided, <code>.toggle()</code> will cycle among all of them. For example, if there are three handlers, then the first handler will be called on the first click, the fourth click, the seventh click, and so on.</p>
+<p>The <code>.toggle()</code> method is provided for convenience. It is relatively straightforward to implement the same behavior by hand, and this can be necessary if the assumptions built into <code>.toggle()</code> prove limiting. For example, <code>.toggle()</code> is not guaranteed to work correctly if applied twice to the same element. Since <code>.toggle()</code> internally uses a <code>click</code> handler to do its work, we must unbind <code>click</code> to remove a behavior attached with <code>.toggle()</code>, so other <code>click</code> handlers can be caught in the crossfire. The implementation also calls <code>.preventDefault()</code> on the event, so links will not be followed and buttons will not be clicked if <code>.toggle()</code> has been called on the element.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Click to toggle highlight on the list item.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  ul { margin:10px; list-style:inside circle; font-weight:bold; }
+  li { cursor:pointer; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Go to the store<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Pick up dinner<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Debug crash<span class="nt">&lt;/li&gt;</span>
+
+    <span class="nt">&lt;li&gt;</span>Take a jog<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("li").toggle(
+      function () {
+        $(this).css({"list-style-type":"disc", "color":"blue"});
+      },
+      function () {
+        $(this).css({"list-style-type":"disc", "color":"red"});
+      },
+      function () {
+        $(this).css({"list-style-type":"", "color":""});
+      }
+    );
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To toggle a style on table cells:</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">td</span>"<span class="p">).</span><span class="n">toggle</span><span class="p">(</span>
+<span class="k">  function</span><span class="nf"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">addClass</span><span class="p">(</span>"<span class="n">selected</span>"<span class="p">);</span>
+  <span class="p">},</span>
+<span class="k">  function</span><span class="nf"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+    $<span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="n">removeClass</span><span class="p">(</span>"<span class="n">selected</span>"<span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>

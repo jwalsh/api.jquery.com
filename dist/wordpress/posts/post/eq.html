@@ -1,0 +1,92 @@
+<script>
+	{
+		"title": ".eq()",
+		"excerpt": "Reduce the set of matched elements to the one at the specified index.",
+		"termSlugs": {
+			"category": [
+				"traversing/filtering","version/1.1.2"
+			]
+		}
+	}
+</script><div id="eq1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.eq( index )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Reduce the set of matched elements to the one at the specified index.</p>
+<ul class="signatures">
+<li class="signature" id="eq-index">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.2/">1.1.2</a></span>.eq( index )</h4>
+<p class="argument"><strong>index: </strong><a href="http://api.jquery.com/Types#Integer">Integer</a>
+                          An integer indicating the 0-based position of the element. </p>
+</li>
+<li class="signature" id="eq--index">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.eq( -index )</h4>
+<p class="argument"><strong>-index: </strong><a href="http://api.jquery.com/Types#Integer">Integer</a>
+                          An integer indicating the position of the element, counting backwards  from the last element in the set. </p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.eq()</code> method constructs a new jQuery object from one element within that set. The supplied index identifies the position of this element in the set. </p>
+<p>Consider a page with a simple list on it:</p>
+<div class="highlightblock"><div class="highlight"><pre>  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>list item 1<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>list item 2<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>list item 4<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>list item 5<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>We can apply this method to the set of list items:</p>
+<div class="highlightblock"><div class="highlight"><pre>  $<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">eq</span><span class="p">(</span>2<span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The result of this call is a red background for item 3. Note that the supplied index is zero-based, and refers to the position of the element within the jQuery object, not within the DOM tree.</p>
+<p>Providing a negative number indicates a position starting from the end of the set, rather than the beginning. For example:</p>
+<div class="highlightblock"><div class="highlight"><pre>  $<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">eq</span><span class="p">(</span><span class="o">-</span>2<span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This time list item 4 is turned red, since it is two from the end of the set.</p>
+<p>If an element cannot be found at the specified zero-based index, the method constructs a new jQuery object with an empty set and a <code>length</code> property of 0. </p>
+<div class="highlightblock"><div class="highlight"><pre>  $<span class="p">(</span><span class="s">'li'</span><span class="p">).</span><span class="n">eq</span><span class="p">(</span>5<span class="p">).</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, none of the list items is turned red, since <code>.eq(5)</code> indicates the sixth of five list items.</p>
+</div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Turn the div with index 2 blue by adding an appropriate class.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { width:60px; height:60px; margin:10px; float:left;
+        border:2px solid blue; }
+  .blue { background:blue; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("body").find("div").eq(2).addClass("blue");
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

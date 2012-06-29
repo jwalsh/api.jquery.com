@@ -1,0 +1,107 @@
+<script>
+	{
+		"title": ".nextAll()",
+		"excerpt": "Get all following siblings of each element in the set of matched elements, optionally filtered by a selector.",
+		"termSlugs": {
+			"category": [
+				"traversing/tree-traversal","version/1.2"
+			]
+		}
+	}
+</script><div id="nextAll1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.nextAll(  [selector]  )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get all following siblings of each element in the set of matched elements, optionally filtered by a selector.</p>
+<ul class="signatures"><li class="signature" id="nextAll-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.nextAll(  [selector] )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string containing a selector expression to match elements against.</p>
+</li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.nextAll()</code> method allows us to search through the successors of these elements in the DOM tree and construct a new jQuery object from the matching elements.</p>
+<p>The method optionally accepts a selector expression of the same type that we can pass to the <code>$()</code> function. If the selector is supplied, the elements will be filtered by testing whether they match it.</p>
+<p>Consider a page with a simple list on it:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+   <span class="nt">&lt;li&gt;</span>list item 1<span class="nt">&lt;/li&gt;</span>
+   <span class="nt">&lt;li&gt;</span>list item 2<span class="nt">&lt;/li&gt;</span>
+   <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"third-item"</span><span class="nt">&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+   <span class="nt">&lt;li&gt;</span>list item 4<span class="nt">&lt;/li&gt;</span>
+   <span class="nt">&lt;li&gt;</span>list item 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>If we begin at the third item, we can find the elements which come after it:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'li.third-item'</span><span class="p">).</span><span class="n">nextAll</span><span class="p">().</span><span class="n">css</span><span class="p">(</span><span class="s">'background-color'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The result of this call is a red background behind items 4 and 5. Since we do not supply a selector expression, these following elements are unequivocally included as part of the object. If we had supplied one, the elements would be tested for a match before they were included.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Locate all the divs after the first and give them a class.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { width: 80px; height: 80px; background: #abc;
+        border: 2px solid black; margin: 10px; float: left; }
+  div.after { border-color: red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>first<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>sibling<span class="nt">&lt;div&gt;</span>child<span class="nt">&lt;/div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>sibling<span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div&gt;</span>sibling<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("div:first").nextAll().addClass("after");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="150"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Locate all the paragraphs after the second child in the body and give them a class.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+div, p { width: 60px; height: 60px; background: #abc;
+         border: 2px solid black; margin: 10px; float: left; }
+.after { border-color: red; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;</span>p<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;</span>div<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;p&gt;</span>p<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>p<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;</span>div<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>p<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;</span>div<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $(":nth-child(1)").nextAll("p").addClass("after");
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="200"></div>
+</div>
+</div>
+</div>
+</div>

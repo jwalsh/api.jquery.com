@@ -1,0 +1,96 @@
+<script>
+	{
+		"title": "ID Selector (\"#id\")",
+		"excerpt": "Selects a single element with the given id attribute. ",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-css-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="id1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">id</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('#id')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>id</dt>
+<dd>An ID to search for, specified via the id attribute of an element.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects a single element with the given id attribute. </p>
+<div class="longdesc">
+<p>For id selectors, jQuery uses the JavaScript function <code>document.getElementById()</code>, which is extremely efficient. When another selector is attached to the id selector, such as <code>h2#pageTitle</code>, jQuery performs an additional check before identifying the element as a match.</p>
+<blockquote>
+      <p>As always, remember that as a developer, your time is typically the most valuable resource. Do not focus on optimization of selector speed unless it is clear that performance needs to be improved.</p>
+    </blockquote>
+<p>Each <code>id</code> value must be used only once within a document. If more than one element has been assigned the same ID, queries that use that ID will only select the first matched element in the DOM. This behavior should not be relied on, however; a document with more than one element using the same ID is invalid.</p>
+<p>If the id contains characters like periods or colons you have to <a href="http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F">escape those characters with backslashes</a>.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Finds the element with the id "myDiv".</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div {
+    width: 90px;
+    height: 90px;
+    float:left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #EEEEEE;
+  }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"notMe"</span><span class="nt">&gt;&lt;p&gt;</span>id="notMe"<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>id="myDiv"<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("#myDiv").css("border","3px solid red");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Finds the element with the id "myID.entry[1]".  See how certain characters must be escaped with backslashes.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div {
+    width: 300px;
+    float:left;
+    padding: 2px;
+    margin: 3px;
+    background-color: #EEEEEE;
+  }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myID.entry[0]"</span><span class="nt">&gt;</span>id="myID.entry[0]"<span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myID.entry[1]"</span><span class="nt">&gt;</span>id="myID.entry[1]"<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myID.entry[2]"</span><span class="nt">&gt;</span>id="myID.entry[2]"<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>$("#myID\\.entry\\[1\\]").css("border","3px solid red");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,96 @@
+<script>
+	{
+		"title": "All Selector (\"*\")",
+		"excerpt": "Selects all elements.",
+		"termSlugs": {
+			"category": [
+				"selectors/basic-css-selectors","version/1.0"
+			]
+		}
+	}
+</script><div id="all1" class="entry selector">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">all</span>  selector</h2>
+<div class="jq-box roundBottom entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery('*')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements.</p>
+<div class="longdesc"><p>Caution: The all, or universal, selector is extremely slow, except when used by itself.</p></div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Finds every element (including head, body, etc) in the document.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  h3 { margin: 0; }
+  div,span,p {
+    width: 80px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>DIV<span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;span&gt;</span>SPAN<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;p&gt;</span>P <span class="nt">&lt;button&gt;</span>Button<span class="nt">&lt;/button&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>var elementCount = $("*").css("border","3px solid red").length;
+$("body").prepend("<span class="nt">&lt;h3&gt;</span>" + elementCount + " elements found<span class="nt">&lt;/h3&gt;</span>");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">A common way to select all elements is to find within document.body so elements like head, script, etc are left out.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  h3 { margin: 0; }
+  div,span,p {
+    width: 80px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  #test {
+    width: auto; height: auto; background-color: transparent;
+  }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"test"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>DIV<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;span&gt;</span>SPAN<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;p&gt;</span>P <span class="nt">&lt;button&gt;</span>Button<span class="nt">&lt;/button&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+var elementCount = $("#test").find("*").css("border","3px solid red").length;
+$("body").prepend("<span class="nt">&lt;h3&gt;</span>" + elementCount + " elements found<span class="nt">&lt;/h3&gt;</span>");<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

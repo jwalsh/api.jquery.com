@@ -1,0 +1,50 @@
+<script>
+	{
+		"title": "event.preventDefault()",
+		"excerpt": " If this method is called, the default action of the event will not be triggered. ",
+		"termSlugs": {
+			"category": [
+				"events/event-object","version/1.0"
+			]
+		}
+	}
+</script><div id="event-preventDefault1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.preventDefault()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#undefined">undefined</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong> If this method is called, the default action of the event will not be triggered. </p>
+<ul class="signatures"><li class="signature" id="event-preventDefault"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>event.preventDefault()</h4></li></ul>
+<div class="longdesc"><p>For example, clicked anchors will not take the browser to a new URL. We can use <code>event.isDefaultPrevented()</code> to determine if this method has been called by an event handler that was triggered by this event.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Cancel the default action (navigation) of the click.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://jquery.com"</span><span class="nt">&gt;</span>default click action is prevented<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"log"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+$("a").click(function(event) {
+  event.preventDefault();
+  $('<span class="nt">&lt;div/&gt;</span>')
+    .append('default ' + event.type + ' prevented')
+    .appendTo('#log');
+});
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

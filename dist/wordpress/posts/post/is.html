@@ -1,0 +1,266 @@
+<script>
+	{
+		"title": ".is()",
+		"excerpt": "Check the current matched set of elements against a selector, element, or jQuery object and return <code>true</code> if at least one of these elements matches the given arguments.",
+		"termSlugs": {
+			"category": [
+				"traversing/filtering","version/1.0","version/1.6","version/1.7"
+			]
+		}
+	}
+</script><div id="is1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.is( selector )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Check the current matched set of elements against a selector, element, or jQuery object and return &lt;code&gt;true&lt;/code&gt; if at least one of these elements matches the given arguments.</p>
+<ul class="signatures">
+<li class="signature" id="is-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.is( selector )</h4>
+<p class="argument"><strong>selector: </strong><a href="http://api.jquery.com/Types#Selector">Selector</a>
+                          A string containing a selector expression to match elements against.</p>
+</li>
+<li class="signature" id="is-functionindex">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.is( function(index) )</h4>
+<p class="argument"><strong>function(index): </strong>Function()
+                          A function used as a test for the set of elements. It accepts one argument, <code>index</code>, which is the element's index in the jQuery collection.Within the function, <code>this</code> refers to the current DOM element. </p>
+</li>
+<li class="signature" id="is-jQuery-object">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.is( jQuery object )</h4>
+<p class="argument"><strong>jQuery object: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          An existing jQuery object to match the current set of elements against.</p>
+</li>
+<li class="signature" id="is-element">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.6/">1.6</a></span>.is( element )</h4>
+<p class="argument"><strong>element: </strong><a href="http://api.jquery.com/Types#Element">Element</a>
+                          An element to match the current set of elements against.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Unlike other filtering methods, <code>.is()</code> does not create a new jQuery object. Instead, it allows you to test the contents of a jQuery object without modification. This is often useful inside callbacks, such as event handlers.</p>
+<p>Suppose you have a list, with two of its items containing a child element:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list <span class="nt">&lt;strong&gt;</span>item 1<span class="nt">&lt;/strong&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;span&gt;</span>list item 2<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>You can attach a click handler to the &lt;ul&gt; element, and then limit the code to be triggered only when a list item itself, not one of its children, is clicked:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">ul</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">var</span> $<span class="n">target</span> <span class="p">=</span> $<span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">target</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> $<span class="n">target</span><span class="p">.</span><span class="n">is</span><span class="p">(</span>"<span class="n">li</span>"<span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+    $<span class="n">target</span><span class="p">.</span><span class="n">css</span><span class="p">(</span>"<span class="n">background</span><span class="o">-</span><span class="n">color</span>"<span class="p">,</span> "<span class="n">red</span>"<span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Now, when the user clicks on the word "list" in the first item or anywhere in the third item, the clicked list item will be given a red background. However, when the user clicks on item 1 in the first item or anywhere in the second item, nothing will occur, because in those cases the target of the event would be <code>&lt;strong&gt;</code> or <code>&lt;span&gt;</code>, respectively.
+</p>
+<p>Prior to jQuery 1.7, in selector strings with positional selectors such as <code>:first</code>, <code>:gt()</code>, or <code>:even</code>, the positional filtering is done against the jQuery object passed to <code>.is()</code>, <em>not</em> against the containing document. So for the HTML shown above, an expression such as <code>$("li:first").is("li:last")</code> returns <code>true</code>, but <code>$("li:first-child").is("li:last-child")</code> returns <code>false</code>. In addition, a bug in Sizzle prevented many positional selectors from working properly. These two factors made positional selectors almost unusable in filters.</p>
+<p>Starting with jQuery 1.7, selector strings with positional selectors apply the selector against the document, and then determine whether the first element of the current jQuery set matches any of the resulting elements. So for the HTML shown above, an expression such as <code>$("li:first").is("li:last")</code> returns <code>false</code>. Note that since positional selectors are jQuery additions and not W3C standard, we recommend using the W3C selectors whenever feasible.</p>
+<h4>Using a Function</h4>
+<p>The second form of this method evaluates expressions related to elements based on a function rather than a selector. For each element, if the function returns <code>true</code>, <code>.is()</code> returns <code>true</code> as well. For example, given a somewhat more involved HTML snippet:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;strong&gt;</span>list<span class="nt">&lt;/strong&gt;</span> item 1 - one strong tag<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;strong&gt;</span>list<span class="nt">&lt;/strong&gt;</span> item <span class="nt">&lt;strong&gt;</span>2<span class="nt">&lt;/strong&gt;</span> -
+    two <span class="nt">&lt;span&gt;</span>strong tags<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 3<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 4<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>list item 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>You can attach a click handler to every <code>&lt;li&gt;</code> that evaluates the number of <code>&lt;strong&gt;</code> elements within the clicked <code>&lt;li&gt;</code> at that time like so:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">li</span>"<span class="p">).</span><span class="n">click</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">var</span> $<span class="n">li</span> <span class="p">=</span> $<span class="p">(</span><span class="n">this</span><span class="p">),</span>
+    <span class="n">isWithTwo</span> <span class="p">=</span> $<span class="n">li</span><span class="p">.</span><span class="n">is</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> $<span class="p">(</span><span class="s">'strong'</span><span class="p">,</span> <span class="n">this</span><span class="p">).</span><span class="nb">length</span> <span class="o">==</span><span class="p">=</span> 2<span class="p">;</span>
+    <span class="p">});</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">isWithTwo</span> <span class="p">)</span> <span class="p">{</span>
+    $<span class="n">li</span><span class="p">.</span><span class="n">css</span><span class="p">(</span>"<span class="n">background</span><span class="o">-</span><span class="n">color</span>"<span class="p">,</span> "<span class="n">green</span>"<span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    $<span class="n">li</span><span class="p">.</span><span class="n">css</span><span class="p">(</span>"<span class="n">background</span><span class="o">-</span><span class="n">color</span>"<span class="p">,</span> "<span class="n">red</span>"<span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Shows a few ways is() can be used inside an event handler.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { width:60px; height:60px; margin:5px; float:left;
+      border:4px outset; background:green; text-align:center;
+      font-weight:bolder; cursor:pointer; }
+  .blue { background:blue; }
+  .red { background:red; }
+  span { color:white; font-size:16px; }
+  p { color:red; font-weight:bolder; background:yellow;
+      margin:3px; clear:left; display:none; }
+<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"blue"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"red"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;div&gt;&lt;br/&gt;&lt;span&gt;</span>Peter<span class="nt">&lt;/span&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"blue"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;p&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  $("div").one('click', function () {
+    if ($(this).is(":first-child")) {
+      $("p").text("It's the first div.");
+    } else if ($(this).is(".blue,.red")) {
+      $("p").text("It's a blue or red div.");
+    } else if ($(this).is(":contains('Peter')")) {
+      $("p").text("It's Peter!");
+    } else {
+      $("p").html("It's nothing <span class="nt">&lt;em&gt;</span>special<span class="nt">&lt;/em&gt;</span>.");
+    }
+    $("p").hide().slideDown("slow");
+    $(this).css({"border-style": "inset", cursor:"default"});
+  });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Returns true, because the parent of the input is a form element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>div { color:red; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="nt">/&gt;&lt;/form&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  var isFormParent = $("input[type='checkbox']").parent().is("form");
+  $("div").text("isFormParent = " + isFormParent);
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Returns false, because the parent of the input is a p element.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>div { color:red; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;form&gt;&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="nt">/&gt;&lt;/p&gt;&lt;/form&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  var isFormParent = $("input[type='checkbox']").parent().is("form");
+  $("div").text("isFormParent = " + isFormParent);
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Checks against an existing collection of alternating list elements. Blue, alternating list elements slide up while others turn red.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>li <span class="err">{</span> cursor:pointer; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"browsers"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Chrome<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Safari<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Firefox<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Opera<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  var <span class="p">$</span><span class="nv">alt</span> = <span class="p">$(</span><span class="s2">"#browsers li:nth-child(2n)"</span><span class="p">).</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">"#00FFFF"</span><span class="p">)</span>;
+  <span class="p">$(</span><span class="s1">'li'</span><span class="p">).</span><span class="nv">click</span><span class="p">(</span><span class="err">function</span><span class="p">()</span> <span class="err">{</span>
+    <span class="err">var</span> <span class="p">$</span><span class="nv">li</span> <span class="err">=</span> <span class="p">$(</span><span class="err">this</span><span class="p">)</span><span class="err">;</span>
+    <span class="err">if</span> <span class="p">(</span> <span class="p">$</span><span class="nv">li</span><span class="p">.</span><span class="nv">is</span><span class="p">(</span> <span class="p">$</span><span class="nv">alt</span> <span class="p">)</span> <span class="p">)</span> <span class="err">{</span>
+      <span class="p">$</span><span class="nv">li</span><span class="p">.</span><span class="nv">slideUp</span><span class="p">()</span><span class="err">;</span>
+    <span class="err">}</span> <span class="err">else</span> <span class="err">{</span>
+      <span class="p">$</span><span class="nv">li</span><span class="p">.</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">)</span><span class="err">;</span>
+    <span class="err">}</span>
+  <span class="err">}</span><span class="p">)</span>;
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">An alternate way to achieve the above example using an element rather than a jQuery object. Checks against an existing collection of alternating list elements. Blue, alternating list elements slide up while others turn red.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>li <span class="err">{</span> cursor:pointer; }<span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"browsers"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Chrome<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Safari<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Firefox<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Opera<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  var <span class="p">$</span><span class="nv">alt</span> = <span class="p">$(</span><span class="s2">"#browsers li:nth-child(2n)"</span><span class="p">).</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">"#00FFFF"</span><span class="p">)</span>;
+  <span class="p">$(</span><span class="s1">'li'</span><span class="p">).</span><span class="nv">click</span><span class="p">(</span><span class="err">function</span><span class="p">()</span> <span class="err">{</span>
+    <span class="err">if</span> <span class="p">(</span> <span class="p">$</span><span class="nv">alt</span><span class="p">.</span><span class="nv">is</span><span class="p">(</span> <span class="err">this</span> <span class="p">)</span> <span class="p">)</span> <span class="err">{</span>
+      <span class="p">$(</span><span class="err">this</span><span class="p">).</span><span class="nv">slideUp</span><span class="p">()</span><span class="err">;</span>
+    <span class="err">}</span> <span class="err">else</span> <span class="err">{</span>
+      <span class="p">$(</span><span class="err">this</span><span class="p">).</span><span class="nv">css</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">)</span><span class="err">;</span>
+    <span class="err">}</span>
+  <span class="err">}</span><span class="p">)</span>;
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,46 @@
+<script>
+	{
+		"title": "jQuery.isNumeric()",
+		"excerpt": "Determines whether its argument is a number.",
+		"termSlugs": {
+			"category": [
+				"utilities","version/1.7"
+			]
+		}
+	}
+</script><div id="jQuery-isNumeric1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.isNumeric( value )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Boolean">Boolean</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Determines whether its argument is a number.</p>
+<ul class="signatures"><li class="signature" id="jQuery-isNumeric-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.7/">1.7</a></span>jQuery.isNumeric( value )</h4>
+<p class="argument"><strong>value: </strong><a href="http://api.jquery.com/Types#PlainObject">PlainObject</a>
+                          The value to be tested.</p>
+</li></ul>
+<div class="longdesc"><p>The <code>$.isNumeric()</code> method checks whether its argument represents a numeric value. If so, it returns <code>true</code>. Otherwise it returns <code>false</code>. The argument can be of any type.</p></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Sample return values of $.isNumeric with various inputs.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>"<span class="o">-</span>10"<span class="p">);</span>  <span class="o">//</span> <span class="n">true</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>16<span class="p">);</span>     <span class="o">//</span> <span class="n">true</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>0<span class="n">xFF</span><span class="p">);</span>   <span class="o">//</span> <span class="n">true</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>"0<span class="n">xFF</span>"<span class="p">);</span> <span class="o">//</span> <span class="n">true</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>"8<span class="n">e5</span>"<span class="p">);</span>  <span class="o">//</span> <span class="n">true</span> <span class="p">(</span><span class="n">exponential</span> <span class="n">notation</span> <span class="n">string</span><span class="p">)</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>3<span class="p">.</span>1415<span class="p">);</span> <span class="o">//</span> <span class="n">true</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span><span class="o">+</span>10<span class="p">);</span>    <span class="o">//</span> <span class="n">true</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>0144<span class="p">);</span>   <span class="o">//</span> <span class="n">true</span> <span class="p">(</span><span class="n">octal</span> <span class="n">integer</span> <span class="n">literal</span><span class="p">)</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span>""<span class="p">);</span>     <span class="o">//</span> <span class="n">false</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">({});</span>     <span class="o">//</span> <span class="n">false</span> <span class="p">(</span><span class="n">empty</span> <span class="n">object</span><span class="p">)</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span><span class="n">NaN</span><span class="p">);</span>    <span class="o">//</span> <span class="n">false</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span><span class="n">null</span><span class="p">);</span>   <span class="o">//</span> <span class="n">false</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>   <span class="o">//</span> <span class="n">false</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span><span class="n">Infinity</span><span class="p">);</span> <span class="o">//</span> <span class="n">false</span>
+$<span class="p">.</span><span class="n">isNumeric</span><span class="p">(</span><span class="n">undefined</span><span class="p">);</span> <span class="o">//</span> <span class="n">false</span>
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>

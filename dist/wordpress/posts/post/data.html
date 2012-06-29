@@ -1,0 +1,218 @@
+<script>
+	{
+		"title": ".data()",
+		"excerpt": "Store arbitrary data associated with the matched elements.",
+		"termSlugs": {
+			"category": [
+				"data","miscellaneous/data-storage","version/1.2.3","version/1.4","version/1.4.3","data","miscellaneous/data-storage","version/1.2.3","version/1.4","version/1.4.3"
+			]
+		}
+	}
+</script><div class="toc">
+<h4><span>Contents:</span></h4>
+<ul class="toc-list">
+<li>
+<a href="#data1">data( key , value &nbsp;) </a><ul>
+<li>.data( key, value )
+              </li>
+<li>.data( obj )
+              </li>
+</ul>
+</li>
+<li>
+<a href="#data2">data( key &nbsp;) </a><ul>
+<li>.data( key )
+              </li>
+<li>.data()
+              </li>
+</ul>
+</li>
+</ul>
+</div><div id="data1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.data( key, value )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Store arbitrary data associated with the matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="data-key-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.3/">1.2.3</a></span>.data( key, value )</h4>
+<p class="argument"><strong>key: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string naming the piece of data to set.</p>
+<p class="argument"><strong>value: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          The new data value; it can be any Javascript type including Array or Object.</p>
+</li>
+<li class="signature" id="data-obj">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.3/">1.4.3</a></span>.data( obj )</h4>
+<p class="argument"><strong>obj: </strong><a href="http://api.jquery.com/Types#Object">Object</a>
+                          An object of key-value pairs of data to update.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.data()</code> method allows us to attach data of any type to DOM elements in a way that is safe from circular references and therefore from memory leaks.</p>
+<p> We can set several distinct values for a single element and retrieve them later:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">data</span><span class="p">(</span><span class="s">'foo'</span><span class="p">,</span> 52<span class="p">);</span>
+$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">data</span><span class="p">(</span><span class="s">'bar'</span><span class="p">,</span> <span class="p">{</span> <span class="n">myType</span><span class="p">:</span> <span class="s">'test'</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> 40 <span class="p">});</span>
+
+$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">data</span><span class="p">(</span><span class="s">'foo'</span><span class="p">);</span> <span class="o">//</span> 52
+$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">data</span><span class="p">();</span> <span class="o">//</span> <span class="p">{</span><span class="n">foo</span><span class="p">:</span> 52<span class="p">,</span> <span class="n">bar</span><span class="p">:</span> <span class="p">{</span> <span class="n">myType</span><span class="p">:</span> <span class="s">'test'</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> 40 <span class="p">}}</span>
+</pre></div>
+</div>
+<p>In jQuery 1.4.3 setting an element's data object with <code>.data(obj)</code> extends the data previously stored with that element. jQuery itself uses the <code>.data()</code> method to save information under the names 'events' and 'handle', and also reserves any data name starting with an underscore ('_') for internal use.</p>
+<p>Prior to jQuery 1.4.3 (starting in jQuery 1.4) the .data() method completely replaced all data, instead of just extending the data object. If you are using third-party plugins it may not be advisable to completely replace the element's data object, since plugins may have also set data.</p>
+<p>Due to the way browsers interact with plugins and external code, the <code>.data()</code> method cannot be used on <code>&lt;object&gt;</code> (unless it's a Flash plugin), <code>&lt;applet&gt;</code> or <code>&lt;embed&gt;</code> elements.</p>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/no-data-on-xml.xml">
+  Note that this method currently does not provide cross-platform support for setting data on XML documents, as Internet Explorer does not allow data to be attached via expando properties.
+</li></ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples"><div id="example-0">
+<h4><span class="desc">Store then retrieve a value from the div element.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { color:blue; }
+  span { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    The values stored were
+    <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+    and
+    <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("div").data("test", { first: 16, last: "pizza!" });
+$("span:first").text($("div").data("test").first);
+$("span:last").text($("div").data("test").last);
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div><div id="data2" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.data( key )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#Object">Object</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Returns value at named data store for the first element in the jQuery collection, as set by data(name, value).</p>
+<ul class="signatures">
+<li class="signature" id="data-key">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.3/">1.2.3</a></span>.data( key )</h4>
+<p class="argument"><strong>key: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          Name of the data stored.</p>
+</li>
+<li class="signature" id="data"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.data()</h4></li>
+</ul>
+<div class="longdesc">
+<p>The <code>.data()</code> method allows us to attach data of any type to DOM elements in a way that is safe from circular references and therefore from memory leaks. We can retrieve several distinct values for a single element one at a time, or as a set:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">data</span><span class="p">(</span><span class="s">'foo'</span><span class="p">));</span>
+<span class="n">alert</span><span class="p">(</span>$<span class="p">(</span><span class="s">'body'</span><span class="p">).</span><span class="n">data</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The above lines alert the data values that were set on the <code>body</code> element. If no data at all was set on that element, <code>undefined</code> is returned.</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">alert</span><span class="p">(</span> $<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">foo</span>"<span class="p">));</span> <span class="o">//</span><span class="n">undefined</span>
+$<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">bar</span>"<span class="p">,</span> "<span class="n">foobar</span>"<span class="p">);</span>
+<span class="n">alert</span><span class="p">(</span> $<span class="p">(</span>"<span class="n">body</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">bar</span>"<span class="p">));</span> <span class="o">//</span><span class="n">foobar</span>
+</pre></div>
+</div>
+<h4 id="data-html5">
+        <a href="#data-html5">HTML5 data-* Attributes</a>
+      </h4>
+<p>As of jQuery 1.4.3 <a href="http://ejohn.org/blog/html-5-data-attributes/">HTML 5 data- attributes</a> will be automatically pulled in to jQuery's data object. The treatment of attributes with embedded dashes was changed in jQuery 1.6 to conform to the <a href="http://www.w3.org/TR/html5/elements.html#embedding-custom-non-visible-data-with-the-data-attributes">W3C HTML5 specification</a>.</p>
+<p>For example, given the following HTML:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span> <span class="na">data-last-value=</span><span class="s">"43"</span> <span class="na">data-hidden=</span><span class="s">"true"</span> <span class="na">data-options=</span><span class="s">'{"name":"John"}'</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>All of the following jQuery code will work.</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span>"<span class="n">div</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">role</span>"<span class="p">)</span> <span class="o">==</span><span class="p">=</span> "<span class="n">page</span>"<span class="p">;</span>
+$<span class="p">(</span>"<span class="n">div</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">lastValue</span>"<span class="p">)</span> <span class="o">==</span><span class="p">=</span> 43<span class="p">;</span>
+$<span class="p">(</span>"<span class="n">div</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">hidden</span>"<span class="p">)</span> <span class="o">==</span><span class="p">=</span> <span class="n">true</span><span class="p">;</span>
+$<span class="p">(</span>"<span class="n">div</span>"<span class="p">).</span><span class="n">data</span><span class="p">(</span>"<span class="n">options</span>"<span class="p">).</span><span class="n">name</span> <span class="o">==</span><span class="p">=</span> "<span class="n">John</span>"<span class="p">;</span>
+</pre></div>
+</div>
+<p>Every attempt is made to convert the string to a JavaScript value (this includes booleans, numbers, objects, arrays, and null) otherwise it is left as a string. To retrieve the value's attribute as a string without any attempt to convert it, use the <code><a href="/attr/">attr()</a></code> method. When the data attribute is an object (starts with '{') or array (starts with '[') then <code>jQuery.parseJSON</code> is used to parse the string; it must follow <a href="http://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example">valid JSON syntax</a> <em>including quoted property names</em>. The data- attributes are pulled in the first time the data property is accessed and then are no longer accessed or mutated (all data values are then stored internally in jQuery).</p>
+<p>Calling <code>.data()</code> with no parameters retrieves all of the values as a JavaScript object. This object can be safely cached in a variable as long as a new object is not set with <code>.data(obj)</code>. Using the object directly to get or set values is faster than making individual calls to <code>.data()</code> to get or set each value:</p>
+<div class="highlightblock"><div class="highlight"><pre><span class="n">var</span> <span class="n">mydata</span> <span class="p">=</span> $<span class="p">(</span>"#<span class="n">mydiv</span>"<span class="p">).</span><span class="n">data</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">mydata</span><span class="p">.</span><span class="n">count</span> <span class="o">&lt;</span> 9 <span class="p">)</span> <span class="p">{</span>
+    <span class="n">mydata</span><span class="p">.</span><span class="n">count</span> <span class="p">=</span> 43<span class="p">;</span>
+    <span class="n">mydata</span><span class="p">.</span><span class="n">status</span> <span class="p">=</span> "<span class="n">embiggened</span>"<span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<h3>Additional Notes:</h3>
+<div class="longdesc"><ul><li xml:base="../notes/no-data-on-xml.xml">
+  Note that this method currently does not provide cross-platform support for setting data on XML documents, as Internet Explorer does not allow data to be attached via expando properties.
+</li></ul></div>
+<h3>Example:</h3>
+<div class="entry-examples" id="entry-examples-1"><div id="example-1-0">
+<h4><span class="desc">Get the data named "blah" stored at for an element.</span></h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  div { margin:5px; background:yellow; }
+  button { margin:5px; font-size:14px; }
+  p { margin:5px; color:blue; }
+  span { color:red; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>A div<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Get "blah" from the div<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Set "blah" to "hello"<span class="nt">&lt;/button&gt;</span>
+
+  <span class="nt">&lt;button&gt;</span>Set "blah" to 86<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Remove "blah" from the div<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;p&gt;</span>The "blah" value of this div is <span class="nt">&lt;span&gt;</span>?<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+$("button").click(function(e) {
+  var value;
+
+  switch ($("button").index(this)) {
+    case 0 :
+      value = $("div").data("blah");
+      break;
+    case 1 :
+      $("div").data("blah", "hello");
+      value = "Stored!";
+      break;
+    case 2 :
+      $("div").data("blah", 86);
+      value = "Stored!";
+      break;
+    case 3 :
+      $("div").removeData("blah");
+      value = "Removed!";
+      break;
+  }
+
+  $("span").text("" + value);
+});
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>

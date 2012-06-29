@@ -1,0 +1,273 @@
+<script>
+	{
+		"title": ".val()",
+		"excerpt": "Get the current value of the first element in the set of matched elements.",
+		"termSlugs": {
+			"category": [
+				"attributes","forms","manipulation/general-attributes","version/1.0","version/1.4","attributes","forms","manipulation/general-attributes","version/1.0","version/1.4"
+			]
+		}
+	}
+</script><div class="toc">
+<h4><span>Contents:</span></h4>
+<ul class="toc-list">
+<li>
+<a href="#val1">val() </a><ul><li>.val()
+              </li></ul>
+</li>
+<li>
+<a href="#val2">val( value &nbsp;) </a><ul>
+<li>.val( value )
+              </li>
+<li>.val( function(index, value) )
+              </li>
+</ul>
+</li>
+</ul>
+</div><div id="val1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.val()</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#String,%20Number,%20Array">String, Number, Array</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Get the current value of the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="val"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.val()</h4></li></ul>
+<div class="longdesc">
+<p>The <code>.val()</code> method is primarily used to get the values of form elements such as <code>input</code>, <code>select</code> and <code>textarea</code>. In the case of <code>&lt;select multiple="multiple"&gt;</code> elements, the <code>.val()</code> method returns an array containing each selected option; if no option is selected, it returns <code>null</code>. </p>
+<p>For selects and checkboxes, you can also use the <a href="/selected">:selected</a> and <a href="/checked">:checked</a> selectors to get at values, for example:</p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'select.foo option:selected'</span><span class="p">).</span><span class="n">val</span><span class="p">();</span>    <span class="o">//</span> <span class="n">get</span> <span class="n">the</span> <span class="n">value</span> <span class="n">from</span> <span class="n">a</span> <span class="n">dropdown</span> <span class="n">select</span>
+$<span class="p">(</span><span class="s">'select.foo'</span><span class="p">).</span><span class="n">val</span><span class="p">();</span>                    <span class="o">//</span> <span class="n">get</span> <span class="n">the</span> <span class="n">value</span> <span class="n">from</span> <span class="n">a</span> <span class="n">dropdown</span> <span class="n">select</span> <span class="n">even</span> <span class="n">easier</span>
+$<span class="p">(</span><span class="s">'input:checkbox:checked'</span><span class="p">).</span><span class="n">val</span><span class="p">();</span>        <span class="o">//</span> <span class="n">get</span> <span class="n">the</span> <span class="n">value</span> <span class="n">from</span> <span class="n">a</span> <span class="n">checked</span> <span class="n">checkbox</span>
+$<span class="p">(</span><span class="s">'input:radio[name=bar]:checked'</span><span class="p">).</span><span class="n">val</span><span class="p">();</span> <span class="o">//</span> <span class="n">get</span> <span class="n">the</span> <span class="n">value</span> <span class="n">from</span> <span class="n">a</span> <span class="n">set</span> <span class="n">of</span> <span class="n">radio</span> <span class="n">buttons</span>
+</pre></div>
+</div>
+<blockquote>
+        <p><strong>Note: </strong> At present, using <code>.val()</code> on textarea elements strips carriage return characters from the browser-reported value. When this value is sent to the server via XHR however, carriage returns are preserved (or added by browsers which do not include them in the raw value). A workaround for this issue can be achieved using a valHook as follows:</p>
+      </blockquote>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">.</span><span class="n">valHooks</span><span class="p">.</span><span class="n">textarea</span> <span class="p">=</span> <span class="p">{</span>
+  <span class="n">get</span><span class="p">:</span> <span class="k">function</span><span class="p">(</span> <span class="n">elem</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">elem</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span> <span class="o">/\</span><span class="n">r</span>?<span class="o">\</span><span class="n">n</span><span class="o">/</span><span class="n">g</span><span class="p">,</span> "<span class="o">\</span><span class="n">r</span><span class="o">\</span><span class="n">n</span>" <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Get the single value from a single select and an array of values from a multiple select and display their values.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  p { color:red; margin:4px; }
+  b { color:blue; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+
+  <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"single"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Single<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Single2<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;</span>
+
+  <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"multiple"</span> <span class="na">multiple=</span><span class="s">"multiple"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Multiple<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Multiple2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Multiple3<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    function displayVals() {
+      var singleValues = $("#single").val();
+      var multipleValues = $("#multiple").val() || [];
+      $("p").html("<span class="nt">&lt;b&gt;</span>Single:<span class="nt">&lt;/b&gt;</span> " +
+                  singleValues +
+                  " <span class="nt">&lt;b&gt;</span>Multiple:<span class="nt">&lt;/b&gt;</span> " +
+                  multipleValues.join(", "));
+    }
+
+    $("select").change(displayVals);
+    displayVals();
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Find the value of an input box.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+
+  p { color:blue; margin:8px; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"some text"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("input").keyup(function () {
+      var value = $(this).val();
+      $("p").text(value);
+    }).keyup();
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div><div id="val2" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.val( value )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Set the value of each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="val-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.val( value )</h4>
+<p class="argument"><strong>value: </strong><a href="http://api.jquery.com/Types#String">String</a>
+                          A string of text or an array of strings corresponding to the value of each matched element to set as selected/checked.</p>
+</li>
+<li class="signature" id="val-functionindex--value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.val( function(index, value) )</h4>
+<p class="argument"><strong>function(index, value): </strong>Function()
+                          A function returning the value to set. <code>this</code> is the current element. Receives the index position of the element in the set and the old value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>This method is typically used to set the values of form fields. </p>
+<p>Passing an array of element values allows matching  <code>&lt;input type="checkbox"&gt;</code>, <code>&lt;input type="radio"&gt;</code> and <code>&lt;option&gt;</code>s inside of n <code>&lt;select multiple="multiple"&gt;</code> to be selected. In the case of <code>&lt;input type="radio"&gt;</code>s that are part of a radio group and <code>&lt;select multiple="multiple"&gt;</code> the other elements will be deselected.</p>
+<p>The <code>.val()</code> method allows us to set the value by passing in a function. As of jQuery 1.4, the function is passed two arguments, the current element's index and its current value: </p>
+<div class="highlightblock"><div class="highlight"><pre>$<span class="p">(</span><span class="s">'input:text.items'</span><span class="p">).</span><span class="n">val</span><span class="p">(</span><span class="k">function</span><span class="p">(</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">value</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="n">this</span><span class="p">.</span><span class="n">className</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This example appends the string " items" to the text inputs' values.</p>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples-1">
+<div id="example-1-0">
+<h4>Example: <span class="desc">Set the value of an input box.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  button { margin:4px; cursor:pointer; }
+  input { margin:4px; color:blue; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;button&gt;</span>Feed<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button&gt;</span>the<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button&gt;</span>Input<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"click a button"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    $("button").click(function () {
+      var text = $(this).text();
+      $("input").val(text);
+    });
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1-1">
+<h4>Example: <span class="desc">Use the function argument to modify the value of an input box.</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  
+  <span class="nt">&lt;p&gt;</span>Type something and then click or tab out of the input.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"type something"</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  $('input').bind('blur', function() {
+    $(this).val(function( i, val ) {
+      return val.toUpperCase();
+    });
+  });
+  <span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1-2">
+<h4>Example: <span class="desc">Set a single select, a multiple select, checkboxes and a radio button .</span>
+</h4>
+<div class="highlightblock"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+  body { color:blue; }
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"single"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Single<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Single2<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;</span>
+
+  <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"multiple"</span> <span class="na">multiple=</span><span class="s">"multiple"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Multiple<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>Multiple2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">selected=</span><span class="s">"selected"</span><span class="nt">&gt;</span>Multiple3<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;/select&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"checkboxname"</span> <span class="na">value=</span><span class="s">"check1"</span><span class="nt">/&gt;</span> check1
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"checkboxname"</span> <span class="na">value=</span><span class="s">"check2"</span><span class="nt">/&gt;</span> check2
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span>  <span class="na">name=</span><span class="s">"r"</span> <span class="na">value=</span><span class="s">"radio1"</span><span class="nt">/&gt;</span> radio1
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span>  <span class="na">name=</span><span class="s">"r"</span> <span class="na">value=</span><span class="s">"radio2"</span><span class="nt">/&gt;</span> radio2
+<span class="nt">&lt;script&gt;</span>
+
+    $("#single").val("Single2");
+    $("#multiple").val(["Multiple2", "Multiple3"]);
+    $("input").val(["check1","check2", "radio1" ]);
+
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
