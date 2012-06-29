@@ -2,7 +2,7 @@
 
 * Pull requests for changes that were requested or recommended via the [jQuery Bug Tracker](http://bugs.jquery.com) should include a link back to the relevant ticket.
 
-## Building
+## Building 
 
 ### Requirements
 * <a href="http://www.xmlsoft.org/">libxml2</a>
@@ -88,3 +88,5 @@ Code in the API documentation should follow the [jQuery Core Style Guide](http:/
   * Tactful
   
 * HELLO!
+* 
+* Team
