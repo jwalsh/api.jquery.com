@@ -86,3 +86,5 @@ Code in the API documentation should follow the [jQuery Core Style Guide](http:/
   * Middle ground between formal and familiar. Err on the side of formality.
   * Authoritive
   * Tactful
+  
+* HELLO!
