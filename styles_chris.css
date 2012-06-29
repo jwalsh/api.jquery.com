@@ -1,0 +1,32 @@
+article.primary-content code {
+	background-color: #E6E6E6;
+	color: #666666;
+	font-family: "Courier New";
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+		    border-radius: 2px;
+	text-shadow: 0px 2px 3px #FFFFFF;
+}
+
+article.primary-content code a {
+	background-color: #DEE3ED;
+	color: #3872A3;
+	font-family: "Courier New";
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+		    border-radius: 2px;
+	text-shadow: 0px 2px 3px #FFFFFF;
+}
+
+article.primary-content blockquote {
+	color: #808080;
+	font-style: italic;
+}
+
+article.primary-content blockquote strong {
+	font-weight: normal !important;
+}
+
+article.primary-content pre {
+	background-color: #212121;
+}
